@@ -2,16 +2,32 @@ import Link from "next/link";
 
 import { Logo } from "@/components/shared/logo";
 import { footerNav, siteConfig } from "@/config/site";
+import { getCities } from "@/features/cities/queries";
 
-export function SiteFooter() {
+const MAX_FOOTER_CITIES = 6;
+
+export async function SiteFooter() {
+  const cities = (await getCities()).slice(0, MAX_FOOTER_CITIES);
+  const groups = [
+    ...footerNav,
+    ...(cities.length > 0
+      ? [
+          {
+            title: "Cities",
+            items: cities.map((city) => ({ title: city.name, href: `/courts/${city.slug}` })),
+          },
+        ]
+      : []),
+  ];
+
   return (
-    <footer className="mt-auto bg-court-deep text-white/80">
-      <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
-        <div className="max-w-sm space-y-4">
+    <footer className="mt-auto bg-ink text-white/80">
+      <div className="container-page grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.6fr_repeat(4,1fr)]">
+        <div className="max-w-sm space-y-4 sm:col-span-2 lg:col-span-1">
           <Logo inverted />
           <p className="text-sm leading-relaxed text-white/70">{siteConfig.description}</p>
         </div>
-        {footerNav.map((group) => (
+        {groups.map((group) => (
           <nav key={group.title} aria-label={group.title}>
             <h2 className="font-heading text-sm font-semibold tracking-wide text-ball uppercase">
               {group.title}

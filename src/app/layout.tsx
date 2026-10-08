@@ -15,6 +15,7 @@ const bodyFont = Geist({
 const displayFont = Bricolage_Grotesque({
   variable: "--font-display",
   subsets: ["latin"],
+  axes: ["wdth"],
   display: "swap",
 });
 
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1f5c45",
+  themeColor: "#0f1b17",
   colorScheme: "light",
 };
 

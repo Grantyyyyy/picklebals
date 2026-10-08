@@ -18,6 +18,8 @@
   --color-ball: var(--ball);
   --color-ball-soft: var(--ball-soft);
   --color-sand: var(--sand);
+  --color-ink: var(--ink);
+  --color-mist: var(--mist);
 
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -52,6 +54,11 @@
   --ball: oklch(0.9 0.19 122);
   --ball-soft: oklch(0.97 0.07 118);
   --sand: oklch(0.975 0.008 95);
+  --ink: oklch(0.18 0.018 165);
+  --mist: oklch(0.955 0.008 170);
+
+  /* Depth of angled section edges; shallower on small screens */
+  --angle: clamp(1.25rem, 5vw, 4.5rem);
 
   --background: oklch(0.99 0.004 95);
   --foreground: oklch(0.21 0.025 165);
@@ -107,4 +114,23 @@
     linear-gradient(to right, oklch(1 0 0 / 0.08) 1px, transparent 1px),
     linear-gradient(to bottom, oklch(1 0 0 / 0.08) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+/* Angled section edges; pair with padding of at least var(--angle) on the clipped side */
+@utility clip-angle-top {
+  clip-path: polygon(0 var(--angle), 100% 0, 100% 100%, 0 100%);
+}
+
+@utility clip-angle-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--angle)), 0 100%);
+}
+
+@utility clip-angle-both {
+  clip-path: polygon(0 var(--angle), 100% 0, 100% calc(100% - var(--angle)), 0 100%);
+}
+
+@utility bg-court-gradient {
+  background-image:
+    radial-gradient(60% 80% at 100% 100%, oklch(0.9 0.19 122 / 0.22), transparent 70%),
+    linear-gradient(115deg, var(--court-deep) 0%, var(--court-deep) 35%, var(--court) 100%);
 }

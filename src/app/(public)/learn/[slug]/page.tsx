@@ -94,7 +94,7 @@ async function ArticleDetail({ params }: Pick<PageProps<"/learn/[slug]">, "param
         src={article.imageUrl}
         alt={article.title}
         sizes="(min-width: 768px) 768px, 100vw"
-        priority
+        preload
         className="mt-8 aspect-[16/9] rounded-3xl"
       />
       <div className="mt-10">

@@ -6,14 +6,25 @@ type MediaImageProps = {
   src: string | null;
   alt: string;
   sizes: string;
-  priority?: boolean;
+  /** Preload in `<head>`; use only for a single above-the-fold (LCP) image. */
+  preload?: boolean;
+  /** Use `"eager"` for above-the-fold images in grids, where several could be the LCP. */
+  loading?: "eager" | "lazy";
   className?: string;
   /** Short label rendered on the placeholder when there is no image. */
   label?: string;
 };
 
 /** Optimized image with a branded court-pattern placeholder when no image is available. */
-export function MediaImage({ src, alt, sizes, priority, className, label }: MediaImageProps) {
+export function MediaImage({
+  src,
+  alt,
+  sizes,
+  preload,
+  loading,
+  className,
+  label,
+}: MediaImageProps) {
   return (
     <div className={cn("relative overflow-hidden bg-court", className)}>
       {src ? (
@@ -22,7 +33,8 @@ export function MediaImage({ src, alt, sizes, priority, className, label }: Medi
           alt={alt}
           fill
           sizes={sizes}
-          priority={priority}
+          preload={preload}
+          loading={preload ? undefined : loading}
           className="object-cover"
         />
       ) : (

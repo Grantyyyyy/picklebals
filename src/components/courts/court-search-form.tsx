@@ -10,6 +10,9 @@ type CourtSearchFormProps = {
   defaultQuery?: string;
   defaultCity?: string;
   className?: string;
+  /** Must be unique when more than one form is rendered on a page. */
+  idPrefix?: string;
+  label?: string;
 };
 
 /** Plain GET form: works without JavaScript and produces shareable `/courts?q=&city=` URLs. */
@@ -18,19 +21,23 @@ export function CourtSearchForm({
   defaultQuery,
   defaultCity,
   className,
+  idPrefix = "court-search",
+  label = "Search courts",
 }: CourtSearchFormProps) {
+  const queryId = `${idPrefix}-q`;
+  const cityId = `${idPrefix}-city`;
   return (
     <form
       action="/courts"
       method="get"
       role="search"
-      aria-label="Search courts"
+      aria-label={label}
       className={cn(
         "flex flex-col gap-2 rounded-2xl bg-white p-2 shadow-xl shadow-court-deep/20 sm:flex-row sm:items-center",
         className,
       )}
     >
-      <label htmlFor="court-search-q" className="sr-only">
+      <label htmlFor={queryId} className="sr-only">
         Court name
       </label>
       <div className="relative flex-1">
@@ -39,7 +46,7 @@ export function CourtSearchForm({
           aria-hidden="true"
         />
         <Input
-          id="court-search-q"
+          id={queryId}
           name="q"
           type="search"
           defaultValue={defaultQuery}
@@ -48,11 +55,11 @@ export function CourtSearchForm({
           className="h-12 border-0 pl-10 text-base text-foreground shadow-none focus-visible:ring-0 md:text-base"
         />
       </div>
-      <label htmlFor="court-search-city" className="sr-only">
+      <label htmlFor={cityId} className="sr-only">
         City
       </label>
       <select
-        id="court-search-city"
+        id={cityId}
         name="city"
         defaultValue={defaultCity ?? ""}
         className="h-12 rounded-xl border-0 bg-muted px-3 text-sm text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50 sm:w-52"

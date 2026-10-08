@@ -10,14 +10,14 @@ export function courtPath(court: Pick<Court, "slug" | "city">): string {
   return `/courts/${court.city.slug}/${court.slug}`;
 }
 
-export function CourtCard({ court, priority }: { court: Court; priority?: boolean }) {
+export function CourtCard({ court, eager }: { court: Court; eager?: boolean }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border bg-card transition-shadow hover:shadow-lg hover:shadow-court/10">
       <MediaImage
         src={court.imageUrl}
         alt={`${court.name} in ${court.city.name}`}
         sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-        priority={priority}
+        loading={eager ? "eager" : undefined}
         className="aspect-[5/3]"
         label={environmentLabels[court.environment]}
       />
@@ -53,7 +53,7 @@ export function CourtGrid({ courts }: { courts: Court[] }) {
     <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {courts.map((court, index) => (
         <li key={court.id} className="grid">
-          <CourtCard court={court} priority={index < 3} />
+          <CourtCard court={court} eager={index < 3} />
         </li>
       ))}
     </ul>

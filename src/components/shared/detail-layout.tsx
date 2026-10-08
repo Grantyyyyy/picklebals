@@ -47,7 +47,7 @@ export function DetailLayout({
         alt={imageAlt}
         label={imageLabel}
         sizes="(min-width: 1280px) 1216px, 100vw"
-        priority
+        preload
         className="mt-8 aspect-[16/9] rounded-3xl sm:aspect-[21/9]"
       />
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem]">

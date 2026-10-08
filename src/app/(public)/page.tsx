@@ -1,9 +1,10 @@
 import { Hero } from "@/components/home/hero";
 import {
-  ClubHighlights,
+  ClubSpotlight,
   ExploreByLocation,
   FeaturedCourts,
-  ListYourCourtCta,
+  FindCourtCta,
+  HomeStats,
   UpcomingEvents,
 } from "@/components/home/sections";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -41,11 +42,12 @@ export default function HomePage() {
         ]}
       />
       <Hero />
+      <HomeStats />
       <FeaturedCourts />
+      <ClubSpotlight />
       <ExploreByLocation />
       <UpcomingEvents />
-      <ClubHighlights />
-      <ListYourCourtCta />
+      <FindCourtCta />
     </>
   );
 }
