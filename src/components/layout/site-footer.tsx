@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Logo } from "@/components/shared/logo";
-import { footerNav, siteConfig } from "@/config/site";
+import { footerNav, legalNav, siteConfig } from "@/config/site";
 import { getCities } from "@/features/cities/queries";
 
 const MAX_FOOTER_CITIES = 6;
@@ -52,7 +52,18 @@ export async function SiteFooter() {
           <p>
             {siteConfig.name} · Made for the pickleball community in the {siteConfig.country}.
           </p>
-          <p>Starting in {siteConfig.initialRegion}.</p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-1">
+            {legalNav.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="rounded-sm transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-ball/70"
+                >
+                  {item.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>

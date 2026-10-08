@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useSubmission } from "@/hooks/use-submission";
 import { courtListingSchema } from "@/lib/validations/submissions";
 
-import { FormField, HoneypotField, selectClassName } from "./form-field";
+import { FormField, HoneypotField, PrivacyNote, selectClassName } from "./form-field";
 import { FormStatus } from "./form-status";
 
 export function CourtListingForm() {
@@ -131,6 +131,9 @@ export function CourtListingForm() {
         message={message}
         successMessage="Thanks! We received your court details and will review them before publishing."
       />
+      <PrivacyNote>
+        We use your details only to review this listing and follow up with you.
+      </PrivacyNote>
       <Button
         type="submit"
         size="lg"

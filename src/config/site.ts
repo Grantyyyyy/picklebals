@@ -44,6 +44,12 @@ export const mainNav: NavItem[] = [
   { title: "Who is Jesus?", href: "/who-is-jesus" },
 ];
 
+export const legalNav: NavItem[] = [
+  { title: "Terms", href: "/terms" },
+  { title: "Privacy", href: "/privacy" },
+  { title: "Photo credits", href: "/credits" },
+];
+
 export const footerNav: { title: string; items: NavItem[] }[] = [
   {
     title: "Discover",
@@ -61,7 +67,6 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
       { title: "About us", href: "/about" },
       { title: "Who is Jesus?", href: "/who-is-jesus" },
       { title: "Contact", href: "/contact" },
-      { title: "Photo credits", href: "/credits" },
     ],
   },
   {

@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useSubmission } from "@/hooks/use-submission";
 import { contactSchema } from "@/lib/validations/submissions";
 
-import { FormField, HoneypotField } from "./form-field";
+import { FormField, HoneypotField, PrivacyNote } from "./form-field";
 import { FormStatus } from "./form-status";
 
 export function ContactForm() {
@@ -49,6 +49,7 @@ export function ContactForm() {
         message={message}
         successMessage="Thanks for reaching out! We'll get back to you soon."
       />
+      <PrivacyNote>We use your details only to reply to you.</PrivacyNote>
       <Button
         type="submit"
         size="lg"

@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useSubmission } from "@/hooks/use-submission";
 import { eventRegistrationSchema } from "@/lib/validations/submissions";
 
-import { FormField, HoneypotField, selectClassName } from "./form-field";
+import { FormField, HoneypotField, PrivacyNote, selectClassName } from "./form-field";
 import { FormStatus } from "./form-status";
 
 export function EventRegistrationForm({
@@ -82,6 +82,9 @@ export function EventRegistrationForm({
         message={message}
         successMessage="You're on the list! The organizer will confirm your spot by email."
       />
+      <PrivacyNote>
+        We share your registration with the organizer so they can confirm your spot.
+      </PrivacyNote>
       <Button
         type="submit"
         size="lg"

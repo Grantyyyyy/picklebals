@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { type ReactNode } from "react";
 
 import { Label } from "@/components/ui/label";
@@ -70,3 +71,15 @@ export function HoneypotField() {
 
 export const selectClassName =
   "h-9 w-full rounded-lg border border-input bg-transparent px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive";
+
+/** Point-of-collection notice: what happens to the details in this form. */
+export function PrivacyNote({ children }: { children: ReactNode }) {
+  return (
+    <p className="text-xs leading-relaxed text-muted-foreground">
+      {children}{" "}
+      <Link href="/privacy" className="font-medium text-court underline underline-offset-4">
+        Privacy policy
+      </Link>
+    </p>
+  );
+}
