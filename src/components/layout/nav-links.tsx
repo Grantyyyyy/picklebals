@@ -3,9 +3,12 @@ import Link from "next/link";
 import { type NavItem } from "@/config/site";
 import { cn } from "@/lib/utils";
 
-export function isActivePath(pathname: string | null, href: string): boolean {
+export function isActivePath(pathname: string | null, item: NavItem): boolean {
   if (!pathname) return false;
-  return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+  if (item.href === "/") return pathname === "/";
+  return [item.href, ...(item.activeFor ?? [])].some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
 }
 
 /** Presentational nav list, shared by the active-aware client nav and its Suspense fallback. */
@@ -13,7 +16,7 @@ export function NavLinks({ items, pathname }: { items: NavItem[]; pathname: stri
   return (
     <ul className="flex items-center gap-0.5">
       {items.map((item) => {
-        const active = isActivePath(pathname, item.href);
+        const active = isActivePath(pathname, item);
         return (
           <li key={item.href}>
             <Link

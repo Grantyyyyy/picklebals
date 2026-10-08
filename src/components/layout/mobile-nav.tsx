@@ -105,7 +105,7 @@ function MenuLinks({ items }: { items: NavItem[] }) {
     >
       <ul className="flex flex-col">
         {items.map((item, index) => {
-          const active = isActivePath(pathname, item.href);
+          const active = isActivePath(pathname, item);
           return (
             <li key={item.href} className="menu-item" style={step(index)}>
               <Dialog.Close asChild>

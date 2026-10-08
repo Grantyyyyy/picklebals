@@ -27,12 +27,17 @@ export const siteConfig = {
   ],
 } as const;
 
-export type NavItem = { title: string; href: string };
+export type NavItem = {
+  title: string;
+  href: string;
+  /** Other path prefixes that belong to this section, so its link stays active there. */
+  activeFor?: string[];
+};
 
 export const mainNav: NavItem[] = [
   { title: "Venues", href: "/venues" },
   { title: "Clubs", href: "/clubs" },
-  { title: "Events", href: "/events" },
+  { title: "Events", href: "/events", activeFor: ["/tournaments"] },
   { title: "Shop", href: "/shop" },
   { title: "Learn", href: "/learn" },
   { title: "About", href: "/about" },

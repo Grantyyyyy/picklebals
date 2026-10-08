@@ -17,6 +17,7 @@ import { DetailSkeleton } from "@/components/shared/skeletons";
 import { Button } from "@/components/ui/button";
 import { getEventBySlug, getUpcomingEvents } from "@/features/events/queries";
 import { absoluteUrl, buildMetadata } from "@/lib/seo";
+import { cn } from "@/lib/utils";
 import { eventTypeLabels, formatEventDate, formatEventTime } from "@/lib/utils/format";
 import { ensureStaticParams, PLACEHOLDER_SLUG } from "@/lib/utils/static-params";
 import type { PickleballEvent } from "@/types/content";
@@ -149,7 +150,15 @@ async function EventDetail({ params }: Pick<PageProps<"/events/[slug]">, "params
                 </InfoRow>
               )}
             </InfoCard>
-            <Button asChild size="lg" className="h-12 w-full rounded-full text-base">
+            {/* Below lg the inline form already sits above this aside, so a jump link would point backwards. */}
+            <Button
+              asChild
+              size="lg"
+              className={cn(
+                "h-12 w-full rounded-full text-base",
+                !event.registrationUrl && "hidden lg:inline-flex",
+              )}
+            >
               {event.registrationUrl ? (
                 <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
                   Register

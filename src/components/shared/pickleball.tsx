@@ -8,7 +8,12 @@ export function Pickleball({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 100 100" className={cn("pointer-events-none", className)} aria-hidden="true">
       <circle cx="50" cy="50" r="48" className="fill-ball" />
-      <g data-scroll-spin className="origin-center fill-court-deep/25 [transform-box:view-box]">
+      {/* ScrollBall sets `style.rotate` here, possibly before a streamed segment hydrates. */}
+      <g
+        data-scroll-spin
+        suppressHydrationWarning
+        className="origin-center fill-court-deep/25 [transform-box:view-box]"
+      >
         <circle cx="32" cy="32" r="5" />
         <circle cx="68" cy="32" r="5" />
         <circle cx="50" cy="50" r="5" />
