@@ -293,6 +293,9 @@ type MatchGameRow = {
   team_b_score: number;
 } & Timestamps;
 
+/** One game's score as passed to submit_match_score / correct_match_score, in game order. */
+export type MatchGameScore = { team_a: number; team_b: number };
+
 type MatchCourtAssignmentRow = {
   id: string;
   tournament_id: string;
@@ -519,6 +522,36 @@ export type Database = {
       can_view_tournament: { Args: { t_id: string }; Returns: boolean };
       is_org_member: { Args: { org_id: string }; Returns: boolean };
       create_organization: { Args: { p_name: string; p_slug: string }; Returns: string };
+      can_score_tournament: { Args: { t_id: string }; Returns: boolean };
+      generate_bracket: { Args: { p_division_id: string }; Returns: number };
+      reset_bracket: { Args: { p_division_id: string; p_reason?: string }; Returns: undefined };
+      assign_match_court: {
+        Args: {
+          p_match_id: string;
+          p_court_label?: string;
+          p_venue_court_id?: string;
+          p_scheduled_start_at?: string;
+        };
+        Returns: string;
+      };
+      start_match: { Args: { p_match_id: string; p_expected_version: number }; Returns: number };
+      submit_match_score: {
+        Args: { p_match_id: string; p_games: MatchGameScore[]; p_expected_version: number };
+        Returns: number;
+      };
+      confirm_match_result: {
+        Args: { p_match_id: string; p_expected_version: number };
+        Returns: number;
+      };
+      correct_match_score: {
+        Args: {
+          p_match_id: string;
+          p_games: MatchGameScore[];
+          p_expected_version: number;
+          p_reason: string;
+        };
+        Returns: number;
+      };
     };
     Enums: {
       content_status: "draft" | "published" | "archived";

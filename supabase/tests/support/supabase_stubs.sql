@@ -44,6 +44,9 @@ create table storage.objects (
 
 alter table storage.objects enable row level security;
 
+-- Supabase Realtime streams changes for tables in this publication.
+create publication supabase_realtime;
+
 -- Assertion helpers for SQL tests.
 create schema tests;
 grant usage on schema tests to anon, authenticated, service_role;
