@@ -3,9 +3,9 @@ import "server-only";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
+import { localVenueImage } from "@/features/shared/local-images";
 import type { Venue } from "@/types/content";
 
-import { localVenueImage } from "./local-images";
 import { prepareVenueSeed } from "./seed/prepare";
 import { venueSeedFileSchema } from "./seed/schema";
 

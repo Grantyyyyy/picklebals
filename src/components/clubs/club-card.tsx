@@ -4,6 +4,7 @@ import Link from "next/link";
 import { NextMeetupStatus } from "@/components/shared/live-status";
 import { MediaImage } from "@/components/shared/media-image";
 import { SampleBadge } from "@/components/shared/sample-content";
+import { isLogoImage } from "@/lib/utils/images";
 import type { Club } from "@/types/content";
 
 export function ClubCard({ club }: { club: Club }) {
@@ -13,7 +14,8 @@ export function ClubCard({ club }: { club: Club }) {
         src={club.imageUrl}
         alt={club.name}
         sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-        className="aspect-[5/2]"
+        className={isLogoImage(club.imageUrl) ? "aspect-[5/2] bg-ink" : "aspect-[5/2]"}
+        fit={isLogoImage(club.imageUrl) ? "contain" : "cover"}
         label="Club"
       />
       <div className="flex flex-1 flex-col gap-2 p-5">

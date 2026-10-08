@@ -13,6 +13,8 @@ type MediaImageProps = {
   className?: string;
   /** Short label rendered on the placeholder when there is no image. */
   label?: string;
+  /** `contain` keeps logos and square artwork whole instead of cropping them. */
+  fit?: "cover" | "contain";
 };
 
 /** Optimized image with a branded court-pattern placeholder when no image is available. */
@@ -24,6 +26,7 @@ export function MediaImage({
   loading,
   className,
   label,
+  fit = "cover",
 }: MediaImageProps) {
   return (
     <div className={cn("relative overflow-hidden bg-court", className)}>
@@ -35,7 +38,7 @@ export function MediaImage({
           sizes={sizes}
           preload={preload}
           loading={preload ? undefined : loading}
-          className="object-cover"
+          className={fit === "contain" ? "object-contain" : "object-cover"}
         />
       ) : (
         <div className="absolute inset-0" role="img" aria-label={alt}>

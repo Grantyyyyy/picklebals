@@ -3,7 +3,7 @@
     "name": "iligan_pickleball_venues_seed",
     "version": 1,
     "compiled_at": "2026-10-08",
-    "description": "Pickleball venues in and around Iligan City compiled from public listings (Courtogo, ReClub, Pickleheads). Unverified: confirm each venue with its operator before marking it verified."
+    "description": "Pickleball venues in and around Iligan City compiled from public Courtogo listings. Unverified: confirm each venue with its operator before marking it verified."
   },
   "city": {
     "name": "Iligan",
@@ -123,51 +123,6 @@
         }
       ],
       "notes": "Listed under Iligan City but the address is on the Linamon National Highway; Linamon is a separate municipality. Confirm whether this belongs in the Iligan directory."
-    },
-    {
-      "name": "CourtLab Central",
-      "address": "Beside Caltex, Santa Filomena, Iligan City",
-      "barangay": "Santa Filomena",
-      "sources": [
-        {
-          "label": "ReClub club page",
-          "url": "https://reclub.co/clubs/@courtlab-central",
-          "type": "club_directory",
-          "accessed_at": "2026-10-08",
-          "note": "Source spells the barangay \"Sta. Felomina\"."
-        }
-      ],
-      "notes": "Listing says two covered courts."
-    },
-    {
-      "name": "Dinkerz Den",
-      "address": "Kiwalan, Iligan City",
-      "barangay": "Kiwalan",
-      "sources": [
-        {
-          "label": "Pickleheads court page",
-          "url": "https://www.pickleheads.com/courts/ph/northern-mindanao/iligan-city/dinkerz-den",
-          "type": "court_directory",
-          "accessed_at": "2026-10-08",
-          "note": "Page returned 403 to automated access; details taken from its search listing. It lists courtogo.com as the website."
-        }
-      ],
-      "notes": "Private, reservable. Re-check the source page in a browser."
-    },
-    {
-      "name": "Miguel Sheker Park",
-      "address": "Miguel Sheker Park, Iligan City",
-      "barangay": null,
-      "sources": [
-        {
-          "label": "Pickleheads court page",
-          "url": "https://www.pickleheads.com/courts/ph/northern-mindanao/iligan-city/miguel-sheker-park",
-          "type": "court_directory",
-          "accessed_at": "2026-10-08",
-          "note": "Page returned 403 to automated access; details taken from its search listing."
-        }
-      ],
-      "notes": "Public park courts. Re-check the source page in a browser."
     }
   ]
 }

@@ -1,11 +1,11 @@
-import { localVenueImage } from "@/features/venues/local-images";
+import { localImage, localVenueImage } from "@/features/shared/local-images";
 import type { Article, City, CityRef, Club, Court, PickleballEvent } from "@/types/content";
 
 /**
  * LOCAL CONTENT — rendered only when Supabase is not configured, and shown as regular listings
  * (`isSample: false`, no Sample badges) by product decision.
  *
- * Courts are real Iligan venues taken from public listings (Courtogo, ReClub, Pickleheads),
+ * Courts are real Iligan venues taken from public Courtogo listings,
  * accessed 2026-10-08, used as test data. Hours, rates and amenities are as listed then and may
  * have changed; each court links to its listing. Clubs and events are placeholders written
  * for this project (not real organizations) and are deliberately not tied to any real venue;
@@ -65,21 +65,6 @@ const sampleCourts: Court[] = (
       openingHours: "Daily, 7:00 AM – 11:00 PM",
       priceInfo: "From ₱200/hr",
       websiteUrl: `${COURTOGO}/pal-pickleball-homecourt`,
-      isFeatured: true,
-    },
-    {
-      slug: "courtlab-central",
-      name: "CourtLab Central",
-      summary:
-        "Two covered silica-sand courts beside Caltex in Santa Filomena, open round the clock.",
-      address: "Beside Caltex, Santa Filomena, Iligan City",
-      environment: "covered",
-      surface: "Silica sand",
-      courtCount: 2,
-      amenities: ["Paddle rental", "Balls for sale", "Café", "Shower room"],
-      openingHours: "Open 24 hours",
-      priceInfo: "₱350/hr day · ₱400/hr night",
-      websiteUrl: "https://reclub.co/clubs/@courtlab-central",
       isFeatured: true,
     },
     {
@@ -148,33 +133,7 @@ const sampleCourts: Court[] = (
       openingHours: "Open 24 hours",
       priceInfo: "From ₱300/hr",
       websiteUrl: `${COURTOGO}/la-pickleball-court-mu2a7rm4`,
-    },
-    {
-      slug: "dinkerz-den",
-      name: "Dinkerz Den",
-      summary: "A private, reservable outdoor court in Kiwalan with permanent lines and net.",
-      address: "Kiwalan, Iligan City",
-      environment: "outdoor",
-      surface: "Concrete",
-      courtCount: 1,
-      amenities: ["Lights", "Food", "Water"],
-      openingHours: null,
-      priceInfo: null,
-      websiteUrl: "https://www.pickleheads.com/courts/ph/northern-mindanao/iligan-city/dinkerz-den",
-    },
-    {
-      slug: "miguel-sheker-park",
-      name: "Miguel Sheker Park",
-      summary: "Four free public outdoor courts; night lights are paid for by the hour.",
-      address: "Miguel Sheker Park, Iligan City",
-      environment: "outdoor",
-      surface: "Concrete",
-      courtCount: 4,
-      amenities: ["Lights", "Restrooms"],
-      openingHours: null,
-      priceInfo: "Free · lights ₱120/hr shared",
-      websiteUrl:
-        "https://www.pickleheads.com/courts/ph/northern-mindanao/iligan-city/miguel-sheker-park",
+      isFeatured: true,
     },
     {
       slug: "jm-s-dink-n-drive",
@@ -219,6 +178,27 @@ const sampleCities: City[] = [
 
 const sampleClubs: Club[] = [
   {
+    // Real club, from its public Reclub page (accessed 2026-10-08).
+    id: "club-match-point",
+    slug: "match-point-pickleball-club",
+    name: "Match Point Pickleball Club",
+    summary:
+      "A community club in Iligan running open plays, DUPR events and social games for every level and age.",
+    description:
+      "A community-driven club based in Iligan City that welcomes players of all skill levels and ages. It runs regular open plays, DUPR-rated events and social games, with weekly sessions on Fridays at 7 PM and on Mondays or Sundays (times vary).",
+    city: iligan,
+    homeCourt: null,
+    skillLevels: ["All levels", "DUPR events"],
+    meetingSchedule: "Fridays, 7:00 PM",
+    contactEmail: null,
+    facebookUrl: null,
+    websiteUrl: "https://reclub.co/clubs/@matchpoint-pickl",
+    imageUrl: localImage("clubs", "match-point-pickleball-club"),
+    isFeatured: true,
+    updatedAt: UPDATED_AT,
+    isSample: false,
+  },
+  {
     id: "sample-club-1",
     slug: "majestic-falls-picklers",
     name: "Majestic Falls Picklers",
@@ -231,7 +211,7 @@ const sampleClubs: Club[] = [
     contactEmail: null,
     facebookUrl: null,
     websiteUrl: null,
-    imageUrl: null,
+    imageUrl: localImage("clubs", "majestic-falls-picklers"),
     isFeatured: true,
     updatedAt: UPDATED_AT,
     isSample: false,
@@ -249,7 +229,7 @@ const sampleClubs: Club[] = [
     contactEmail: null,
     facebookUrl: null,
     websiteUrl: null,
-    imageUrl: null,
+    imageUrl: localImage("clubs", "iligan-third-shot-society"),
     isFeatured: true,
     updatedAt: UPDATED_AT,
     isSample: false,
@@ -267,7 +247,7 @@ const sampleClubs: Club[] = [
     contactEmail: null,
     facebookUrl: null,
     websiteUrl: null,
-    imageUrl: null,
+    imageUrl: localImage("clubs", "lanao-kitchen-club"),
     isFeatured: true,
     updatedAt: UPDATED_AT,
     isSample: false,
@@ -292,7 +272,6 @@ export function buildSampleEvents(now: Date): PickleballEvent[] {
     city: iligan,
     court: null,
     registrationUrl: null,
-    imageUrl: null,
     updatedAt: UPDATED_AT,
     isSample: false,
   } as const;
@@ -302,6 +281,7 @@ export function buildSampleEvents(now: Date): PickleballEvent[] {
       ...base,
       id: "sample-event-1",
       slug: "iligan-weekend-open-play",
+      imageUrl: localImage("events", "iligan-weekend-open-play"),
       title: "Iligan Weekend Open Play",
       summary: "Rotating doubles for all levels. Bring a paddle — or borrow one.",
       description: "Casual rotating doubles with a paddle-stack queue. All levels welcome.",
@@ -316,6 +296,7 @@ export function buildSampleEvents(now: Date): PickleballEvent[] {
       ...base,
       id: "sample-event-2",
       slug: "beginner-clinic-iligan",
+      imageUrl: localImage("events", "beginner-clinic-iligan"),
       title: "Beginner Clinic: Dinks & Drops",
       summary: "A two-hour clinic covering the kitchen, dinks and the third-shot drop.",
       description: "Coached drills for new players with small groups and plenty of reps.",
@@ -330,6 +311,7 @@ export function buildSampleEvents(now: Date): PickleballEvent[] {
       ...base,
       id: "sample-event-3",
       slug: "iligan-doubles-classic",
+      imageUrl: localImage("events", "iligan-doubles-classic"),
       title: "Iligan Doubles Classic",
       summary: "A city doubles tournament with novice, intermediate and open brackets.",
       description: "Men's, women's and mixed doubles brackets across three skill divisions.",
@@ -344,6 +326,7 @@ export function buildSampleEvents(now: Date): PickleballEvent[] {
       ...base,
       id: "sample-event-4",
       slug: "friday-night-social-mixer",
+      imageUrl: localImage("events", "friday-night-social-mixer"),
       title: "Friday Night Social Mixer",
       summary: "Mixed partners every game, snacks after. Great for meeting new players.",
       description: "Partners rotate each game. Light snacks afterwards.",

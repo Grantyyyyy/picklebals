@@ -1,9 +1,11 @@
 /**
- * SHOP LISTINGS — local placeholder data (`isSample: true`) until sellers can list gear for real.
+ * SHOP LISTINGS — local content shown as regular listings (`isSample: false`) by product decision,
+ * matching the clubs and events in `sample-content/data.ts`.
  *
  * Pickleball Hub does not take payments: each listing points buyers to the seller, who arranges
  * payment and pickup themselves. Sellers below are this project's placeholder clubs, not real
- * organizations, and every item, price and size is invented for preview purposes.
+ * organizations, and every item, price and size is invented; replace them with real listings
+ * before launch. Photos are from Unsplash (Unsplash License: free to use, no attribution required).
  */
 
 export const shopCategories = [
@@ -37,17 +39,21 @@ const majesticFalls = { name: "Majestic Falls Picklers", clubSlug: "majestic-fal
 const thirdShot = { name: "Iligan Third Shot Society", clubSlug: "iligan-third-shot-society" };
 const lanaoKitchen = { name: "Lanao Kitchen Club", clubSlug: "lanao-kitchen-club" };
 
-const items: Omit<ShopItem, "id" | "contactUrl" | "imageUrl" | "isSample">[] = [
+const unsplash = (id: string) => `https://images.unsplash.com/photo-${id}?w=1200&q=80`;
+
+const items: Omit<ShopItem, "id" | "contactUrl" | "isSample">[] = [
   {
-    name: "Club jersey — home green",
+    name: "Club training tee",
+    imageUrl: unsplash("1562157873-818bc0726f68"),
     category: "jerseys",
     condition: "new",
     price: 650,
-    details: "Dri-fit · Sizes S–XXL",
+    details: "Dri-fit · 6 colors · Sizes S–XXL",
     seller: majesticFalls,
   },
   {
     name: "Carbon fiber paddle, 16mm",
+    imageUrl: unsplash("1753901821774-22a88913130f"),
     category: "paddles",
     condition: "new",
     price: 4200,
@@ -56,6 +62,7 @@ const items: Omit<ShopItem, "id" | "contactUrl" | "imageUrl" | "isSample">[] = [
   },
   {
     name: "Court shoes, worn twice",
+    imageUrl: unsplash("1738165758746-5bfad0dd55ec"),
     category: "shoes",
     condition: "pre-loved",
     price: 2300,
@@ -64,6 +71,7 @@ const items: Omit<ShopItem, "id" | "contactUrl" | "imageUrl" | "isSample">[] = [
   },
   {
     name: "Beginner paddle pair with balls",
+    imageUrl: unsplash("1693142518820-78d7a05f1546"),
     category: "paddles",
     condition: "new",
     price: 1800,
@@ -72,6 +80,7 @@ const items: Omit<ShopItem, "id" | "contactUrl" | "imageUrl" | "isSample">[] = [
   },
   {
     name: "Tournament tee — Doubles Classic",
+    imageUrl: unsplash("1581655353564-df123a1eb820"),
     category: "jerseys",
     condition: "new",
     price: 450,
@@ -80,6 +89,7 @@ const items: Omit<ShopItem, "id" | "contactUrl" | "imageUrl" | "isSample">[] = [
   },
   {
     name: "Outdoor balls, 6-pack",
+    imageUrl: unsplash("1711996151738-657bd95b7cdb"),
     category: "gear",
     condition: "new",
     price: 900,
@@ -88,6 +98,7 @@ const items: Omit<ShopItem, "id" | "contactUrl" | "imageUrl" | "isSample">[] = [
   },
   {
     name: "Graphite paddle, light use",
+    imageUrl: unsplash("1659318006095-4d44845f3a1b"),
     category: "paddles",
     condition: "pre-loved",
     price: 1500,
@@ -96,6 +107,7 @@ const items: Omit<ShopItem, "id" | "contactUrl" | "imageUrl" | "isSample">[] = [
   },
   {
     name: "Women's court shoes",
+    imageUrl: unsplash("1727060167812-a53ac9b802d4"),
     category: "shoes",
     condition: "new",
     price: 3400,
@@ -103,21 +115,21 @@ const items: Omit<ShopItem, "id" | "contactUrl" | "imageUrl" | "isSample">[] = [
     seller: majesticFalls,
   },
   {
-    name: "Paddle cover & overgrip set",
+    name: "Court backpack with paddle sleeve",
+    imageUrl: unsplash("1753903118385-0119302c1400"),
     category: "gear",
-    condition: "new",
-    price: 380,
-    details: "Neoprene cover · 3 overgrips",
+    condition: "pre-loved",
+    price: 1200,
+    details: "Fits 2 paddles · Mesh ball pocket",
     seller: thirdShot,
   },
 ];
 
-export const sampleShopItems: ShopItem[] = items.map((item, index) => ({
+export const shopItems: ShopItem[] = items.map((item, index) => ({
   ...item,
-  id: `sample-shop-item-${index + 1}`,
+  id: `shop-item-${index + 1}`,
   contactUrl: null,
-  imageUrl: null,
-  isSample: true,
+  isSample: false,
 }));
 
 export function isShopCategory(value: string | undefined): value is ShopCategory {
@@ -125,5 +137,5 @@ export function isShopCategory(value: string | undefined): value is ShopCategory
 }
 
 export function getShopItems(category?: ShopCategory): ShopItem[] {
-  return category ? sampleShopItems.filter((item) => item.category === category) : sampleShopItems;
+  return category ? shopItems.filter((item) => item.category === category) : shopItems;
 }

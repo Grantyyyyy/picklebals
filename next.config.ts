@@ -29,7 +29,11 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ["image/avif", "image/webp"],
-    remotePatterns: supabaseImagePattern(),
+    remotePatterns: [
+      ...supabaseImagePattern(),
+      // Shop listing photos (see src/features/shop/data.ts).
+      { protocol: "https", hostname: "images.unsplash.com", pathname: "/photo-*" },
+    ],
   },
   turbopack: {
     rules: {

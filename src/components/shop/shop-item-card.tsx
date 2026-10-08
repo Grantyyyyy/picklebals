@@ -1,4 +1,4 @@
-import { ArrowUpRightIcon, MessageCircleIcon, StoreIcon } from "lucide-react";
+import { StoreIcon } from "lucide-react";
 import Link from "next/link";
 
 import { MediaImage } from "@/components/shared/media-image";
@@ -6,19 +6,13 @@ import { SampleBadge } from "@/components/shared/sample-content";
 import { type ShopItem, shopCategories } from "@/features/shop/data";
 import { cn } from "@/lib/utils";
 
-const priceFormatter = new Intl.NumberFormat("en-PH", {
-  style: "currency",
-  currency: "PHP",
-  maximumFractionDigits: 0,
-});
+import { formatPrice } from "./shop-format";
+import { ShopItemSheet } from "./shop-item-sheet";
 
 const conditionLabels: Record<ShopItem["condition"], string> = {
   new: "New",
   "pre-loved": "Pre-loved",
 };
-
-const ctaClassName =
-  "inline-flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-court-deep px-4 text-sm font-semibold text-white transition-colors hover:bg-court focus-visible:ring-3 focus-visible:ring-ring/60 focus-visible:outline-none";
 
 export function ShopItemCard({ item, eager }: { item: ShopItem; eager?: boolean }) {
   const categoryLabel =
@@ -69,26 +63,9 @@ export function ShopItemCard({ item, eager }: { item: ShopItem; eager?: boolean 
 
         <div className="mt-auto flex items-center justify-between gap-3 border-t border-court/10 pt-4">
           <p className="font-heading text-2xl font-extrabold text-court-deep tabular-nums">
-            {priceFormatter.format(item.price)}
+            {formatPrice(item.price)}
           </p>
-          {item.contactUrl ? (
-            <a
-              href={item.contactUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={ctaClassName}
-            >
-              Message seller
-              <ArrowUpRightIcon className="size-4" aria-hidden="true" />
-              <span className="sr-only">about {item.name} (opens in a new tab)</span>
-            </a>
-          ) : (
-            <Link href="/contact" className={ctaClassName}>
-              <MessageCircleIcon className="size-4" aria-hidden="true" />
-              Ask about it
-              <span className="sr-only">: {item.name}</span>
-            </Link>
-          )}
+          <ShopItemSheet item={item} categoryLabel={categoryLabel} />
         </div>
       </div>
     </article>

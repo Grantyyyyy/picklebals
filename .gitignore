@@ -50,5 +50,7 @@ supabase/.temp
 .impeccable/live/inject-journal.json
 .impeccable/live/*.log
 
-# venue photos copied from third-party listings for the private preview; never commit or publish
+# images for the private preview (third-party listings and Commons photos, see data/image-credits.md); do not commit
 public/images/venues/
+public/images/clubs/
+public/images/events/

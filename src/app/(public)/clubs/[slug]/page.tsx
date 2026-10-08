@@ -9,6 +9,7 @@ import { NextMeetupStatus } from "@/components/shared/live-status";
 import { DetailSkeleton } from "@/components/shared/skeletons";
 import { getClubBySlug, getClubs } from "@/features/clubs/queries";
 import { absoluteUrl, buildMetadata } from "@/lib/seo";
+import { isLogoImage } from "@/lib/utils/images";
 import { ensureStaticParams, PLACEHOLDER_SLUG } from "@/lib/utils/static-params";
 
 export async function generateStaticParams() {
@@ -76,6 +77,7 @@ async function ClubDetail({ params }: Pick<PageProps<"/clubs/[slug]">, "params">
         summary={club.summary}
         imageUrl={club.imageUrl}
         imageAlt={club.name}
+        imageFit={isLogoImage(club.imageUrl) ? "contain" : "cover"}
         imageLabel={club.city?.name}
         isSample={club.isSample}
         aside={

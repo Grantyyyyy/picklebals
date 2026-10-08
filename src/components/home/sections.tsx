@@ -15,6 +15,7 @@ import { EventCard } from "@/components/events/event-card";
 import { CountUp } from "@/components/reactbits/count-up";
 import { EmptyState } from "@/components/shared/empty-state";
 import { LogoMark } from "@/components/shared/logo";
+import { MediaImage } from "@/components/shared/media-image";
 import { SampleBadge } from "@/components/shared/sample-content";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
@@ -25,6 +26,7 @@ import { getUpcomingEvents } from "@/features/events/queries";
 import { getVenueDirectory } from "@/features/venues/queries";
 import { cn } from "@/lib/utils";
 import { pluralize } from "@/lib/utils/format";
+import { isLogoImage } from "@/lib/utils/images";
 import type { Club } from "@/types/content";
 
 import { FeaturedCourtCard } from "./featured-court-card";
@@ -300,9 +302,19 @@ export async function ClubSpotlight() {
 function ClubBandItem({ club }: { club: Club }) {
   return (
     <article className="group relative flex items-center gap-4 rounded-2xl border border-white/15 bg-ink/30 p-4 transition-colors hover:bg-ink/45 has-[a:focus-visible]:ring-3 has-[a:focus-visible]:ring-ball/60">
-      <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-ball text-court-deep">
-        <UsersRoundIcon className="size-6" aria-hidden="true" />
-      </span>
+      {club.imageUrl ? (
+        <MediaImage
+          src={club.imageUrl}
+          alt=""
+          sizes="48px"
+          fit={isLogoImage(club.imageUrl) ? "contain" : "cover"}
+          className="size-12 shrink-0 rounded-xl bg-ink ring-1 ring-white/15"
+        />
+      ) : (
+        <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-ball text-court-deep">
+          <UsersRoundIcon className="size-6" aria-hidden="true" />
+        </span>
+      )}
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
           <h3 className="font-semibold">

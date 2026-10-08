@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { MediaImage } from "@/components/shared/media-image";
 import { SampleBadge } from "@/components/shared/sample-content";
 import { type BreadcrumbItem } from "@/lib/seo";
+import { cn } from "@/lib/utils";
 
 type DetailLayoutProps = {
   breadcrumbs: BreadcrumbItem[];
@@ -14,6 +15,8 @@ type DetailLayoutProps = {
   imageUrl: string | null;
   imageAlt: string;
   imageLabel?: string;
+  /** `contain` for logos, so they are shown whole on an ink panel. */
+  imageFit?: "cover" | "contain";
   isSample: boolean;
   aside: ReactNode;
   children: ReactNode;
@@ -27,6 +30,7 @@ export function DetailLayout({
   imageUrl,
   imageAlt,
   imageLabel,
+  imageFit = "cover",
   isSample,
   aside,
   children,
@@ -48,7 +52,11 @@ export function DetailLayout({
         label={imageLabel}
         sizes="(min-width: 1280px) 1216px, 100vw"
         preload
-        className="mt-8 aspect-[16/9] rounded-3xl sm:aspect-[21/9]"
+        fit={imageUrl ? imageFit : "cover"}
+        className={cn(
+          "mt-8 aspect-[16/9] rounded-3xl sm:aspect-[21/9]",
+          imageUrl && imageFit === "contain" && "bg-ink",
+        )}
       />
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div className="min-w-0 space-y-8">{children}</div>
