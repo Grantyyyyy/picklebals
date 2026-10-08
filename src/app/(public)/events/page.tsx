@@ -31,7 +31,7 @@ async function EventList() {
       ) : (
         <EmptyState
           icon={CalendarDaysIcon}
-          title="No games posted yet"
+          title="No events posted yet"
           description="Running a tournament, open play or clinic? Tell us and we'll put it on the calendar."
           action={{ label: "Post an event", href: "/contact" }}
         />
@@ -57,7 +57,7 @@ export default function EventsPage() {
             id="events-heading"
             className="font-heading text-3xl leading-[0.95] font-extrabold text-court-deep uppercase font-stretch-condensed sm:text-4xl"
           >
-            Upcoming events
+            On the calendar
           </h2>
           <Suspense fallback={<EventListSkeleton />}>
             <EventList />

@@ -58,7 +58,7 @@ export function EventRegistrationForm({
               required
               className={selectClassName}
             >
-              <option value="">Select…</option>
+              <option value="">Choose your level</option>
               <option value="beginner">Beginner</option>
               <option value="intermediate">Intermediate</option>
               <option value="advanced">Advanced</option>

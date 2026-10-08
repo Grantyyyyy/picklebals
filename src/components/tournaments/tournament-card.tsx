@@ -15,6 +15,15 @@ const phaseLabels: Record<TournamentSummary["phase"], string> = {
   cancelled: "Cancelled",
 };
 
+const ctaLabels: Record<TournamentSummary["phase"], string> = {
+  setup: "See divisions",
+  registration_open: "See divisions",
+  registration_closed: "See divisions",
+  in_progress: "Follow live scores",
+  completed: "See final results",
+  cancelled: "View tournament",
+};
+
 export function TournamentCard({ tournament }: { tournament: TournamentSummary }) {
   const playing = tournament.phase === "in_progress";
   return (
@@ -55,7 +64,7 @@ export function TournamentCard({ tournament }: { tournament: TournamentSummary }
         </p>
       </div>
       <p className="inline-flex items-center gap-1 text-sm font-semibold text-court">
-        {playing ? "Follow live scores" : "Brackets and results"}
+        {ctaLabels[tournament.phase]}
         <ArrowRightIcon
           className="size-4 transition-transform duration-200 group-hover:translate-x-0.5"
           aria-hidden="true"

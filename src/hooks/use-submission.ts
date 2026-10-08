@@ -25,7 +25,7 @@ export function useSubmission<Schema extends z.ZodType>(schema: Schema) {
     const parsed = schema.safeParse(values);
     if (!parsed.success) {
       setStatus("error");
-      setMessage("Please correct the highlighted fields.");
+      setMessage("Some fields need attention. Check the messages below each one.");
       setFieldErrors(z.flattenError(parsed.error).fieldErrors as FieldErrors);
       return;
     }

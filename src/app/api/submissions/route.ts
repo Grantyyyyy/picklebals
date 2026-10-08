@@ -104,7 +104,7 @@ export async function POST(request: Request) {
     return json(
       {
         ok: false,
-        error: "Please correct the highlighted fields.",
+        error: "Some fields need attention. Check the messages below each one.",
         fieldErrors: z.flattenError(parsed.error).fieldErrors,
       },
       422,
@@ -117,8 +117,7 @@ export async function POST(request: Request) {
     return json(
       {
         ok: false,
-        error:
-          "Submissions are not available yet: the database is not configured in this environment.",
+        error: "This form isn't connected yet, so nothing was sent. Please try again later.",
       },
       503,
     );

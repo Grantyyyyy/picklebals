@@ -1,4 +1,5 @@
 import {
+  ArrowUpRightIcon,
   BadgeDollarSignIcon,
   CalendarDaysIcon,
   ClockIcon,
@@ -161,7 +162,9 @@ async function EventDetail({ params }: Pick<PageProps<"/events/[slug]">, "params
             >
               {event.registrationUrl ? (
                 <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
-                  Register
+                  Register on the organizer&rsquo;s site
+                  <ArrowUpRightIcon aria-hidden="true" />
+                  <span className="sr-only">(opens in a new tab)</span>
                 </a>
               ) : (
                 <a href="#register">Register</a>
