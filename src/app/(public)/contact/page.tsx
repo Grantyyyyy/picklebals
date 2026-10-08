@@ -17,7 +17,7 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Contact"
         title="Get in touch"
-        description="Corrections, club or event listings, partnerships — we'd love to hear from you."
+        description="Corrections, club or event listings, partnerships: we'd love to hear from you."
       />
       <div className="container-page grid gap-12 py-14 lg:grid-cols-[1fr_20rem]">
         <section aria-label="Contact form" className="rounded-3xl border bg-card p-6 sm:p-10">

@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "Pick n Go",
   tagline: "Find your next tournament.",
   description:
-    "Discover pickleball tournaments and venues in Iligan City, Lanao del Norte — with brackets, schedules and results in one place.",
+    "Discover pickleball tournaments and venues in Iligan City, Lanao del Norte, with brackets, schedules and results in one place.",
   locale: "en_PH",
   country: "Philippines",
   initialRegion: "Iligan City",

@@ -2,7 +2,7 @@ import { localImage, localVenueImage } from "@/features/shared/local-images";
 import type { Article, City, CityRef, Club, Court, PickleballEvent } from "@/types/content";
 
 /**
- * LOCAL CONTENT — rendered only when Supabase is not configured, and shown as regular listings
+ * LOCAL CONTENT: rendered only when Supabase is not configured, and shown as regular listings
  * (`isSample: false`, no Sample badges) by product decision.
  *
  * Courts are real Iligan venues taken from public Courtogo listings,
@@ -283,7 +283,7 @@ export function buildSampleEvents(now: Date): PickleballEvent[] {
       slug: "iligan-weekend-open-play",
       imageUrl: localImage("events", "iligan-weekend-open-play"),
       title: "Iligan Weekend Open Play",
-      summary: "Rotating doubles for all levels. Bring a paddle — or borrow one.",
+      summary: "Rotating doubles for all levels. Bring a paddle or borrow one.",
       description: "Casual rotating doubles with a paddle-stack queue. All levels welcome.",
       eventType: "open_play",
       startsAt: at(3, 23),
@@ -349,7 +349,7 @@ const sampleArticles: Article[] = [
     id: "sample-article-1",
     slug: "what-is-pickleball",
     title: "What is pickleball? A quick guide for first-timers",
-    excerpt: "The fastest-growing paddle sport explained in five minutes — court, rules and gear.",
+    excerpt: "The fastest-growing paddle sport explained in five minutes: court, rules and gear.",
     body: [
       "Pickleball combines elements of tennis, badminton and table tennis. It is played with solid paddles and a perforated plastic ball on a court roughly a third the size of a tennis court.",
       "## The court",

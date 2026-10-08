@@ -1,5 +1,5 @@
 /**
- * SHOP LISTINGS — local content shown as regular listings (`isSample: false`) by product decision,
+ * SHOP LISTINGS: local content shown as regular listings (`isSample: false`) by product decision,
  * matching the clubs and events in `sample-content/data.ts`.
  *
  * Pick n Go does not take payments: each listing points buyers to the seller, who arranges
@@ -79,7 +79,7 @@ const items: Omit<ShopItem, "id" | "contactUrl" | "isSample">[] = [
     seller: majesticFalls,
   },
   {
-    name: "Tournament tee — Doubles Classic",
+    name: "Tournament tee: Doubles Classic",
     imageUrl: unsplash("1581655353564-df123a1eb820"),
     category: "jerseys",
     condition: "new",

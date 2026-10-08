@@ -275,7 +275,7 @@ export async function ClubSpotlight() {
             Clubs that make the game better
           </h2>
           <p className="mt-4 max-w-md text-lg text-white/80">
-            Find your people — from beginner-friendly socials to competitive ladders.
+            Find your people, from beginner-friendly socials to competitive ladders.
           </p>
           <Link
             href="/clubs"

@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: PageProps<"/courts/[city]/[sl
     });
   }
   return buildMetadata({
-    title: `${court.name} — Pickleball court in ${court.city.name}`,
+    title: `${court.name}: Pickleball court in ${court.city.name}`,
     description:
       court.summary ??
       `${court.name} is a pickleball venue in ${court.city.name}, ${court.city.province}.`,

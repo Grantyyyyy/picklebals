@@ -9,7 +9,7 @@ import { getArticles } from "@/features/articles/queries";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Learn pickleball — rules, tips & guides",
+  title: "Learn pickleball: rules, tips & guides",
   description:
     "New to pickleball? Learn the rules, scoring, etiquette and techniques with beginner-friendly guides for Filipino players.",
   path: "/learn",
@@ -44,7 +44,7 @@ export default function LearnPage() {
       <PageHeader
         eyebrow="Learn"
         title="Learn to play pickleball"
-        description="Rules, scoring, etiquette and technique — explained simply."
+        description="Rules, scoring, etiquette and technique, explained simply."
       />
       <section aria-label="Articles" className="container-page py-12">
         <Suspense fallback={<CardGridSkeleton />}>

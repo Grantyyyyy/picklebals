@@ -68,7 +68,7 @@ export function prepareVenueSeed(file: VenueSeedFile): PreparedSeed {
 
   const venues = file.venues.map((venue, index): PreparedVenue => {
     const label = `venues[${index}] "${venue.name}"`;
-    if (!venue.address) warnings.push(`${label}: no address — shown as "not yet confirmed"`);
+    if (!venue.address) warnings.push(`${label}: no address, shown as "not yet confirmed"`);
     if (venue.sources.length === 0) warnings.push(`${label}: no source references to review`);
     return {
       sourceKey: venueSourceKey(venue),

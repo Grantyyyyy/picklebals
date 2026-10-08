@@ -7,7 +7,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "About",
-  description: `${siteConfig.name} helps players across the Philippines discover pickleball courts, clubs and events — starting in ${siteConfig.initialRegion}.`,
+  description: `${siteConfig.name} helps players across the Philippines discover pickleball courts, clubs and events, starting in ${siteConfig.initialRegion}.`,
   path: "/about",
 });
 
@@ -16,7 +16,7 @@ const pillars = [
     icon: MapPinnedIcon,
     title: "Discover courts",
     description:
-      "An accurate, up-to-date directory of places to play — indoor, outdoor and covered.",
+      "An accurate, up-to-date directory of places to play: indoor, outdoor and covered.",
   },
   {
     icon: UsersRoundIcon,

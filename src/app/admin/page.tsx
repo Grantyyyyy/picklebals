@@ -49,7 +49,9 @@ async function ContentCounts() {
         <li key={table} className="rounded-2xl border bg-card p-5">
           <Icon className="size-5 text-court" aria-hidden="true" />
           <p className="mt-3 text-sm text-muted-foreground">{label}</p>
-          <p className="font-heading text-3xl font-bold text-court-deep">{counts[index] ?? "—"}</p>
+          <p className="font-heading text-3xl font-bold text-court-deep">
+            {counts[index] ?? "n/a"}
+          </p>
         </li>
       ))}
     </ul>

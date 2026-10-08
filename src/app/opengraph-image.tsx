@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 import { siteConfig } from "@/config/site";
 
-export const alt = `${siteConfig.name} — pickleball courts, clubs and events in the Philippines`;
+export const alt = `${siteConfig.name}: pickleball courts, clubs and events in the Philippines`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

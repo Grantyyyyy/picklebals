@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: PageProps<"/clubs/[slug]">) {
     });
   }
   return buildMetadata({
-    title: club.city ? `${club.name} — Pickleball club in ${club.city.name}` : club.name,
+    title: club.city ? `${club.name}: Pickleball club in ${club.city.name}` : club.name,
     description: club.summary ?? `${club.name} is a pickleball club in the Philippines.`,
     path: `/clubs/${club.slug}`,
     image: club.imageUrl,

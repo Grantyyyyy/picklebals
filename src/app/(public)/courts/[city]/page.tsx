@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: PageProps<"/courts/[city]">) 
 
   return buildMetadata({
     title: `Pickleball courts in ${city.name}, ${city.province}`,
-    description: `Find ${pluralize(city.courtCount, "pickleball court")} in ${city.name}, ${city.province} — locations, hours, amenities and open play.`,
+    description: `Find ${pluralize(city.courtCount, "pickleball court")} in ${city.name}, ${city.province}: locations, hours, amenities and open play.`,
     path: `/courts/${city.slug}`,
   });
 }

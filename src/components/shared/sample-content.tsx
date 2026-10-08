@@ -10,7 +10,7 @@ export function SampleBadge({ className }: { className?: string }) {
         "inline-flex items-center gap-1 rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 text-xs font-semibold tracking-wide text-amber-800 uppercase",
         className,
       )}
-      title="Sample content for preview purposes — not a real listing"
+      title="Sample content for preview purposes, not a real listing"
     >
       <FlaskConicalIcon className="size-3" aria-hidden="true" />
       Sample

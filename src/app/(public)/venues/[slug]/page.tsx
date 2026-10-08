@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: PageProps<"/venues/[slug]">) 
     });
   }
   return buildMetadata({
-    title: `${venue.name} — Pickleball venue in ${venue.city.name}`,
+    title: `${venue.name}: Pickleball venue in ${venue.city.name}`,
     description: `${venue.name}${venue.address ? `, ${venue.address}` : ""}. Pickleball venue in ${venue.city.name}, ${venue.city.province}.`,
     path: venuePath(venue),
     image: venue.imageUrl,

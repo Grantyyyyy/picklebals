@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: PageProps<"/events/[slug]">) 
     });
   }
   return buildMetadata({
-    title: `${event.title}${event.city ? ` — ${event.city.name}` : ""}`,
+    title: `${event.title}${event.city ? ` in ${event.city.name}` : ""}`,
     description:
       event.summary ??
       `${eventTypeLabels[event.eventType]} on ${formatEventDate(event.startsAt)}${event.city ? ` in ${event.city.name}` : ""}.`,

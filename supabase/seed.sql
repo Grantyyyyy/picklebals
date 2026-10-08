@@ -1,5 +1,5 @@
 -- =============================================================================
--- LOCAL DEVELOPMENT SEED — FICTIONAL SAMPLE DATA. DO NOT RUN AGAINST PRODUCTION.
+-- LOCAL DEVELOPMENT SEED: FICTIONAL SAMPLE DATA. DO NOT RUN AGAINST PRODUCTION.
 -- Mirrors src/features/sample-content/data.ts. Venue, club and event names are made up.
 --
 -- Runs automatically with `supabase db reset` (local stack).
@@ -106,7 +106,7 @@ select c.id, ct.id, cl.id, v.title, v.slug, v.summary, v.description,
        ct.name, v.fee_info, v.is_featured, 'published'
 from (values
   ('cagayan-de-oro', 'uptown-rally-courts', 'golden-friendship-picklers', 'CDO Weekend Open Play',
-   'cdo-weekend-open-play', 'Rotating doubles for all levels. Bring a paddle — or borrow one.',
+   'cdo-weekend-open-play', 'Rotating doubles for all levels. Bring a paddle or borrow one.',
    'Casual rotating doubles with a paddle-stack queue.', 'open_play',
    interval '3 days 23 hours', interval '4 hours', 'Sample fee: ₱150', true),
   ('iligan', 'waterfall-city-sports-hall', 'iligan-third-shot-society', 'Beginner Clinic: Dinks & Drops',
@@ -131,7 +131,7 @@ on conflict (slug) do nothing;
 insert into public.articles (title, slug, excerpt, body, category, author_name, reading_minutes, status)
 values
   ('What is pickleball? A quick guide for first-timers', 'what-is-pickleball',
-   'The fastest-growing paddle sport explained in five minutes — court, rules and gear.',
+   'The fastest-growing paddle sport explained in five minutes: court, rules and gear.',
    E'Pickleball combines elements of tennis, badminton and table tennis.\n\n## The court\n\nA pickleball court measures 20 by 44 feet. The seven-foot zone on each side of the net is the kitchen.\n\n## Basic rules\n\n- Serves are underhand and diagonal.\n- The ball must bounce once on each side before volleys are allowed.\n- You cannot volley while standing in the kitchen.',
    'Basics', 'Pick n Go (sample)', 5, 'published'),
   ('Pickleball scoring explained (without the headache)', 'pickleball-scoring-explained',

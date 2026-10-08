@@ -11,7 +11,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Pickleball clubs in the Philippines",
   description:
-    "Join a pickleball club in Cagayan de Oro, Iligan, Bukidnon and Northern Mindanao — open play, clinics and leagues for every level.",
+    "Join a pickleball club in Cagayan de Oro, Iligan, Bukidnon and Northern Mindanao, with open play, clinics and leagues for every level.",
   path: "/clubs",
 });
 

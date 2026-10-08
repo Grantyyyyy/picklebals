@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Who is Jesus?",
   description:
-    "Who Jesus is, what he did, and why it matters — a short introduction from the people behind this site.",
+    "Who Jesus is, what he did, and why it matters: a short introduction from the people behind this site.",
   path: "/who-is-jesus",
 });
 
@@ -50,7 +50,7 @@ const story = [
 const nextSteps = [
   {
     title: "Read about him",
-    description: "Start with the Gospel of John — it was written so that you may believe.",
+    description: "Start with the Gospel of John. It was written so that you may believe.",
   },
   {
     title: "Talk to him",
@@ -58,7 +58,7 @@ const nextSteps = [
   },
   {
     title: "Find a church",
-    description: "Faith grows in community — just like your game grows with a good club.",
+    description: "Faith grows in community, just like your game grows with a good club.",
   },
 ];
 

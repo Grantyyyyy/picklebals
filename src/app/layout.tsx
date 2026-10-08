@@ -22,7 +22,7 @@ const displayFont = Bricolage_Grotesque({
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
-    default: `${siteConfig.name} — Pickleball courts, clubs & events in the Philippines`,
+    default: `${siteConfig.name}: Pickleball courts, clubs & events in the Philippines`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
