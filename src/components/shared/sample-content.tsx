@@ -24,8 +24,8 @@ export function SampleContentNotice() {
   return (
     <div role="note" className="border-b border-amber-200 bg-amber-50 text-amber-900">
       <p className="container-page py-2 text-center text-xs sm:text-sm">
-        <strong className="font-semibold">Preview mode:</strong> Supabase is not configured, so the
-        listings below are fictional sample content.
+        <strong className="font-semibold">Preview mode:</strong> Supabase is not configured.
+        Listings marked “Sample” are fictional; venues come from the unverified test dataset.
       </p>
     </div>
   );

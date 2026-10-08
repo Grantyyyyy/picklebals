@@ -7,6 +7,7 @@ import type { Enums } from "./database";
 
 export type CourtEnvironment = Enums<"court_environment">;
 export type EventType = Enums<"event_type">;
+export type VerificationStatus = Enums<"verification_status">;
 
 export type CityRef = { name: string; slug: string; province: string };
 
@@ -99,4 +100,45 @@ export type Article = {
   publishedAt: string | null;
   updatedAt: string;
   isSample: boolean;
+};
+
+export type VenueSource = {
+  label: string;
+  url: string | null;
+  type: string | null;
+  accessedAt: string | null;
+  note: string | null;
+};
+
+export type VenueCourt = {
+  id: string;
+  label: string;
+  environment: CourtEnvironment | null;
+  surface: string | null;
+};
+
+export type Venue = {
+  id: string;
+  slug: string;
+  name: string;
+  address: string | null;
+  barangay: string | null;
+  city: CityRef;
+  latitude: number | null;
+  longitude: number | null;
+  description: string | null;
+  contactPhone: string | null;
+  contactEmail: string | null;
+  websiteUrl: string | null;
+  facebookUrl: string | null;
+  imageUrl: string | null;
+  verificationStatus: VerificationStatus;
+  sources: VenueSource[];
+  dataNotes: string | null;
+  /** Only courts recorded by an admin; never inferred. */
+  courts: VenueCourt[];
+  isTestData: boolean;
+  /** "seed-file" when read from the local curated JSON because Supabase is not configured. */
+  origin: "database" | "seed-file";
+  updatedAt: string | null;
 };

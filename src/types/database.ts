@@ -121,6 +121,203 @@ type SubmissionRow = {
   reviewed_by: string | null;
 } & Timestamps;
 
+type E<T extends keyof Database["public"]["Enums"]> = Database["public"]["Enums"][T];
+
+type VenueRow = {
+  id: string;
+  city_id: string;
+  name: string;
+  slug: string;
+  address: string | null;
+  barangay: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  description: string | null;
+  contact_phone: string | null;
+  contact_email: string | null;
+  website_url: string | null;
+  facebook_url: string | null;
+  cover_image_path: string | null;
+  verification_status: E<"verification_status">;
+  verified_at: string | null;
+  verified_by: string | null;
+  source_dataset: string | null;
+  source_key: string | null;
+  source_references: Json;
+  data_notes: string | null;
+  is_test_data: boolean;
+} & Publishable &
+  Timestamps;
+
+type VenueCourtRow = {
+  id: string;
+  venue_id: string;
+  label: string;
+  environment: E<"court_environment"> | null;
+  surface: string | null;
+  is_active: boolean;
+  sort_order: number;
+} & Timestamps;
+
+type OrganizationRow = {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  contact_email: string | null;
+  website_url: string | null;
+  facebook_url: string | null;
+  logo_path: string | null;
+  is_test_data: boolean;
+  created_by: string | null;
+} & Timestamps;
+
+type OrganizationMemberRow = {
+  organization_id: string;
+  user_id: string;
+  role: E<"org_role">;
+} & Timestamps;
+
+type TournamentRow = {
+  id: string;
+  organization_id: string;
+  city_id: string;
+  venue_id: string | null;
+  name: string;
+  slug: string;
+  summary: string | null;
+  description: string | null;
+  starts_at: string;
+  ends_at: string | null;
+  timezone: string;
+  registration_opens_at: string | null;
+  registration_closes_at: string | null;
+  registration_instructions: string | null;
+  max_entries: number | null;
+  phase: E<"tournament_phase">;
+  is_featured: boolean;
+  is_test_data: boolean;
+  cover_image_path: string | null;
+  created_by: string | null;
+} & Publishable &
+  Timestamps;
+
+type TournamentDivisionRow = {
+  id: string;
+  tournament_id: string;
+  name: string;
+  slug: string;
+  category: E<"division_category">;
+  team_size: number;
+  skill_label: string | null;
+  format: E<"bracket_format">;
+  max_entries: number | null;
+  points_to_win: number;
+  win_by: number;
+  best_of: number;
+  status: E<"division_status">;
+  sort_order: number;
+} & Timestamps;
+
+type ParticipantRow = {
+  id: string;
+  organization_id: string;
+  full_name: string;
+  email: string | null;
+  phone: string | null;
+  skill_label: string | null;
+  is_test_data: boolean;
+} & Timestamps;
+
+type TeamRow = {
+  id: string;
+  tournament_id: string;
+  division_id: string;
+  name: string;
+  seed: number | null;
+  is_test_data: boolean;
+} & Timestamps;
+
+type TeamMemberRow = {
+  team_id: string;
+  division_id: string;
+  participant_id: string;
+  created_at: string;
+};
+
+type RegistrationRow = {
+  id: string;
+  tournament_id: string;
+  division_id: string;
+  team_id: string | null;
+  status: E<"registration_status">;
+  source: E<"registration_source">;
+  team_name: string | null;
+  players: Json;
+  contact_name: string;
+  contact_email: string | null;
+  contact_phone: string | null;
+  notes: string | null;
+  ip_hash: string | null;
+  is_test_data: boolean;
+  reviewed_at: string | null;
+  reviewed_by: string | null;
+} & Timestamps;
+
+type MatchRow = {
+  id: string;
+  tournament_id: string;
+  division_id: string;
+  round: number;
+  position: number;
+  team_a_id: string | null;
+  team_b_id: string | null;
+  winner_team_id: string | null;
+  status: E<"match_status">;
+  next_match_id: string | null;
+  next_match_slot: E<"match_slot"> | null;
+  scheduled_at: string | null;
+  started_at: string | null;
+  completed_at: string | null;
+  confirmed_at: string | null;
+  confirmed_by: string | null;
+  version: number;
+} & Timestamps;
+
+type MatchGameRow = {
+  id: string;
+  tournament_id: string;
+  match_id: string;
+  game_number: number;
+  team_a_score: number;
+  team_b_score: number;
+} & Timestamps;
+
+type MatchCourtAssignmentRow = {
+  id: string;
+  tournament_id: string;
+  match_id: string;
+  venue_court_id: string | null;
+  court_label: string;
+  scheduled_start_at: string | null;
+  is_current: boolean;
+  assigned_by: string | null;
+  created_at: string;
+};
+
+type ScoreAuditLogRow = {
+  id: string;
+  organization_id: string;
+  tournament_id: string;
+  match_id: string | null;
+  action: E<"score_audit_action">;
+  previous_state: Json | null;
+  new_state: Json | null;
+  reason: string | null;
+  performed_by: string | null;
+  created_at: string;
+};
+
 type AdminRow = { user_id: string; created_at: string };
 
 /** Insert type: columns with database defaults (or nullable) become optional. */
@@ -187,10 +384,141 @@ export type Database = {
         Update: Partial<SubmissionRow>;
         Relationships: [];
       };
+      venues: {
+        Row: VenueRow;
+        Insert: InsertOf<VenueRow, "city_id" | "name" | "slug">;
+        Update: Partial<VenueRow>;
+        Relationships: [Rel<"venues_city_id_fkey", "city_id", "cities">];
+      };
+      venue_courts: {
+        Row: VenueCourtRow;
+        Insert: InsertOf<VenueCourtRow, "venue_id" | "label">;
+        Update: Partial<VenueCourtRow>;
+        Relationships: [Rel<"venue_courts_venue_id_fkey", "venue_id", "venues">];
+      };
+      organizations: {
+        Row: OrganizationRow;
+        Insert: InsertOf<OrganizationRow, "name" | "slug">;
+        Update: Partial<OrganizationRow>;
+        Relationships: [];
+      };
+      organization_members: {
+        Row: OrganizationMemberRow;
+        Insert: InsertOf<OrganizationMemberRow, "organization_id" | "user_id" | "role">;
+        Update: Partial<OrganizationMemberRow>;
+        Relationships: [
+          Rel<"organization_members_organization_id_fkey", "organization_id", "organizations">,
+        ];
+      };
+      tournaments: {
+        Row: TournamentRow;
+        Insert: InsertOf<
+          TournamentRow,
+          "organization_id" | "city_id" | "name" | "slug" | "starts_at"
+        >;
+        Update: Partial<TournamentRow>;
+        Relationships: [
+          Rel<"tournaments_organization_id_fkey", "organization_id", "organizations">,
+          Rel<"tournaments_city_id_fkey", "city_id", "cities">,
+          Rel<"tournaments_venue_id_fkey", "venue_id", "venues">,
+        ];
+      };
+      tournament_divisions: {
+        Row: TournamentDivisionRow;
+        Insert: InsertOf<
+          TournamentDivisionRow,
+          "tournament_id" | "name" | "slug" | "category" | "team_size"
+        >;
+        Update: Partial<TournamentDivisionRow>;
+        Relationships: [
+          Rel<"tournament_divisions_tournament_id_fkey", "tournament_id", "tournaments">,
+        ];
+      };
+      participants: {
+        Row: ParticipantRow;
+        Insert: InsertOf<ParticipantRow, "organization_id" | "full_name">;
+        Update: Partial<ParticipantRow>;
+        Relationships: [
+          Rel<"participants_organization_id_fkey", "organization_id", "organizations">,
+        ];
+      };
+      teams: {
+        Row: TeamRow;
+        Insert: InsertOf<TeamRow, "tournament_id" | "division_id" | "name">;
+        Update: Partial<TeamRow>;
+        Relationships: [
+          Rel<"teams_division_id_tournament_id_fkey", "division_id", "tournament_divisions">,
+        ];
+      };
+      team_members: {
+        Row: TeamMemberRow;
+        Insert: InsertOf<TeamMemberRow, "team_id" | "division_id" | "participant_id">;
+        Update: Partial<TeamMemberRow>;
+        Relationships: [
+          Rel<"team_members_team_id_division_id_fkey", "team_id", "teams">,
+          Rel<"team_members_participant_id_fkey", "participant_id", "participants">,
+        ];
+      };
+      registrations: {
+        Row: RegistrationRow;
+        Insert: InsertOf<
+          RegistrationRow,
+          "tournament_id" | "division_id" | "source" | "contact_name"
+        >;
+        Update: Partial<RegistrationRow>;
+        Relationships: [
+          Rel<
+            "registrations_division_id_tournament_id_fkey",
+            "division_id",
+            "tournament_divisions"
+          >,
+          Rel<"registrations_team_id_fkey", "team_id", "teams">,
+        ];
+      };
+      matches: {
+        Row: MatchRow;
+        Insert: InsertOf<MatchRow, "tournament_id" | "division_id" | "round" | "position">;
+        Update: Partial<MatchRow>;
+        Relationships: [
+          Rel<"matches_division_id_tournament_id_fkey", "division_id", "tournament_divisions">,
+          Rel<"matches_team_a_id_division_id_fkey", "team_a_id", "teams">,
+          Rel<"matches_team_b_id_division_id_fkey", "team_b_id", "teams">,
+          Rel<"matches_winner_team_id_fkey", "winner_team_id", "teams">,
+        ];
+      };
+      match_games: {
+        Row: MatchGameRow;
+        Insert: InsertOf<
+          MatchGameRow,
+          "tournament_id" | "match_id" | "game_number" | "team_a_score" | "team_b_score"
+        >;
+        Update: Partial<MatchGameRow>;
+        Relationships: [Rel<"match_games_match_id_tournament_id_fkey", "match_id", "matches">];
+      };
+      match_court_assignments: {
+        Row: MatchCourtAssignmentRow;
+        Insert: InsertOf<MatchCourtAssignmentRow, "tournament_id" | "match_id" | "court_label">;
+        Update: Partial<MatchCourtAssignmentRow>;
+        Relationships: [
+          Rel<"match_court_assignments_match_id_tournament_id_fkey", "match_id", "matches">,
+          Rel<"match_court_assignments_venue_court_id_fkey", "venue_court_id", "venue_courts">,
+        ];
+      };
+      score_audit_logs: {
+        Row: ScoreAuditLogRow;
+        Insert: InsertOf<ScoreAuditLogRow, "organization_id" | "tournament_id" | "action">;
+        Update: Partial<ScoreAuditLogRow>;
+        Relationships: [Rel<"score_audit_logs_match_id_fkey", "match_id", "matches">];
+      };
     };
     Views: { [_ in never]: never };
     Functions: {
       is_admin: { Args: Record<PropertyKey, never>; Returns: boolean };
+      is_public_tournament: { Args: { t_id: string }; Returns: boolean };
+      can_manage_tournament: { Args: { t_id: string }; Returns: boolean };
+      can_view_tournament: { Args: { t_id: string }; Returns: boolean };
+      is_org_member: { Args: { org_id: string }; Returns: boolean };
+      create_organization: { Args: { p_name: string; p_slug: string }; Returns: string };
     };
     Enums: {
       content_status: "draft" | "published" | "archived";
@@ -198,6 +526,37 @@ export type Database = {
       event_type: "tournament" | "open_play" | "clinic" | "league" | "social";
       submission_type: "court_listing" | "contact";
       submission_status: "pending" | "reviewed" | "approved" | "rejected" | "spam";
+      verification_status: "unverified" | "verified" | "rejected";
+      org_role: "owner" | "organizer" | "scorekeeper";
+      tournament_phase:
+        | "setup"
+        | "registration_open"
+        | "registration_closed"
+        | "in_progress"
+        | "completed"
+        | "cancelled";
+      division_category:
+        | "mens_singles"
+        | "womens_singles"
+        | "mens_doubles"
+        | "womens_doubles"
+        | "mixed_doubles"
+        | "open"
+        | "custom";
+      bracket_format: "round_robin" | "single_elimination";
+      division_status: "setup" | "bracket_generated" | "in_progress" | "completed";
+      registration_status: "pending" | "approved" | "waitlisted" | "rejected" | "withdrawn";
+      registration_source: "public" | "organizer";
+      match_status: "pending" | "scheduled" | "in_progress" | "completed" | "bye" | "cancelled";
+      match_slot: "a" | "b";
+      score_audit_action:
+        | "bracket_generated"
+        | "bracket_reset"
+        | "court_assigned"
+        | "score_submitted"
+        | "score_corrected"
+        | "result_confirmed"
+        | "winner_advanced";
     };
     CompositeTypes: { [_ in never]: never };
   };

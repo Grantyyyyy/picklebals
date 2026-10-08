@@ -5,11 +5,13 @@ import { getCities } from "@/features/cities/queries";
 import { getClubs } from "@/features/clubs/queries";
 import { getCourts } from "@/features/courts/queries";
 import { getUpcomingEvents } from "@/features/events/queries";
+import { getVenueDirectory } from "@/features/venues/queries";
 import { absoluteUrl } from "@/lib/seo";
 
 const staticPaths: { path: string; priority: number }[] = [
   { path: "/", priority: 1 },
-  { path: "/courts", priority: 0.9 },
+  { path: "/venues", priority: 0.9 },
+  { path: "/courts", priority: 0.6 },
   { path: "/clubs", priority: 0.8 },
   { path: "/events", priority: 0.8 },
   { path: "/learn", priority: 0.7 },
@@ -19,20 +21,31 @@ const staticPaths: { path: string; priority: number }[] = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [cities, courts, clubs, events, articles] = await Promise.all([
+  const [cities, courts, clubs, events, articles, venueDirectory] = await Promise.all([
     getCities(),
     getCourts(),
     getClubs(),
     getUpcomingEvents(),
     getArticles(),
+    getVenueDirectory(),
   ]);
 
   // Sample content is fictional and must not be submitted to search engines.
   const live = <T extends { isSample: boolean }>(items: T[]) =>
     items.filter((item) => !item.isSample);
 
+  // Unverified venues are noindex until an operator confirms them.
+  const verifiedVenues = venueDirectory.venues.filter(
+    (venue) => venue.origin === "database" && venue.verificationStatus === "verified",
+  );
+
   return [
     ...staticPaths.map(({ path, priority }) => ({ url: absoluteUrl(path), priority })),
+    ...verifiedVenues.map((venue) => ({
+      url: absoluteUrl(`/venues/${venue.slug}`),
+      lastModified: venue.updatedAt ?? undefined,
+      priority: 0.8,
+    })),
     ...live(cities).map((city) => ({
       url: absoluteUrl(`/courts/${city.slug}`),
       priority: 0.8,

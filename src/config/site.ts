@@ -1,29 +1,36 @@
 export const siteConfig = {
   name: "Pickleball Hub",
   shortName: "PB Hub",
-  tagline: "Find your next game.",
+  tagline: "Find your next tournament.",
   description:
-    "Discover pickleball courts, clubs, and events across the Philippines — starting with Cagayan de Oro and Northern Mindanao.",
+    "Discover pickleball tournaments and venues in Iligan City, Lanao del Norte — with brackets, schedules and results in one place.",
   locale: "en_PH",
   country: "Philippines",
-  initialRegion: "Northern Mindanao",
+  initialRegion: "Iligan City",
+  /** The only market served today. The schema supports more cities; the UI does not yet. */
+  market: {
+    city: "Iligan",
+    citySlug: "iligan",
+    province: "Lanao del Norte",
+    region: "Northern Mindanao",
+  },
   timeZone: "Asia/Manila",
   contactEmail: "hello@example.com",
   keywords: [
     "pickleball Philippines",
-    "pickleball courts",
-    "pickleball Cagayan de Oro",
-    "pickleball Northern Mindanao",
-    "pickleball clubs",
-    "pickleball tournaments",
-    "open play",
+    "pickleball Iligan",
+    "pickleball Iligan City",
+    "pickleball tournaments Iligan",
+    "pickleball venues Iligan",
+    "pickleball Lanao del Norte",
+    "pickleball brackets",
   ],
 } as const;
 
 export type NavItem = { title: string; href: string };
 
 export const mainNav: NavItem[] = [
-  { title: "Courts", href: "/courts" },
+  { title: "Venues", href: "/venues" },
   { title: "Clubs", href: "/clubs" },
   { title: "Events", href: "/events" },
   { title: "Learn", href: "/learn" },
@@ -34,7 +41,7 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
   {
     title: "Discover",
     items: [
-      { title: "Courts", href: "/courts" },
+      { title: "Venues", href: "/venues" },
       { title: "Clubs", href: "/clubs" },
       { title: "Events", href: "/events" },
     ],
@@ -49,6 +56,6 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
   },
   {
     title: "For venues",
-    items: [{ title: "List your court", href: "/list-your-court" }],
+    items: [{ title: "Suggest a venue", href: "/list-your-court" }],
   },
 ];

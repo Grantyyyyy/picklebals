@@ -728,12 +728,12 @@ begin
     'tournament_divisions', 'teams', 'matches', 'match_games', 'match_court_assignments'
   ] loop
     execute format(
-      'create policy %L on public.%I for select to anon, authenticated using (public.is_public_tournament(tournament_id))',
-      'Public can read ' || t || ' of published tournaments', t
+      'create policy %I on public.%I for select to anon, authenticated using (public.is_public_tournament(tournament_id))',
+      t || ': public read (published tournaments)', t
     );
     execute format(
-      'create policy %L on public.%I for select to authenticated using (public.can_view_tournament(tournament_id))',
-      'Members can read ' || t, t
+      'create policy %I on public.%I for select to authenticated using (public.can_view_tournament(tournament_id))',
+      t || ': members read', t
     );
   end loop;
 
@@ -741,16 +741,16 @@ begin
   -- written only through security-definer functions.
   foreach t in array array['tournament_divisions', 'teams'] loop
     execute format(
-      'create policy %L on public.%I for insert to authenticated with check (public.can_manage_tournament(tournament_id))',
-      'Organizers can insert ' || t, t
+      'create policy %I on public.%I for insert to authenticated with check (public.can_manage_tournament(tournament_id))',
+      t || ': organizers insert', t
     );
     execute format(
-      'create policy %L on public.%I for update to authenticated using (public.can_manage_tournament(tournament_id)) with check (public.can_manage_tournament(tournament_id))',
-      'Organizers can update ' || t, t
+      'create policy %I on public.%I for update to authenticated using (public.can_manage_tournament(tournament_id)) with check (public.can_manage_tournament(tournament_id))',
+      t || ': organizers update', t
     );
     execute format(
-      'create policy %L on public.%I for delete to authenticated using (public.can_manage_tournament(tournament_id))',
-      'Organizers can delete ' || t, t
+      'create policy %I on public.%I for delete to authenticated using (public.can_manage_tournament(tournament_id))',
+      t || ': organizers delete', t
     );
   end loop;
 end;

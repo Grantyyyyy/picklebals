@@ -1,0 +1,48 @@
+{
+  "dataset": {
+    "name": "iligan_pickleball_venues_seed_example",
+    "version": 1,
+    "compiled_at": "2026-10-08",
+    "description": "PLACEHOLDER example showing the expected shape. These are not real venues. The real dataset lives in iligan_pickleball_venues_seed.json."
+  },
+  "city": { "name": "Iligan", "province": "Lanao del Norte", "region": "Northern Mindanao" },
+  "venues": [
+    {
+      "name": "Example Venue A (placeholder)",
+      "address": "Example street, Example barangay, Iligan City",
+      "barangay": "Example Barangay",
+      "sources": [
+        {
+          "label": "Example public page",
+          "url": "https://example.com/venue-a",
+          "type": "website",
+          "accessed_at": "2026-10-01"
+        }
+      ]
+    },
+    {
+      "name": "Example Venue B (placeholder)",
+      "address": null,
+      "sources": [],
+      "notes": "Address not yet confirmed."
+    }
+  ],
+  "demo_tournament": {
+    "name": "Example Demo Open (fictional)",
+    "description": "Fictional tournament used only to demonstrate setup and bracket generation.",
+    "organizer_name": "Example Organizer (fictional)",
+    "divisions": [
+      {
+        "name": "Mixed Doubles — Intermediate",
+        "category": "mixed_doubles",
+        "skill_label": "3.0–3.5",
+        "format": "round_robin",
+        "teams": [
+          { "name": "Team One", "players": ["Player A1", "Player A2"] },
+          { "name": "Team Two", "players": ["Player B1", "Player B2"] },
+          { "name": "Team Three", "players": ["Player C1", "Player C2"] }
+        ]
+      }
+    ]
+  }
+}

@@ -2,6 +2,7 @@
   "name": "pickleball-hub",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,7 +12,10 @@
     "typecheck": "next typegen && tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "pnpm lint && pnpm typecheck && pnpm format:check"
+    "check": "pnpm lint && pnpm typecheck && pnpm format:check && pnpm test",
+    "test": "node --test --test-reporter=spec \"src/**/*.test.ts\" \"scripts/**/*.test.ts\"",
+    "db:test": "bash scripts/db-test.sh",
+    "seed:venues": "node scripts/import-venue-seed.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -43,7 +47,7 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=20.9.0"
+    "node": ">=22.18.0"
   },
   "packageManager": "pnpm@9.13.2"
 }

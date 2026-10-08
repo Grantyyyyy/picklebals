@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  // The venue seed is read at runtime only when Supabase is not configured (local previews).
+  outputFileTracingIncludes: {
+    "/venues": ["./data/seeds/iligan_pickleball_venues_seed.json"],
+    "/venues/[slug]": ["./data/seeds/iligan_pickleball_venues_seed.json"],
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: supabaseImagePattern(),
