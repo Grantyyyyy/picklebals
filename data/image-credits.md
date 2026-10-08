@@ -1,6 +1,8 @@
 # Image credits
 
-Images live in `public/images/` (gitignored) and are used only in the private preview.
+Images live in `public/images/` and are published with the site. Every file must also be listed in
+`src/features/shared/local-images.ts`, and its credit shown on the /credits page
+(`src/app/(public)/credits/page.tsx`).
 
 ## Wikimedia Commons (free licenses; attribution required unless CC0)
 
@@ -12,7 +14,7 @@ Images live in `public/images/` (gitignored) and are used only in the private pr
 - `events/beginner-clinic-iligan.jpg`: [Pickleball balls and paddles.jpg](https://commons.wikimedia.org/wiki/File:Pickleball_balls_and_paddles.jpg) by E is for Ian, CC BY-SA 4.0 ([license](https://creativecommons.org/licenses/by-sa/4.0))
 - `events/friday-night-social-mixer.jpg`: [A pickleball paddle with two pickleballs.jpg](https://commons.wikimedia.org/wiki/File:A_pickleball_paddle_with_two_pickleballs.jpg) by OvertAnalyzer, CC BY-SA 4.0 ([license](https://creativecommons.org/licenses/by-sa/4.0))
 
-## Third-party listings (no license; used privately, replace or get permission before publishing)
+## Third-party listings (no license; published by owner decision 2026-10-08, replace or get permission)
 
 - `venues/*`: cover photos from each venue's Courtogo listing (https://courtogo.com/venues/…), accessed 2026-10-08. `sweat-rally.jpg` is from its Courtogo gallery.
 - `clubs/match-point-pickleball-club.logo.webp`: club logo from https://reclub.co/clubs/@matchpoint-pickl, accessed 2026-10-08.

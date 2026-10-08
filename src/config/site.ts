@@ -61,6 +61,7 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
       { title: "About us", href: "/about" },
       { title: "Who is Jesus?", href: "/who-is-jesus" },
       { title: "Contact", href: "/contact" },
+      { title: "Photo credits", href: "/credits" },
     ],
   },
   {

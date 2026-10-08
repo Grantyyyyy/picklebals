@@ -1,38 +1,49 @@
-import "server-only";
-
-import { readdirSync } from "node:fs";
-import { join, parse } from "node:path";
-
 /**
- * Photos and logos saved locally for the private preview, at `public/images/<folder>/<slug>.<ext>`
- * (logos as `<slug>.logo.<ext>`, see `isLogoImage`). Credits are in `data/image-credits.md`.
- * These folders are gitignored: the images come from third-party listings and must not be
- * committed or published. Without them, cards fall back to the court illustration.
+ * Photos and logos committed at `public/images/<folder>/<file>` (logos as `<slug>.logo.<ext>`).
+ * Credits are in `data/image-credits.md` and on the /credits page.
+ *
+ * Listed here rather than read from disk: on serverless hosts `public/` is served from the CDN
+ * and is not part of the server bundle, so a runtime directory read finds nothing. Add a file
+ * to the folder and to this list together.
  */
 type ImageFolder = "venues" | "clubs" | "events";
 
-const cache = new Map<ImageFolder, Map<string, string>>();
+const files: Record<ImageFolder, string[]> = {
+  venues: [
+    "jm-s-dink-n-drive.jpeg",
+    "kingple-dink-yard.jpg",
+    "kmpnd.webp",
+    "la-pickleball-court.webp",
+    "meadow-rally.webp",
+    "pal-pickleball-homecourt.webp",
+    "siradj-pickleball.jpeg",
+    "sweat-rally.jpg",
+  ],
+  clubs: [
+    "iligan-third-shot-society.jpg",
+    "lanao-kitchen-club.jpg",
+    "majestic-falls-picklers.jpg",
+    "match-point-pickleball-club.logo.webp",
+  ],
+  events: [
+    "beginner-clinic-iligan.jpg",
+    "friday-night-social-mixer.jpg",
+    "iligan-doubles-classic.jpg",
+    "iligan-weekend-open-play.jpg",
+  ],
+};
 
-function loadFolder(folder: ImageFolder): Map<string, string> {
-  try {
-    const files = readdirSync(join(process.cwd(), "public", "images", folder));
-    return new Map(
-      files
-        .filter((file) => /\.(jpe?g|png|webp|avif)$/i.test(file))
-        .map((file) => [parse(file).name.replace(/\.logo$/, ""), `/images/${folder}/${file}`]),
-    );
-  } catch {
-    return new Map();
-  }
-}
+const bySlug = new Map(
+  Object.entries(files).map(([folder, names]) => [
+    folder,
+    new Map(
+      names.map((file) => [file.replace(/(\.logo)?\.[^.]+$/, ""), `/images/${folder}/${file}`]),
+    ),
+  ]),
+);
 
 export function localImage(folder: ImageFolder, slug: string): string | null {
-  let images = cache.get(folder);
-  if (!images) {
-    images = loadFolder(folder);
-    cache.set(folder, images);
-  }
-  return images.get(slug) ?? null;
+  return bySlug.get(folder)?.get(slug) ?? null;
 }
 
 export function localVenueImage(slug: string): string | null {

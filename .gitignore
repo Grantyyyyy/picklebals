@@ -49,8 +49,3 @@ supabase/.temp
 .impeccable/config.local.json
 .impeccable/live/inject-journal.json
 .impeccable/live/*.log
-
-# images for the private preview (third-party listings and Commons photos, see data/image-credits.md); do not commit
-public/images/venues/
-public/images/clubs/
-public/images/events/

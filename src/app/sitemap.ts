@@ -19,6 +19,7 @@ const staticPaths: { path: string; priority: number }[] = [
   { path: "/learn", priority: 0.7 },
   { path: "/list-your-court", priority: 0.6 },
   { path: "/about", priority: 0.4 },
+  { path: "/credits", priority: 0.1 },
   { path: "/contact", priority: 0.4 },
   { path: "/who-is-jesus", priority: 0.4 },
 ];

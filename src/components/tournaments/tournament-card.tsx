@@ -1,7 +1,6 @@
 import { ArrowRightIcon, CalendarDaysIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
 
-import { SampleBadge } from "@/components/shared/sample-content";
 import type { TournamentSummary } from "@/features/tournaments/types";
 import { cn } from "@/lib/utils";
 import { formatEventDate, formatEventTime } from "@/lib/utils/format";
@@ -42,7 +41,6 @@ export function TournamentCard({ tournament }: { tournament: TournamentSummary }
           {playing && <span className="size-1.5 rounded-full bg-ball" aria-hidden="true" />}
           {phaseLabels[tournament.phase]}
         </span>
-        {tournament.isSample && <SampleBadge />}
       </div>
       <h3 className="font-heading text-2xl leading-tight font-extrabold text-court-deep uppercase font-stretch-condensed">
         <Link href={`/tournaments/${tournament.slug}`} className="after:absolute after:inset-0">

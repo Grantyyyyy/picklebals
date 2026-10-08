@@ -120,7 +120,6 @@ function StatusLine({
       )}
 
       <span className="inline-flex items-center gap-2 text-sm text-muted-foreground">
-        {connection === "preview" && "Sample scores, not a live feed"}
         {connection === "connecting" && `Connecting… scores as of ${formatClockTime(fetchedAt)}`}
         {connection === "live" && (
           <>
