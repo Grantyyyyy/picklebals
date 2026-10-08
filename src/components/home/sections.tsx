@@ -18,6 +18,7 @@ import { LogoMark } from "@/components/shared/logo";
 import { MediaImage } from "@/components/shared/media-image";
 import { SampleBadge } from "@/components/shared/sample-content";
 import { Button } from "@/components/ui/button";
+import { CarouselItem } from "@/components/ui/carousel";
 import { siteConfig } from "@/config/site";
 import { getCities } from "@/features/cities/queries";
 import { getClubs, getFeaturedClubs } from "@/features/clubs/queries";
@@ -29,6 +30,7 @@ import { pluralize } from "@/lib/utils/format";
 import { isLogoImage } from "@/lib/utils/images";
 import type { Club } from "@/types/content";
 
+import { AutoCarousel } from "./auto-carousel";
 import { FeaturedCourtCard } from "./featured-court-card";
 import { FeaturedEventCard } from "./featured-event";
 
@@ -198,7 +200,13 @@ function TextLink({
 }
 
 export async function FeaturedCourts() {
-  const courts = await getFeaturedCourts(3);
+  const all = await getCourts();
+  const withPhotos = all.filter((court) => court.imageUrl);
+  // Featured courts lead; then every other court that has a photo. Fall back to featured only.
+  const courts =
+    withPhotos.length >= 3
+      ? [...withPhotos].sort((a, b) => Number(b.isFeatured) - Number(a.isFeatured))
+      : await getFeaturedCourts(3);
   return (
     <section aria-labelledby="featured-courts" className="border-t bg-background py-20">
       <div className="container-page">
@@ -209,18 +217,19 @@ export async function FeaturedCourts() {
           description="Hand-picked venues with great courts, lighting and community."
         />
         {courts.length > 0 ? (
-          <>
-            <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {courts.map((court, index) => (
-                <li key={court.id} className="grid">
-                  <FeaturedCourtCard court={court} eager={index < 3} index={index} />
-                </li>
-              ))}
-            </ul>
-            <div className="mt-10 text-center">
-              <TextLink href="/courts">Browse all courts</TextLink>
-            </div>
-          </>
+          <AutoCarousel
+            label="Featured courts"
+            footer={<TextLink href="/courts">Browse all courts</TextLink>}
+          >
+            {courts.map((court, index) => (
+              <CarouselItem
+                key={court.id}
+                className="basis-[86%] min-[480px]:basis-[62%] sm:basis-1/2 lg:basis-1/3"
+              >
+                <FeaturedCourtCard court={court} eager={index < 3} index={index} />
+              </CarouselItem>
+            ))}
+          </AutoCarousel>
         ) : (
           <div className="mt-12">
             <EmptyState
@@ -362,11 +371,7 @@ export async function ExploreByLocation() {
           <article className="group relative isolate flex min-h-80 flex-col justify-between gap-10 overflow-hidden rounded-[1.5rem] bg-court-deep p-6 text-white sm:p-8">
             <div className="absolute inset-0 -z-10 bg-court-grain opacity-60" aria-hidden="true" />
             <CourtMarkings crop="kitchen" className="-z-10" />
-            <p className="inline-flex items-center gap-2 text-xs font-bold tracking-wider text-ball uppercase">
-              <span className="size-1.5 rounded-full bg-ball" aria-hidden="true" />
-              Now covering
-            </p>
-            <div>
+            <div className="mt-auto">
               <h2
                 id="explore-location"
                 className="reveal-title font-heading text-[clamp(3.5rem,12vw,6.5rem)] leading-[0.85] font-extrabold uppercase font-stretch-condensed"

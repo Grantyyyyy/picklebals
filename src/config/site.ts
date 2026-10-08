@@ -36,6 +36,7 @@ export const mainNav: NavItem[] = [
   { title: "Shop", href: "/shop" },
   { title: "Learn", href: "/learn" },
   { title: "About", href: "/about" },
+  { title: "Who is Jesus?", href: "/who-is-jesus" },
 ];
 
 export const footerNav: { title: string; items: NavItem[] }[] = [
@@ -53,6 +54,7 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     items: [
       { title: "Guides & articles", href: "/learn" },
       { title: "About us", href: "/about" },
+      { title: "Who is Jesus?", href: "/who-is-jesus" },
       { title: "Contact", href: "/contact" },
     ],
   },

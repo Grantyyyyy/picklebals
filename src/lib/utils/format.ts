@@ -30,6 +30,11 @@ export function formatEventTime(startIso: string, endIso: string | null): string
   return endIso ? `${start} – ${timeFormatter.format(new Date(endIso))}` : start;
 }
 
+/** Clock time in Philippine time, e.g. "2:40 PM". */
+export function formatClockTime(iso: string): string {
+  return timeFormatter.format(new Date(iso));
+}
+
 const weekdayFormatter = new Intl.DateTimeFormat("en-PH", {
   weekday: "short",
   timeZone: siteConfig.timeZone,

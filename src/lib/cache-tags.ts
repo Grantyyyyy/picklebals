@@ -6,4 +6,5 @@ export const cacheTags = {
   events: "events",
   articles: "articles",
   venues: "venues",
+  tournaments: "tournaments",
 } as const;

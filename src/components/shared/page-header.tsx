@@ -1,6 +1,7 @@
 import { type ReactNode } from "react";
 
 import { CourtMarkings } from "@/components/shared/court-markings";
+import { Pickleball } from "@/components/shared/pickleball";
 import { cn } from "@/lib/utils";
 
 type PageHeaderProps = {
@@ -22,16 +23,13 @@ export function PageHeader({ eyebrow, title, description, children, className }:
         crop="full"
         className="left-auto w-full mask-l-from-40% mask-l-to-95% sm:w-4/5 lg:w-3/5"
       />
-      <div
-        className="absolute -top-24 -right-24 size-72 rounded-full bg-ball/20 blur-3xl"
-        aria-hidden="true"
-      />
+      <Pickleball className="absolute -right-10 -bottom-14 hidden size-40 animate-ball-drop sm:block lg:right-[10%] lg:size-48" />
       <div className="relative container-page py-14 sm:py-20">
         <div className="max-w-3xl space-y-4">
           {eyebrow && (
             <p className="text-sm font-semibold tracking-wider text-ball uppercase">{eyebrow}</p>
           )}
-          <h1 id="page-title" className="text-4xl font-bold sm:text-5xl">
+          <h1 id="page-title" className="animate-title-in text-4xl font-bold sm:text-5xl">
             {title}
           </h1>
           {description && <p className="text-lg text-white/75">{description}</p>}

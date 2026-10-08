@@ -3,6 +3,10 @@ import { Suspense } from "react";
 
 import { EmptyState } from "@/components/shared/empty-state";
 import { PageHeader } from "@/components/shared/page-header";
+import {
+  ResultsSkeletonTransition,
+  ResultsTransition,
+} from "@/components/shared/results-transition";
 import { CardGridSkeleton } from "@/components/shared/skeletons";
 import { VenueGrid } from "@/components/venues/venue-card";
 import { VenueSearchForm } from "@/components/venues/venue-search-form";
@@ -79,13 +83,15 @@ async function VenueResults({ searchParams }: Pick<PageProps<"/venues">, "search
         {query ? ` matching “${query}”` : ""}
         {barangay ? ` in Barangay ${barangay}` : ""}
       </p>
-      <div className="mt-4">
-        {directory.venues.length > 0 ? (
-          <VenueGrid venues={directory.venues} />
-        ) : (
-          <NoVenues directory={directory} filtered={filtered} />
-        )}
-      </div>
+      <ResultsTransition filterKey={`${query ?? ""}|${barangay ?? ""}`}>
+        <div className="mt-4">
+          {directory.venues.length > 0 ? (
+            <VenueGrid venues={directory.venues} />
+          ) : (
+            <NoVenues directory={directory} filtered={filtered} />
+          )}
+        </div>
+      </ResultsTransition>
     </>
   );
 }
@@ -103,9 +109,11 @@ export default function VenuesPage({ searchParams }: PageProps<"/venues">) {
           fallback={
             <>
               <VenueSearchForm barangays={[]} />
-              <div className="mt-12">
-                <CardGridSkeleton />
-              </div>
+              <ResultsSkeletonTransition>
+                <div className="mt-12">
+                  <CardGridSkeleton />
+                </div>
+              </ResultsSkeletonTransition>
             </>
           }
         >

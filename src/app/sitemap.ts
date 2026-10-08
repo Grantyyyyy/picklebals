@@ -5,6 +5,7 @@ import { getCities } from "@/features/cities/queries";
 import { getClubs } from "@/features/clubs/queries";
 import { getCourts } from "@/features/courts/queries";
 import { getUpcomingEvents } from "@/features/events/queries";
+import { getPublishedTournaments } from "@/features/tournaments/queries";
 import { getVenueDirectory } from "@/features/venues/queries";
 import { absoluteUrl } from "@/lib/seo";
 
@@ -19,16 +20,18 @@ const staticPaths: { path: string; priority: number }[] = [
   { path: "/list-your-court", priority: 0.6 },
   { path: "/about", priority: 0.4 },
   { path: "/contact", priority: 0.4 },
+  { path: "/who-is-jesus", priority: 0.4 },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [cities, courts, clubs, events, articles, venueDirectory] = await Promise.all([
+  const [cities, courts, clubs, events, articles, venueDirectory, tournaments] = await Promise.all([
     getCities(),
     getCourts(),
     getClubs(),
     getUpcomingEvents(),
     getArticles(),
     getVenueDirectory(),
+    getPublishedTournaments(),
   ]);
 
   // Sample content is fictional and must not be submitted to search engines.
@@ -45,6 +48,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...verifiedVenues.map((venue) => ({
       url: absoluteUrl(`/venues/${venue.slug}`),
       lastModified: venue.updatedAt ?? undefined,
+      priority: 0.8,
+    })),
+    ...live(tournaments).map((tournament) => ({
+      url: absoluteUrl(`/tournaments/${tournament.slug}`),
+      lastModified: tournament.updatedAt,
       priority: 0.8,
     })),
     ...live(cities).map((city) => ({

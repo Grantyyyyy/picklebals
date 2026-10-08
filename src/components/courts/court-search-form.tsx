@@ -1,4 +1,5 @@
 import { SearchIcon } from "lucide-react";
+import Form from "next/form";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,9 +14,11 @@ type CourtSearchFormProps = {
   /** Must be unique when more than one form is rendered on a page. */
   idPrefix?: string;
   label?: string;
+  /** Stay in place on submit, for the form that sits above the results. */
+  keepScroll?: boolean;
 };
 
-/** Plain GET form: works without JavaScript and produces shareable `/courts?q=&city=` URLs. */
+/** GET form: works without JavaScript and produces shareable `/courts?q=&city=` URLs. */
 export function CourtSearchForm({
   cities,
   defaultQuery,
@@ -23,13 +26,14 @@ export function CourtSearchForm({
   className,
   idPrefix = "court-search",
   label = "Search courts",
+  keepScroll = false,
 }: CourtSearchFormProps) {
   const queryId = `${idPrefix}-q`;
   const cityId = `${idPrefix}-city`;
   return (
-    <form
+    <Form
       action="/courts"
-      method="get"
+      scroll={!keepScroll}
       role="search"
       aria-label={label}
       className={cn(
@@ -74,6 +78,6 @@ export function CourtSearchForm({
       <Button type="submit" size="lg" className="h-12 rounded-full px-6 text-base">
         Find courts
       </Button>
-    </form>
+    </Form>
   );
 }

@@ -341,6 +341,9 @@ export function buildSampleEvents(now: Date): PickleballEvent[] {
   return events.sort((a, b) => a.startsAt.localeCompare(b.startsAt));
 }
 
+// Article covers are free-license Unsplash photos (Brendan Sapp, Laura Tang, Lesli Whitecotton).
+const unsplash = (id: string) => `https://images.unsplash.com/photo-${id}?w=1200&q=80`;
+
 const sampleArticles: Article[] = [
   {
     id: "sample-article-1",
@@ -359,7 +362,7 @@ const sampleArticles: Article[] = [
     category: "Basics",
     authorName: "Pickleball Hub (sample)",
     readingMinutes: 5,
-    imageUrl: null,
+    imageUrl: unsplash("1659318006095-4d44845f3a1b"),
     seoTitle: null,
     seoDescription: null,
     publishedAt: "2026-09-15T00:00:00.000Z",
@@ -381,7 +384,7 @@ const sampleArticles: Article[] = [
     category: "Rules",
     authorName: "Pickleball Hub (sample)",
     readingMinutes: 4,
-    imageUrl: null,
+    imageUrl: unsplash("1711996151738-657bd95b7cdb"),
     seoTitle: null,
     seoDescription: null,
     publishedAt: "2026-09-22T00:00:00.000Z",
@@ -403,7 +406,7 @@ const sampleArticles: Article[] = [
     category: "Community",
     authorName: "Pickleball Hub (sample)",
     readingMinutes: 3,
-    imageUrl: null,
+    imageUrl: unsplash("1665855031742-a87f5964adf1"),
     seoTitle: null,
     seoDescription: null,
     publishedAt: "2026-09-29T00:00:00.000Z",

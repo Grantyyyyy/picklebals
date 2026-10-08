@@ -1,4 +1,5 @@
 import { SearchIcon } from "lucide-react";
+import Form from "next/form";
 
 import { selectClassName } from "@/components/forms/form-field";
 import { Button } from "@/components/ui/button";
@@ -11,15 +12,16 @@ type VenueSearchFormProps = {
   defaultBarangay?: string;
 };
 
-/** Plain GET form: works without JavaScript and keeps filters in the URL. */
+/** GET form: keeps filters in the URL and works without JavaScript; with it, results update in place. */
 export function VenueSearchForm({
   barangays,
   defaultQuery,
   defaultBarangay,
 }: VenueSearchFormProps) {
   return (
-    <form
+    <Form
       action="/venues"
+      scroll={false}
       role="search"
       aria-label="Search venues"
       className="flex flex-col gap-3 rounded-2xl border bg-card p-3 sm:flex-row sm:items-end"
@@ -62,6 +64,6 @@ export function VenueSearchForm({
         <SearchIcon aria-hidden="true" />
         Search
       </Button>
-    </form>
+    </Form>
   );
 }

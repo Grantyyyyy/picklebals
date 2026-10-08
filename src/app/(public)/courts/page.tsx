@@ -6,6 +6,10 @@ import { CourtGrid } from "@/components/courts/court-card";
 import { CourtSearchForm } from "@/components/courts/court-search-form";
 import { EmptyState } from "@/components/shared/empty-state";
 import { PageHeader } from "@/components/shared/page-header";
+import {
+  ResultsSkeletonTransition,
+  ResultsTransition,
+} from "@/components/shared/results-transition";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { CardGridSkeleton } from "@/components/shared/skeletons";
 import { getCities } from "@/features/cities/queries";
@@ -46,23 +50,26 @@ async function CourtSearchResults({
         defaultQuery={query}
         defaultCity={citySlug}
         className="max-w-3xl border"
+        keepScroll
       />
       <p className="mt-8 text-sm text-muted-foreground" aria-live="polite">
         {pluralize(courts.length, "court")}
         {query ? ` matching “${query}”` : ""}
         {cityName ? ` in ${cityName}` : ""}
       </p>
-      <div className="mt-4">
-        {courts.length > 0 ? (
-          <CourtGrid courts={courts} />
-        ) : (
-          <EmptyState
-            title="No courts found"
-            description="Try a different name or city. Know a court we're missing? Let us know."
-            action={{ label: "List a court", href: "/list-your-court" }}
-          />
-        )}
-      </div>
+      <ResultsTransition filterKey={`${query ?? ""}|${citySlug ?? ""}`}>
+        <div className="mt-4">
+          {courts.length > 0 ? (
+            <CourtGrid courts={courts} />
+          ) : (
+            <EmptyState
+              title="No courts found"
+              description="Try a different name or city. Know a court we're missing? Let us know."
+              action={{ label: "List a court", href: "/list-your-court" }}
+            />
+          )}
+        </div>
+      </ResultsTransition>
     </>
   );
 }
@@ -82,9 +89,11 @@ export default async function CourtsPage({ searchParams }: PageProps<"/courts">)
           fallback={
             <>
               <CourtSearchForm cities={cities} className="max-w-3xl border" />
-              <div className="mt-12">
-                <CardGridSkeleton />
-              </div>
+              <ResultsSkeletonTransition>
+                <div className="mt-12">
+                  <CardGridSkeleton />
+                </div>
+              </ResultsSkeletonTransition>
             </>
           }
         >

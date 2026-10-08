@@ -8,7 +8,7 @@ import { type CSSProperties, useEffect, useState } from "react";
 
 import { CourtMarkings } from "@/components/shared/court-markings";
 import { Logo } from "@/components/shared/logo";
-import { type NavItem, siteConfig } from "@/config/site";
+import { type NavItem } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 import { isActivePath } from "./nav-links";
@@ -142,10 +142,10 @@ function MenuLinks({ items }: { items: NavItem[] }) {
         </div>
 
         <div
-          className="mt-8 grid menu-item grid-cols-2 gap-6 border-t border-white/10 pt-6 text-sm"
+          className="mt-8 menu-item border-t border-white/10 pt-6 text-sm"
           style={step(items.length + 1)}
         >
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {exploreLinks.map((item) => (
               <li key={item.href}>
                 <Dialog.Close asChild>
@@ -159,14 +159,6 @@ function MenuLinks({ items }: { items: NavItem[] }) {
               </li>
             ))}
           </ul>
-          <p className="flex items-start gap-2 text-white/70">
-            <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-ball" aria-hidden="true" />
-            <span>
-              Now covering
-              <br />
-              <span className="text-white">{siteConfig.initialRegion}</span>
-            </span>
-          </p>
         </div>
       </div>
     </nav>
