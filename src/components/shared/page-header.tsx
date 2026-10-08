@@ -1,5 +1,6 @@
 import { type ReactNode } from "react";
 
+import { CourtMarkings } from "@/components/shared/court-markings";
 import { cn } from "@/lib/utils";
 
 type PageHeaderProps = {
@@ -16,7 +17,11 @@ export function PageHeader({ eyebrow, title, description, children, className }:
       className={cn("relative overflow-hidden bg-court-deep text-white", className)}
       aria-labelledby="page-title"
     >
-      <div className="absolute inset-0 bg-court-lines" aria-hidden="true" />
+      <div className="absolute inset-0 bg-court-grain opacity-70" aria-hidden="true" />
+      <CourtMarkings
+        crop="full"
+        className="left-auto w-full mask-l-from-40% mask-l-to-95% sm:w-4/5 lg:w-3/5"
+      />
       <div
         className="absolute -top-24 -right-24 size-72 rounded-full bg-ball/20 blur-3xl"
         aria-hidden="true"

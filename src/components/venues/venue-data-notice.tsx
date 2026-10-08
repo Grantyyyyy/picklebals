@@ -23,8 +23,8 @@ export function VenueDataNotice({ source }: { source: VenueDataSource }) {
         </p>
         {source.kind === "seed-file" && (
           <p className="text-xs text-amber-800">
-            Development preview: Supabase is not configured, so venues are read from the curated
-            test dataset (<code>{LOCAL_VENUE_SEED_PATH}</code>).
+            Supabase is not configured, so venues are read from the local venue dataset (
+            <code>{LOCAL_VENUE_SEED_PATH}</code>).
           </p>
         )}
       </div>

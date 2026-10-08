@@ -1,6 +1,7 @@
 import { MapPinIcon, UsersIcon } from "lucide-react";
 import Link from "next/link";
 
+import { OpenNowStatus } from "@/components/shared/live-status";
 import { MediaImage } from "@/components/shared/media-image";
 import { SampleBadge } from "@/components/shared/sample-content";
 import { environmentLabels, pluralize } from "@/lib/utils/format";
@@ -37,6 +38,7 @@ export function CourtCard({ court, eager }: { court: Court; eager?: boolean }) {
         {court.summary && (
           <p className="line-clamp-2 text-sm text-muted-foreground">{court.summary}</p>
         )}
+        {court.openingHours && <OpenNowStatus hours={court.openingHours} />}
         {court.courtCount && (
           <p className="mt-auto inline-flex items-center gap-1.5 pt-2 text-sm font-medium text-court">
             <UsersIcon className="size-4" aria-hidden="true" />

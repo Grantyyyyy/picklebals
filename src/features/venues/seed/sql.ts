@@ -61,7 +61,7 @@ insert into public.venues (
 select
   c.id, v.name::text, v.slug::text, v.address::text, v.barangay::text,
   v.latitude::double precision, v.longitude::double precision, v.source_key::text,
-  v.source_references::jsonb, v.data_notes::text, ${sqlLiteral(seed.dataset)}, 'unverified', false, ${sqlLiteral(options.status)}::public.content_status
+  v.source_references::jsonb, v.data_notes::text, ${sqlLiteral(seed.dataset)}, 'unverified', ${sqlLiteral(seed.isTestData)}, ${sqlLiteral(options.status)}::public.content_status
 from (values
   ${rows.map((row) => `(${row})`).join(",\n  ")}
 ) as v(name, slug, address, barangay, latitude, longitude, source_key, source_references, data_notes)

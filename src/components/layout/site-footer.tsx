@@ -35,7 +35,10 @@ export async function SiteFooter() {
             <ul className="mt-4 space-y-2.5 text-sm">
               {group.items.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="transition-colors hover:text-white">
+                  <Link
+                    href={item.href}
+                    className="rounded-sm transition-colors hover:text-white focus-visible:ring-3 focus-visible:ring-ball/70"
+                  >
                     {item.title}
                   </Link>
                 </li>
@@ -45,7 +48,7 @@ export async function SiteFooter() {
         ))}
       </div>
       <div className="border-t border-white/10">
-        <div className="container-page flex flex-col gap-2 py-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-page flex flex-col gap-2 py-6 text-xs text-white/70 sm:flex-row sm:items-center sm:justify-between">
           <p>
             {siteConfig.name} · Made for the pickleball community in the {siteConfig.country}.
           </p>

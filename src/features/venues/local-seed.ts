@@ -5,6 +5,7 @@ import { join } from "node:path";
 
 import type { Venue } from "@/types/content";
 
+import { localVenueImage } from "./local-images";
 import { prepareVenueSeed } from "./seed/prepare";
 import { venueSeedFileSchema } from "./seed/schema";
 
@@ -48,7 +49,7 @@ export async function loadLocalVenueSeed(): Promise<LocalVenueSeed> {
         contactEmail: null,
         websiteUrl: null,
         facebookUrl: null,
-        imageUrl: null,
+        imageUrl: localVenueImage(venue.slug),
         verificationStatus: "unverified",
         sources: venue.sources.map((source) => ({
           label: source.label,
@@ -59,7 +60,7 @@ export async function loadLocalVenueSeed(): Promise<LocalVenueSeed> {
         })),
         dataNotes: venue.notes,
         courts: [],
-        isTestData: false,
+        isTestData: seed.isTestData,
         origin: "seed-file",
         updatedAt: null,
       })),

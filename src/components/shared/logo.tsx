@@ -19,10 +19,19 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
-export function Logo({ className, inverted = false }: { className?: string; inverted?: boolean }) {
+export function Logo({
+  className,
+  inverted = false,
+  onClick,
+}: {
+  className?: string;
+  inverted?: boolean;
+  onClick?: () => void;
+}) {
   return (
     <Link
       href="/"
+      onClick={onClick}
       className={cn("flex items-center gap-2.5 rounded-lg outline-offset-4", className)}
       aria-label={`${siteConfig.name} home`}
     >

@@ -13,6 +13,7 @@ import { Suspense } from "react";
 import { courtPath } from "@/components/courts/court-card";
 import { DetailLayout, ExternalLink, InfoCard, InfoRow } from "@/components/shared/detail-layout";
 import { JsonLd } from "@/components/shared/json-ld";
+import { OpenNowStatus } from "@/components/shared/live-status";
 import { DetailSkeleton } from "@/components/shared/skeletons";
 import { getCourtBySlug, getCourtStaticParams } from "@/features/courts/queries";
 import { absoluteUrl, buildMetadata } from "@/lib/seo";
@@ -120,6 +121,7 @@ async function CourtDetail({ params }: Pick<PageProps<"/courts/[city]/[slug]">, 
             {court.openingHours && (
               <InfoRow icon={ClockIcon} label="Hours">
                 {court.openingHours}
+                <OpenNowStatus hours={court.openingHours} className="mt-1 flex" />
               </InfoRow>
             )}
             {court.courtCount && (

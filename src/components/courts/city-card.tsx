@@ -1,13 +1,18 @@
 import { ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
 
+import { CourtMarkings } from "@/components/shared/court-markings";
 import { pluralize } from "@/lib/utils/format";
 import type { City } from "@/types/content";
 
 export function CityCard({ city }: { city: City }) {
   return (
     <article className="group relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-2xl bg-court p-6 text-white transition-colors hover:bg-court-deep">
-      <div className="absolute inset-0 bg-court-lines opacity-60" aria-hidden="true" />
+      <div className="absolute inset-0 bg-court-grain opacity-60" aria-hidden="true" />
+      <CourtMarkings
+        crop="baseline"
+        className="transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
+      />
       <div className="relative flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-semibold tracking-wider text-ball uppercase">

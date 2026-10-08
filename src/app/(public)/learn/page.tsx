@@ -1,8 +1,10 @@
 import { BookOpenIcon } from "lucide-react";
+import { Suspense } from "react";
 
 import { ArticleCard } from "@/components/learn/article-card";
 import { EmptyState } from "@/components/shared/empty-state";
 import { PageHeader } from "@/components/shared/page-header";
+import { CardGridSkeleton } from "@/components/shared/skeletons";
 import { getArticles } from "@/features/articles/queries";
 import { buildMetadata } from "@/lib/seo";
 
@@ -13,9 +15,30 @@ export const metadata = buildMetadata({
   path: "/learn",
 });
 
-export default async function LearnPage() {
+async function ArticleList() {
   const articles = await getArticles();
+  return (
+    <>
+      {articles.length > 0 ? (
+        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {articles.map((article) => (
+            <li key={article.id}>
+              <ArticleCard article={article} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <EmptyState
+          icon={BookOpenIcon}
+          title="No articles yet"
+          description="Guides for new and improving players are on the way."
+        />
+      )}
+    </>
+  );
+}
 
+export default function LearnPage() {
   return (
     <>
       <PageHeader
@@ -24,21 +47,9 @@ export default async function LearnPage() {
         description="Rules, scoring, etiquette and technique — explained simply."
       />
       <section aria-label="Articles" className="container-page py-12">
-        {articles.length > 0 ? (
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {articles.map((article) => (
-              <li key={article.id}>
-                <ArticleCard article={article} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <EmptyState
-            icon={BookOpenIcon}
-            title="No articles yet"
-            description="Guides for new and improving players are on the way."
-          />
-        )}
+        <Suspense fallback={<CardGridSkeleton />}>
+          <ArticleList />
+        </Suspense>
       </section>
     </>
   );

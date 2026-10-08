@@ -14,6 +14,7 @@ const staticPaths: { path: string; priority: number }[] = [
   { path: "/courts", priority: 0.6 },
   { path: "/clubs", priority: 0.8 },
   { path: "/events", priority: 0.8 },
+  { path: "/shop", priority: 0.6 },
   { path: "/learn", priority: 0.7 },
   { path: "/list-your-court", priority: 0.6 },
   { path: "/about", priority: 0.4 },

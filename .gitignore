@@ -44,3 +44,11 @@ next-env.d.ts
 # supabase cli
 supabase/.branches
 supabase/.temp
+
+# impeccable (per-developer hook consent and live inject journal)
+.impeccable/config.local.json
+.impeccable/live/inject-journal.json
+.impeccable/live/*.log
+
+# venue photos copied from third-party listings for the private preview; never commit or publish
+public/images/venues/

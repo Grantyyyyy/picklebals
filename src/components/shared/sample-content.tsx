@@ -7,7 +7,7 @@ export function SampleBadge({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 text-[11px] font-semibold tracking-wide text-amber-800 uppercase",
+        "inline-flex items-center gap-1 rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 text-xs font-semibold tracking-wide text-amber-800 uppercase",
         className,
       )}
       title="Sample content for preview purposes — not a real listing"
@@ -25,7 +25,7 @@ export function SampleContentNotice() {
     <div role="note" className="border-b border-amber-200 bg-amber-50 text-amber-900">
       <p className="container-page py-2 text-center text-xs sm:text-sm">
         <strong className="font-semibold">Preview mode:</strong> Supabase is not configured.
-        Listings marked “Sample” are fictional; venues come from the unverified test dataset.
+        Listings marked “Sample” are for preview only.
       </p>
     </div>
   );

@@ -2,7 +2,7 @@
 
 ## `iligan_pickleball_venues_seed.json`
 
-Curated **test** dataset of pickleball venues in Iligan City, plus a fictional demo tournament.
+Curated dataset of real pickleball venues in Iligan City, plus a fictional demo tournament.
 It is converted to idempotent SQL with:
 
 ```bash
@@ -22,6 +22,7 @@ It is used by tests only and is never imported.
     "version": "string | number",
     "compiled_at": "string",
     "description": "string",
+    "test_data": "boolean", // optional, default false: marks every venue as test data (is_test_data)
   }, // optional
   "city": { "name": "Iligan", "province": "Lanao del Norte", "region": "Northern Mindanao" }, // optional, defaults to Iligan
   "venues": [

@@ -31,3 +31,20 @@ export function DetailSkeleton() {
     </div>
   );
 }
+
+export function EventListSkeleton({ count = 4 }: { count?: number }) {
+  return (
+    <div className="grid gap-4 md:grid-cols-2" role="status" aria-label="Loading">
+      {Array.from({ length: count }, (_, index) => (
+        <div key={index} className="flex gap-4 rounded-2xl border bg-card p-5">
+          <Skeleton className="size-16 shrink-0 rounded-xl" />
+          <div className="flex-1 space-y-3">
+            <Skeleton className="h-4 w-1/4 rounded-full" />
+            <Skeleton className="h-5 w-3/4" />
+            <Skeleton className="h-3 w-1/2" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}

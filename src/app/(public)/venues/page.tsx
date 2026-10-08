@@ -5,7 +5,6 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { PageHeader } from "@/components/shared/page-header";
 import { CardGridSkeleton } from "@/components/shared/skeletons";
 import { VenueGrid } from "@/components/venues/venue-card";
-import { VenueDataNotice } from "@/components/venues/venue-data-notice";
 import { VenueSearchForm } from "@/components/venues/venue-search-form";
 import { siteConfig } from "@/config/site";
 import {
@@ -20,7 +19,7 @@ const { city, province } = siteConfig.market;
 
 export const metadata = buildMetadata({
   title: `Pickleball venues in ${city} City`,
-  description: `Find places to play pickleball in ${city} City, ${province}. Search by name or barangay, with clear labels for unverified listings.`,
+  description: `Find places to play pickleball in ${city} City, ${province}. Search by name or barangay.`,
   path: "/venues",
 });
 
@@ -75,9 +74,6 @@ async function VenueResults({ searchParams }: Pick<PageProps<"/venues">, "search
   return (
     <>
       <VenueSearchForm barangays={barangays} defaultQuery={query} defaultBarangay={barangay} />
-      <div className="mt-6">
-        <VenueDataNotice source={directory.source} />
-      </div>
       <p className="mt-8 text-sm text-muted-foreground" aria-live="polite">
         {pluralize(directory.venues.length, "venue")}
         {query ? ` matching “${query}”` : ""}

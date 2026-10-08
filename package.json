@@ -18,12 +18,15 @@
     "seed:venues": "node scripts/import-venue-seed.ts"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.117.3",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.4.0",
     "embla-carousel-react": "^8.6.0",
+    "gsap": "^3.13.0",
     "lucide-react": "^1.52.0",
+    "motion": "^12.23.12",
     "next": "16.4.0",
     "radix-ui": "^1.7.0",
     "react": "19.3.0",

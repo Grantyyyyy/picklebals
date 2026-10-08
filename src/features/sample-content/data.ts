@@ -1,210 +1,231 @@
+import { localVenueImage } from "@/features/venues/local-images";
 import type { Article, City, CityRef, Club, Court, PickleballEvent } from "@/types/content";
 
 /**
- * SAMPLE CONTENT — illustrative placeholders rendered only when Supabase is not configured.
- * Venue, club and event names are fictional. Every record is flagged `isSample: true` and the
- * UI labels it as sample content.
+ * LOCAL CONTENT — rendered only when Supabase is not configured, and shown as regular listings
+ * (`isSample: false`, no Sample badges) by product decision.
+ *
+ * Courts are real Iligan venues taken from public listings (Courtogo, ReClub, Pickleheads),
+ * accessed 2026-10-08, used as test data. Hours, rates and amenities are as listed then and may
+ * have changed; each court links to its listing. Clubs and events are placeholders written
+ * for this project (not real organizations) and are deliberately not tied to any real venue;
+ * replace them with real clubs and events before launch.
  */
 
-const UPDATED_AT = "2026-10-01T00:00:00.000Z";
+const UPDATED_AT = "2026-10-08T00:00:00.000Z";
 
-const cityRefs = {
-  cdo: { name: "Cagayan de Oro", slug: "cagayan-de-oro", province: "Misamis Oriental" },
-  iligan: { name: "Iligan", slug: "iligan", province: "Lanao del Norte" },
-  malaybalay: { name: "Malaybalay", slug: "malaybalay", province: "Bukidnon" },
-  valencia: { name: "Valencia", slug: "valencia", province: "Bukidnon" },
-  ozamiz: { name: "Ozamiz", slug: "ozamiz", province: "Misamis Occidental" },
-} satisfies Record<string, CityRef>;
+const iligan: CityRef = { name: "Iligan", slug: "iligan", province: "Lanao del Norte" };
 
-const cityDescriptions: Record<keyof typeof cityRefs, string> = {
-  cdo: "The City of Golden Friendship and the region's busiest pickleball scene.",
-  iligan: "The City of Majestic Waterfalls, with a fast-growing open-play community.",
-  malaybalay: "Cool highland weather that makes outdoor games a pleasure year-round.",
-  valencia: "Bukidnon's commercial hub with a friendly, beginner-heavy crowd.",
-  ozamiz: "A coastal city where weekend social games are picking up quickly.",
-};
+type VenueFacts = Pick<
+  Court,
+  | "slug"
+  | "name"
+  | "summary"
+  | "address"
+  | "environment"
+  | "surface"
+  | "courtCount"
+  | "amenities"
+  | "openingHours"
+  | "priceInfo"
+  | "websiteUrl"
+> & { isFeatured?: boolean };
 
-const sampleCourts: Court[] = [
-  {
-    id: "sample-court-1",
-    slug: "uptown-rally-courts",
-    name: "Uptown Rally Courts",
-    summary: "Four covered hard courts with lights for evening open play.",
-    description:
-      "A covered four-court facility with permanent nets, LED lighting and a shaded waiting area. Popular for weeknight open play and weekend round-robins.",
-    address: "Sample address, Cagayan de Oro",
-    city: cityRefs.cdo,
-    latitude: 8.4542,
-    longitude: 124.6319,
-    environment: "covered",
-    surface: "Acrylic hard court",
-    courtCount: 4,
-    amenities: ["Lights", "Parking", "Restrooms", "Paddle rental"],
-    openingHours: "Daily, 6:00 AM – 10:00 PM",
-    priceInfo: "Sample rate: ₱150 per player per session",
+function venueCourt(facts: VenueFacts, index: number): Court {
+  return {
+    id: `sample-court-${index + 1}`,
+    description: facts.summary,
+    city: iligan,
+    latitude: null,
+    longitude: null,
     contactPhone: null,
     contactEmail: null,
-    websiteUrl: null,
     facebookUrl: null,
-    imageUrl: null,
-    isFeatured: true,
+    imageUrl: localVenueImage(facts.slug),
     updatedAt: UPDATED_AT,
-    isSample: true,
-  },
+    isSample: false,
+    ...facts,
+    isFeatured: facts.isFeatured ?? false,
+  };
+}
+
+const COURTOGO = "https://courtogo.com/venues";
+
+const sampleCourts: Court[] = (
+  [
+    {
+      slug: "pal-pickleball-homecourt",
+      name: "PAL Pickleball Homecourt",
+      summary: "One covered and one half-shaded court on a silica-sand surface in Tubod.",
+      address: "F.G. Reuyan Street, Baraas Laville Subdivision, Tubod, Iligan City",
+      environment: "covered",
+      surface: "Silica-sand textured",
+      courtCount: 2,
+      amenities: ["Paddle rental", "Balls for sale", "Instant booking"],
+      openingHours: "Daily, 7:00 AM – 11:00 PM",
+      priceInfo: "From ₱200/hr",
+      websiteUrl: `${COURTOGO}/pal-pickleball-homecourt`,
+      isFeatured: true,
+    },
+    {
+      slug: "courtlab-central",
+      name: "CourtLab Central",
+      summary:
+        "Two covered silica-sand courts beside Caltex in Santa Filomena, open round the clock.",
+      address: "Beside Caltex, Santa Filomena, Iligan City",
+      environment: "covered",
+      surface: "Silica sand",
+      courtCount: 2,
+      amenities: ["Paddle rental", "Balls for sale", "Café", "Shower room"],
+      openingHours: "Open 24 hours",
+      priceInfo: "₱350/hr day · ₱400/hr night",
+      websiteUrl: "https://reclub.co/clubs/@courtlab-central",
+      isFeatured: true,
+    },
+    {
+      slug: "meadow-rally",
+      name: "Meadow Rally",
+      summary: "Two outdoor courts in Franklin Hills, open from early morning until late.",
+      address: "Cor. Beltran–Franklin Hills St., Iligan City",
+      environment: "outdoor",
+      surface: null,
+      courtCount: 2,
+      amenities: [],
+      openingHours: "Daily, 5:00 AM – 2:00 AM",
+      priceInfo: "From ₱200/hr",
+      websiteUrl: `${COURTOGO}/meadow-rally`,
+      isFeatured: true,
+    },
+    {
+      slug: "kingple-dink-yard",
+      name: "Kingple Dink Yard",
+      summary: "A single open court in Suarez with food stalls and its own comfort room.",
+      address: "Zone Meteor, Ishaii, Suarez, Iligan City",
+      environment: "outdoor",
+      surface: null,
+      courtCount: 1,
+      amenities: ["Comfort room", "Food stalls", "Water vending", "Seating"],
+      openingHours: "Daily, 6:00 AM – 12:00 AM",
+      priceInfo: "From ₱200/hr",
+      websiteUrl: `${COURTOGO}/kingple-dink-yard`,
+    },
+    {
+      slug: "sweat-rally",
+      name: "Sweat Rally",
+      summary:
+        "A private indoor court off Circumferential Road in Ubaldo Laya, with a KTV room on site.",
+      address: "Rajah Village, near Circumferential Road 3, Ubaldo Laya, Iligan City",
+      environment: "indoor",
+      surface: null,
+      courtCount: 1,
+      amenities: ["KTV room"],
+      openingHours: "Open 24 hours",
+      priceInfo: "From ₱300/hr",
+      websiteUrl: `${COURTOGO}/sweat-rally`,
+    },
+    {
+      slug: "kmpnd",
+      name: "KMPND",
+      summary: "A private, fully roofed court along Camague Highway.",
+      address: "#9 Purok 1, Camague Highway, Iligan City",
+      environment: "covered",
+      surface: null,
+      courtCount: 1,
+      amenities: [],
+      openingHours: "Daily, 9:00 AM – 12:00 AM",
+      priceInfo: "From ₱400/hr",
+      websiteUrl: `${COURTOGO}/kmpnd`,
+    },
+    {
+      slug: "la-pickleball-court",
+      name: "LA Pickleball Court",
+      summary: "Two open courts behind Iprep Play and Learn, with parking and a snack corner.",
+      address: "At the back of Iprep Play and Learn, Iligan City",
+      environment: "outdoor",
+      surface: null,
+      courtCount: 2,
+      amenities: ["Parking", "Snack corner"],
+      openingHours: "Open 24 hours",
+      priceInfo: "From ₱300/hr",
+      websiteUrl: `${COURTOGO}/la-pickleball-court-mu2a7rm4`,
+    },
+    {
+      slug: "dinkerz-den",
+      name: "Dinkerz Den",
+      summary: "A private, reservable outdoor court in Kiwalan with permanent lines and net.",
+      address: "Kiwalan, Iligan City",
+      environment: "outdoor",
+      surface: "Concrete",
+      courtCount: 1,
+      amenities: ["Lights", "Food", "Water"],
+      openingHours: null,
+      priceInfo: null,
+      websiteUrl: "https://www.pickleheads.com/courts/ph/northern-mindanao/iligan-city/dinkerz-den",
+    },
+    {
+      slug: "miguel-sheker-park",
+      name: "Miguel Sheker Park",
+      summary: "Four free public outdoor courts; night lights are paid for by the hour.",
+      address: "Miguel Sheker Park, Iligan City",
+      environment: "outdoor",
+      surface: "Concrete",
+      courtCount: 4,
+      amenities: ["Lights", "Restrooms"],
+      openingHours: null,
+      priceInfo: "Free · lights ₱120/hr shared",
+      websiteUrl:
+        "https://www.pickleheads.com/courts/ph/northern-mindanao/iligan-city/miguel-sheker-park",
+    },
+    {
+      slug: "jm-s-dink-n-drive",
+      name: "Jm's Dink N Drive",
+      summary: "An outdoor court in Doña Maria Subdivision, listed as coming soon.",
+      address: "Phase 1 Doña Maria Subdivision, Purok 14, Iligan City",
+      environment: "outdoor",
+      surface: null,
+      courtCount: 1,
+      amenities: [],
+      openingHours: "Daily, 6:00 AM – 11:00 PM",
+      priceInfo: "₱300/hr",
+      websiteUrl: `${COURTOGO}/jms-dink-n-drive`,
+    },
+    {
+      slug: "siradj-pickleball",
+      name: "Siradj Pickleball",
+      summary:
+        "One open court at Siradj Beach Resort on the Linamon highway, just outside the city.",
+      address: "Siradj Beach Resort, Linamon National Highway, Lanao del Norte",
+      environment: "outdoor",
+      surface: null,
+      courtCount: 1,
+      amenities: ["Beach resort", "Swimming"],
+      openingHours: "Open 24 hours",
+      priceInfo: "From ₱250/hr",
+      websiteUrl: `${COURTOGO}/siradj-pickleball`,
+    },
+  ] satisfies VenueFacts[]
+).map(venueCourt);
+
+const sampleCities: City[] = [
   {
-    id: "sample-court-2",
-    slug: "riverside-kitchen-club",
-    name: "Riverside Kitchen Club",
-    summary: "Outdoor courts near the river with morning and late-afternoon sessions.",
-    description:
-      "Two outdoor courts with portable nets. Best enjoyed early morning before the heat sets in.",
-    address: "Sample address, Cagayan de Oro",
-    city: cityRefs.cdo,
-    latitude: 8.4822,
-    longitude: 124.6472,
-    environment: "outdoor",
-    surface: "Concrete with court paint",
-    courtCount: 2,
-    amenities: ["Parking", "Water station"],
-    openingHours: "Daily, 5:30 AM – 9:00 AM and 3:30 PM – 7:00 PM",
-    priceInfo: "Sample rate: free open play",
-    contactPhone: null,
-    contactEmail: null,
-    websiteUrl: null,
-    facebookUrl: null,
-    imageUrl: null,
-    isFeatured: true,
-    updatedAt: UPDATED_AT,
-    isSample: true,
-  },
-  {
-    id: "sample-court-3",
-    slug: "waterfall-city-sports-hall",
-    name: "Waterfall City Sports Hall",
-    summary: "Indoor gym converted for pickleball on weekday evenings.",
-    description:
-      "A multi-purpose indoor hall with three taped pickleball courts, available for scheduled sessions.",
-    address: "Sample address, Iligan",
-    city: cityRefs.iligan,
-    latitude: 8.228,
-    longitude: 124.2452,
-    environment: "indoor",
-    surface: "Hardwood",
-    courtCount: 3,
-    amenities: ["Air-conditioned", "Restrooms", "Seating"],
-    openingHours: "Mon–Fri, 5:00 PM – 10:00 PM",
-    priceInfo: "Sample rate: ₱200 per hour per court",
-    contactPhone: null,
-    contactEmail: null,
-    websiteUrl: null,
-    facebookUrl: null,
-    imageUrl: null,
-    isFeatured: true,
-    updatedAt: UPDATED_AT,
-    isSample: true,
-  },
-  {
-    id: "sample-court-4",
-    slug: "highland-dink-park",
-    name: "Highland Dink Park",
-    summary: "Cool-weather outdoor courts with mountain views.",
-    description: "Two outdoor courts in the highlands, ideal for long weekend sessions.",
-    address: "Sample address, Malaybalay",
-    city: cityRefs.malaybalay,
-    latitude: 8.1575,
-    longitude: 125.1278,
-    environment: "outdoor",
-    surface: "Acrylic hard court",
-    courtCount: 2,
-    amenities: ["Parking", "Café nearby"],
-    openingHours: "Daily, 6:00 AM – 6:00 PM",
-    priceInfo: "Sample rate: ₱100 per player",
-    contactPhone: null,
-    contactEmail: null,
-    websiteUrl: null,
-    facebookUrl: null,
-    imageUrl: null,
-    isFeatured: true,
-    updatedAt: UPDATED_AT,
-    isSample: true,
-  },
-  {
-    id: "sample-court-5",
-    slug: "valencia-community-courts",
-    name: "Valencia Community Courts",
-    summary: "Covered barangay courts shared with basketball on weekends.",
-    description: "Lines for two pickleball courts painted over a covered basketball court.",
-    address: "Sample address, Valencia",
-    city: cityRefs.valencia,
-    latitude: 7.9064,
-    longitude: 125.0928,
-    environment: "covered",
-    surface: "Concrete",
-    courtCount: 2,
-    amenities: ["Lights", "Restrooms"],
-    openingHours: "Tue–Sun, 4:00 PM – 9:00 PM",
-    priceInfo: null,
-    contactPhone: null,
-    contactEmail: null,
-    websiteUrl: null,
-    facebookUrl: null,
-    imageUrl: null,
-    isFeatured: false,
-    updatedAt: UPDATED_AT,
-    isSample: true,
-  },
-  {
-    id: "sample-court-6",
-    slug: "bayview-paddle-courts",
-    name: "Bayview Paddle Courts",
-    summary: "Breezy seaside courts with weekend social play.",
-    description: "Two outdoor courts by the bay with a relaxed, social atmosphere.",
-    address: "Sample address, Ozamiz",
-    city: cityRefs.ozamiz,
-    latitude: 8.1462,
-    longitude: 123.8444,
-    environment: "outdoor",
-    surface: "Acrylic hard court",
-    courtCount: 2,
-    amenities: ["Parking", "Seating"],
-    openingHours: "Sat–Sun, 6:00 AM – 6:00 PM",
-    priceInfo: "Sample rate: ₱120 per player",
-    contactPhone: null,
-    contactEmail: null,
-    websiteUrl: null,
-    facebookUrl: null,
-    imageUrl: null,
-    isFeatured: false,
-    updatedAt: UPDATED_AT,
-    isSample: true,
+    ...iligan,
+    id: "sample-city-1",
+    region: "Northern Mindanao",
+    description: "The City of Majestic Waterfalls, with a fast-growing open-play community.",
+    courtCount: sampleCourts.length,
+    isSample: false,
   },
 ];
-
-const sampleCities: City[] = (Object.keys(cityRefs) as (keyof typeof cityRefs)[]).map(
-  (key, index) => ({
-    ...cityRefs[key],
-    id: `sample-city-${index + 1}`,
-    region: "Northern Mindanao",
-    description: cityDescriptions[key],
-    courtCount: sampleCourts.filter((court) => court.city.slug === cityRefs[key].slug).length,
-    isSample: true,
-  }),
-);
 
 const sampleClubs: Club[] = [
   {
     id: "sample-club-1",
-    slug: "golden-friendship-picklers",
-    name: "Golden Friendship Picklers",
+    slug: "majestic-falls-picklers",
+    name: "Majestic Falls Picklers",
     summary: "A welcoming community club with weekly open play and beginner clinics.",
-    description:
-      "Founded by a group of friends who fell in love with the sport, the club hosts weekly open play and monthly beginner clinics.",
-    city: cityRefs.cdo,
-    homeCourt: {
-      name: "Uptown Rally Courts",
-      slug: "uptown-rally-courts",
-      citySlug: "cagayan-de-oro",
-    },
+    description: "Weekly open play and monthly beginner clinics for new players.",
+    city: iligan,
+    homeCourt: null,
     skillLevels: ["Beginner", "Intermediate"],
     meetingSchedule: "Tuesdays & Thursdays, 6:00 PM",
     contactEmail: null,
@@ -213,20 +234,16 @@ const sampleClubs: Club[] = [
     imageUrl: null,
     isFeatured: true,
     updatedAt: UPDATED_AT,
-    isSample: true,
+    isSample: false,
   },
   {
     id: "sample-club-2",
     slug: "iligan-third-shot-society",
     name: "Iligan Third Shot Society",
     summary: "Competitive drills and ladder play for intermediate and advanced players.",
-    description: "Structured drilling sessions followed by ladder play every week.",
-    city: cityRefs.iligan,
-    homeCourt: {
-      name: "Waterfall City Sports Hall",
-      slug: "waterfall-city-sports-hall",
-      citySlug: "iligan",
-    },
+    description: "Structured drilling followed by ladder play every week.",
+    city: iligan,
+    homeCourt: null,
     skillLevels: ["Intermediate", "Advanced"],
     meetingSchedule: "Mondays & Wednesdays, 7:00 PM",
     contactEmail: null,
@@ -235,16 +252,16 @@ const sampleClubs: Club[] = [
     imageUrl: null,
     isFeatured: true,
     updatedAt: UPDATED_AT,
-    isSample: true,
+    isSample: false,
   },
   {
     id: "sample-club-3",
-    slug: "bukidnon-highland-paddlers",
-    name: "Bukidnon Highland Paddlers",
-    summary: "Weekend social games and family-friendly sessions in the highlands.",
+    slug: "lanao-kitchen-club",
+    name: "Lanao Kitchen Club",
+    summary: "Weekend social games and family-friendly sessions for every level.",
     description: "A social-first club focused on fun games and introducing new players.",
-    city: cityRefs.malaybalay,
-    homeCourt: { name: "Highland Dink Park", slug: "highland-dink-park", citySlug: "malaybalay" },
+    city: iligan,
+    homeCourt: null,
     skillLevels: ["All levels"],
     meetingSchedule: "Saturdays, 7:00 AM",
     contactEmail: null,
@@ -253,13 +270,16 @@ const sampleClubs: Club[] = [
     imageUrl: null,
     isFeatured: true,
     updatedAt: UPDATED_AT,
-    isSample: true,
+    isSample: false,
   },
 ];
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-/** Sample events are generated relative to `now` so they always appear upcoming. */
+/**
+ * Local events are generated relative to `now` so they always appear upcoming.
+ * They are placeholders and name no venue.
+ */
 export function buildSampleEvents(now: Date): PickleballEvent[] {
   const at = (days: number, hourUtc: number) => {
     const date = new Date(now.getTime() + days * DAY_MS);
@@ -267,32 +287,33 @@ export function buildSampleEvents(now: Date): PickleballEvent[] {
     return date.toISOString();
   };
 
+  const base = {
+    venueName: null,
+    city: iligan,
+    court: null,
+    registrationUrl: null,
+    imageUrl: null,
+    updatedAt: UPDATED_AT,
+    isSample: false,
+  } as const;
+
   const events: PickleballEvent[] = [
     {
+      ...base,
       id: "sample-event-1",
-      slug: "cdo-weekend-open-play",
-      title: "CDO Weekend Open Play",
+      slug: "iligan-weekend-open-play",
+      title: "Iligan Weekend Open Play",
       summary: "Rotating doubles for all levels. Bring a paddle — or borrow one.",
       description: "Casual rotating doubles with a paddle-stack queue. All levels welcome.",
       eventType: "open_play",
       startsAt: at(3, 23),
       endsAt: at(4, 3),
-      venueName: "Uptown Rally Courts",
-      city: cityRefs.cdo,
-      court: {
-        name: "Uptown Rally Courts",
-        slug: "uptown-rally-courts",
-        citySlug: "cagayan-de-oro",
-      },
-      club: { name: "Golden Friendship Picklers", slug: "golden-friendship-picklers" },
-      registrationUrl: null,
-      feeInfo: "Sample fee: ₱150",
-      imageUrl: null,
+      club: { name: "Majestic Falls Picklers", slug: "majestic-falls-picklers" },
+      feeInfo: "₱150",
       isFeatured: true,
-      updatedAt: UPDATED_AT,
-      isSample: true,
     },
     {
+      ...base,
       id: "sample-event-2",
       slug: "beginner-clinic-iligan",
       title: "Beginner Clinic: Dinks & Drops",
@@ -301,64 +322,37 @@ export function buildSampleEvents(now: Date): PickleballEvent[] {
       eventType: "clinic",
       startsAt: at(8, 10),
       endsAt: at(8, 12),
-      venueName: "Waterfall City Sports Hall",
-      city: cityRefs.iligan,
-      court: {
-        name: "Waterfall City Sports Hall",
-        slug: "waterfall-city-sports-hall",
-        citySlug: "iligan",
-      },
       club: { name: "Iligan Third Shot Society", slug: "iligan-third-shot-society" },
-      registrationUrl: null,
-      feeInfo: "Sample fee: ₱300",
-      imageUrl: null,
+      feeInfo: "₱300",
       isFeatured: true,
-      updatedAt: UPDATED_AT,
-      isSample: true,
     },
     {
+      ...base,
       id: "sample-event-3",
-      slug: "northern-mindanao-doubles-classic",
-      title: "Northern Mindanao Doubles Classic",
-      summary: "A regional doubles tournament with novice, intermediate and open brackets.",
+      slug: "iligan-doubles-classic",
+      title: "Iligan Doubles Classic",
+      summary: "A city doubles tournament with novice, intermediate and open brackets.",
       description: "Men's, women's and mixed doubles brackets across three skill divisions.",
       eventType: "tournament",
       startsAt: at(21, 0),
       endsAt: at(22, 9),
-      venueName: "Uptown Rally Courts",
-      city: cityRefs.cdo,
-      court: {
-        name: "Uptown Rally Courts",
-        slug: "uptown-rally-courts",
-        citySlug: "cagayan-de-oro",
-      },
       club: null,
-      registrationUrl: null,
-      feeInfo: "Sample fee: ₱800 per team",
-      imageUrl: null,
+      feeInfo: "₱800 per team",
       isFeatured: true,
-      updatedAt: UPDATED_AT,
-      isSample: true,
     },
     {
+      ...base,
       id: "sample-event-4",
-      slug: "highland-social-mixer",
-      title: "Highland Social Mixer",
-      summary: "Mixed partners every game, coffee after. Great for meeting new players.",
-      description: "Partners rotate each game. Light snacks and coffee afterwards.",
+      slug: "friday-night-social-mixer",
+      title: "Friday Night Social Mixer",
+      summary: "Mixed partners every game, snacks after. Great for meeting new players.",
+      description: "Partners rotate each game. Light snacks afterwards.",
       eventType: "social",
       startsAt: at(12, 23),
       endsAt: at(13, 3),
-      venueName: "Highland Dink Park",
-      city: cityRefs.malaybalay,
-      court: { name: "Highland Dink Park", slug: "highland-dink-park", citySlug: "malaybalay" },
-      club: { name: "Bukidnon Highland Paddlers", slug: "bukidnon-highland-paddlers" },
-      registrationUrl: null,
+      club: { name: "Lanao Kitchen Club", slug: "lanao-kitchen-club" },
       feeInfo: null,
-      imageUrl: null,
       isFeatured: false,
-      updatedAt: UPDATED_AT,
-      isSample: true,
     },
   ];
   return events.sort((a, b) => a.startsAt.localeCompare(b.startsAt));
@@ -387,7 +381,7 @@ const sampleArticles: Article[] = [
     seoDescription: null,
     publishedAt: "2026-09-15T00:00:00.000Z",
     updatedAt: UPDATED_AT,
-    isSample: true,
+    isSample: false,
   },
   {
     id: "sample-article-2",
@@ -409,7 +403,7 @@ const sampleArticles: Article[] = [
     seoDescription: null,
     publishedAt: "2026-09-22T00:00:00.000Z",
     updatedAt: UPDATED_AT,
-    isSample: true,
+    isSample: false,
   },
   {
     id: "sample-article-3",
@@ -431,7 +425,7 @@ const sampleArticles: Article[] = [
     seoDescription: null,
     publishedAt: "2026-09-29T00:00:00.000Z",
     updatedAt: UPDATED_AT,
-    isSample: true,
+    isSample: false,
   },
 ];
 

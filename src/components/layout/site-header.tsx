@@ -22,7 +22,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <Button
             asChild
-            className="hidden h-10 rounded-full bg-ball px-5 font-semibold text-court-deep hover:bg-ball/85 sm:inline-flex"
+            className="hidden h-11 rounded-full bg-ball px-5 font-semibold text-court-deep hover:bg-ball/85 sm:inline-flex"
           >
             <Link href="/list-your-court">List your court</Link>
           </Button>

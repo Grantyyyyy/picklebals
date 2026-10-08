@@ -52,7 +52,7 @@ export function CourtSearchForm({
           defaultValue={defaultQuery}
           placeholder="Search courts by name"
           maxLength={80}
-          className="h-12 border-0 pl-10 text-base text-foreground shadow-none focus-visible:ring-0 md:text-base"
+          className="h-12 border-0 pl-10 text-base text-foreground shadow-none focus-visible:border-transparent focus-visible:ring-3 focus-visible:ring-ring/50 md:text-base"
         />
       </div>
       <label htmlFor={cityId} className="sr-only">
@@ -71,7 +71,7 @@ export function CourtSearchForm({
           </option>
         ))}
       </select>
-      <Button type="submit" size="lg" className="h-12 rounded-xl px-6 text-base">
+      <Button type="submit" size="lg" className="h-12 rounded-full px-6 text-base">
         Find courts
       </Button>
     </form>

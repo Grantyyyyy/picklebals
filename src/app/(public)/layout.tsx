@@ -1,6 +1,6 @@
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { SampleContentNotice } from "@/components/shared/sample-content";
+import { ScrollBall } from "@/components/shared/scroll-ball";
 
 export default function PublicLayout({ children }: LayoutProps<"/">) {
   return (
@@ -11,12 +11,12 @@ export default function PublicLayout({ children }: LayoutProps<"/">) {
       >
         Skip to content
       </a>
-      <SampleContentNotice />
       <SiteHeader />
-      <main id="main" className="flex-1">
+      <main id="main" tabIndex={-1} className="flex-1 outline-none">
         {children}
       </main>
       <SiteFooter />
+      <ScrollBall />
     </>
   );
 }

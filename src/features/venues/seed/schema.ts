@@ -100,6 +100,8 @@ export const venueSeedFileSchema = z.object({
       version: z.union([z.string(), z.number()]).nullish(),
       compiled_at: optionalText(40),
       description: optionalText(2000),
+      /** Mark every imported venue as test data (`venues.is_test_data`). */
+      test_data: z.boolean().default(false),
     })
     .nullish(),
   city: z

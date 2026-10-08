@@ -1,0 +1,16 @@
+---
+description: Use the Impeccable skill as the visual/design standard for all UI and frontend work.
+globs: "**/*.{tsx,jsx,css,scss}"
+alwaysApply: true
+---
+
+# Impeccable is the visual standard
+
+For **any** UI, visual, layout, styling, typography, motion, or frontend work in this repo, follow the Impeccable skill before editing.
+
+1. Read `.cursor/skills/impeccable/SKILL.md` and run `.cursor/skills/impeccable/scripts/impeccable context` (cwd = project root).
+2. Honor `PRODUCT.md` (product truth) and `DESIGN.md` (incumbent visual system). The public home is **Nike sporty energy + WANDER clean cards** — preserve it unless the user explicitly asks for a redesign.
+3. Before UI edits, load `.cursor/skills/impeccable/reference/craft-floor.md`. Use the matching command playbook (`polish`, `audit`, `document`, `new-work`, etc.) when the request maps to one.
+4. Skip this skill only for backend-only, schema, or non-UI work.
+
+Do not invent a new aesthetic, swap the type pairing, or restyle away from court-green / ink / ball-lime tokens without an explicit redesign request.

@@ -8,8 +8,10 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { type ReactNode } from "react";
+import { type CSSProperties, type ReactNode } from "react";
 
+import { CourtMarkings } from "@/components/shared/court-markings";
+import { EventTimingBadge } from "@/components/shared/live-status";
 import { SampleBadge } from "@/components/shared/sample-content";
 import { Button } from "@/components/ui/button";
 import { getCourtBySlug } from "@/features/courts/queries";
@@ -38,19 +40,21 @@ export async function FeaturedEventCard({ event }: { event: PickleballEvent }) {
   const court = event.court ? await getCourtBySlug(event.court.slug) : null;
   const mapsUrl = venueMapsUrl(court);
   const venue = event.venueName ?? event.court?.name;
-  const { month, day } = formatDateParts(event.startsAt);
+  const { month, day, weekday } = formatDateParts(event.startsAt);
   const titleId = `featured-event-${event.id}`;
 
   return (
     <article
       aria-labelledby={titleId}
-      className="grid overflow-hidden rounded-3xl border bg-card shadow-xl shadow-court-deep/5 lg:grid-cols-[1.2fr_1fr]"
+      style={{ "--notch": "0.9rem" } as CSSProperties}
+      className="grid drop-shadow-[0_1px_1.5px_oklch(0.44_0.095_160/0.22)] lg:grid-cols-[1.2fr_1fr]"
     >
-      <div className="flex flex-col gap-5 p-6 sm:p-10">
+      <div className="flex flex-col gap-5 rounded-t-3xl border-b-2 border-dashed border-court/25 bg-card notch-b p-6 sm:p-10 lg:rounded-l-3xl lg:rounded-tr-none lg:border-r-2 lg:border-b-0 lg:notch-r">
         <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-full bg-ball-soft px-2.5 py-0.5 text-xs font-semibold text-court-deep">
             {eventTypeLabels[event.eventType]}
           </span>
+          <EventTimingBadge startsAt={event.startsAt} endsAt={event.endsAt} />
           {event.isSample && <SampleBadge />}
         </div>
         <div className="space-y-2">
@@ -115,14 +119,16 @@ export async function FeaturedEventCard({ event }: { event: PickleballEvent }) {
         </div>
       </div>
 
-      <div className="relative isolate flex min-h-64 flex-col justify-between gap-8 overflow-hidden bg-court-gradient p-6 text-white sm:p-10">
-        <div className="absolute inset-0 -z-10 bg-court-lines" aria-hidden="true" />
+      <div className="relative isolate flex min-h-64 flex-col justify-between gap-8 overflow-hidden rounded-b-3xl bg-court-gradient notch-t p-6 text-white sm:p-10 lg:rounded-r-3xl lg:rounded-bl-none lg:notch-l">
+        <div className="absolute inset-0 -z-10 bg-court-grain opacity-70" aria-hidden="true" />
+        <CourtMarkings crop="corner" className="-z-10" />
         <p
           className="font-heading leading-none font-extrabold uppercase font-stretch-condensed"
           aria-hidden="true"
         >
           <span className="block text-2xl tracking-wider text-ball">{month}</span>
           <span className="block text-[clamp(6rem,16vw,10rem)]">{day}</span>
+          <span className="mt-1 block text-xl tracking-wider text-white/70">{weekday}</span>
         </p>
         {(venue || mapsUrl) && (
           <div className="space-y-2">

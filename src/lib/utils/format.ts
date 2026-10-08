@@ -30,9 +30,15 @@ export function formatEventTime(startIso: string, endIso: string | null): string
   return endIso ? `${start} – ${timeFormatter.format(new Date(endIso))}` : start;
 }
 
-export function formatDateParts(iso: string): { month: string; day: string } {
-  const [month = "", day = ""] = shortDateFormatter.format(new Date(iso)).split(" ");
-  return { month, day };
+const weekdayFormatter = new Intl.DateTimeFormat("en-PH", {
+  weekday: "short",
+  timeZone: siteConfig.timeZone,
+});
+
+export function formatDateParts(iso: string): { month: string; day: string; weekday: string } {
+  const date = new Date(iso);
+  const [month = "", day = ""] = shortDateFormatter.format(date).split(" ");
+  return { month, day, weekday: weekdayFormatter.format(date) };
 }
 
 export function formatPublishedDate(iso: string | null): string | null {

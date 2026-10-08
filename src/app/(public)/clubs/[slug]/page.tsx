@@ -5,6 +5,7 @@ import { Suspense } from "react";
 
 import { DetailLayout, ExternalLink, InfoCard, InfoRow } from "@/components/shared/detail-layout";
 import { JsonLd } from "@/components/shared/json-ld";
+import { NextMeetupStatus } from "@/components/shared/live-status";
 import { DetailSkeleton } from "@/components/shared/skeletons";
 import { getClubBySlug, getClubs } from "@/features/clubs/queries";
 import { absoluteUrl, buildMetadata } from "@/lib/seo";
@@ -99,6 +100,7 @@ async function ClubDetail({ params }: Pick<PageProps<"/clubs/[slug]">, "params">
             {club.meetingSchedule && (
               <InfoRow icon={CalendarClockIcon} label="Schedule">
                 {club.meetingSchedule}
+                <NextMeetupStatus schedule={club.meetingSchedule} className="mt-1 flex" />
               </InfoRow>
             )}
             {club.contactEmail && (

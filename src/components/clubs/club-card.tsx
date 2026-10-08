@@ -1,6 +1,7 @@
 import { CalendarClockIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
 
+import { NextMeetupStatus } from "@/components/shared/live-status";
 import { MediaImage } from "@/components/shared/media-image";
 import { SampleBadge } from "@/components/shared/sample-content";
 import type { Club } from "@/types/content";
@@ -51,6 +52,7 @@ export function ClubCard({ club }: { club: Club }) {
             {club.meetingSchedule}
           </p>
         )}
+        {club.meetingSchedule && <NextMeetupStatus schedule={club.meetingSchedule} />}
       </div>
     </article>
   );

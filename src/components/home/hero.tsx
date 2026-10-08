@@ -3,6 +3,7 @@ import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 
 import { CourtSearchForm } from "@/components/courts/court-search-form";
+import { SplitText } from "@/components/reactbits/split-text";
 import { siteConfig } from "@/config/site";
 import { getCities } from "@/features/cities/queries";
 
@@ -13,7 +14,7 @@ export async function Hero({ image }: { image?: HeroImage }) {
 
   return (
     <section aria-labelledby="hero-title" className="container-page pt-4 pb-14 sm:pt-6 sm:pb-20">
-      <div className="relative isolate overflow-hidden rounded-[2rem] bg-court-deep text-white">
+      <div className="@container relative isolate overflow-hidden rounded-[2rem] bg-court-deep text-white">
         {image ? (
           <>
             <Image
@@ -39,14 +40,15 @@ export async function Hero({ image }: { image?: HeroImage }) {
             Now covering {siteConfig.initialRegion}
           </p>
           <h1 id="hero-title" className="mt-5">
-            <span className="block font-heading text-[clamp(3.5rem,15vw,12.5rem)] leading-[0.85] font-extrabold tracking-[-0.02em] uppercase font-stretch-condensed">
-              Pickleball
-            </span>
-            <span className="mt-4 block text-2xl font-bold sm:text-3xl">
+            <SplitText
+              text="Pickleball"
+              className="block font-heading text-[clamp(2.4rem,15.5cqi,12.5rem)] leading-[0.85] font-extrabold tracking-[-0.02em] uppercase font-stretch-condensed"
+            />
+            <span className="mt-4 block font-sans text-2xl font-bold text-pretty sm:text-3xl">
               Find your next game<span className="text-ball">.</span>
             </span>
           </h1>
-          <p className="mt-3 max-w-xl text-base text-white/80 sm:text-lg">
+          <p className="mt-3 max-w-xl text-base text-pretty text-white/85 sm:text-lg">
             Discover courts, join local clubs, and never miss an open play or tournament near you in
             the Philippines.
           </p>
@@ -65,7 +67,7 @@ function HeroLink({ href, children }: { href: string; children: string }) {
   return (
     <Link
       href={href}
-      className="group inline-flex h-10 items-center gap-1.5 rounded-full border border-white/30 px-4 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+      className="group inline-flex h-11 items-center gap-1.5 rounded-full border border-white/30 px-4 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:ring-3 focus-visible:ring-ball/70"
     >
       {children}
       <ArrowRightIcon
@@ -79,7 +81,7 @@ function HeroLink({ href, children }: { href: string; children: string }) {
 function HeroBackdrop() {
   return (
     <div className="absolute inset-0 -z-10 bg-court-gradient" aria-hidden="true">
-      <div className="absolute inset-0 bg-court-lines" />
+      <div className="absolute inset-0 bg-court-grain opacity-70" />
       <svg
         viewBox="0 0 440 200"
         preserveAspectRatio="xMaxYMax meet"
@@ -96,10 +98,10 @@ function HeroBackdrop() {
       </svg>
       <svg
         viewBox="0 0 100 100"
-        className="absolute -right-12 -bottom-16 hidden size-72 lg:block xl:right-8 xl:bottom-10 xl:size-64"
+        className="absolute -right-12 -bottom-16 hidden size-72 animate-ball-drop lg:block xl:right-8 xl:bottom-10 xl:size-64"
       >
         <circle cx="50" cy="50" r="48" className="fill-ball" />
-        <g className="fill-court-deep/25">
+        <g data-scroll-spin className="origin-center fill-court-deep/25 [transform-box:view-box]">
           <circle cx="32" cy="32" r="5" />
           <circle cx="68" cy="32" r="5" />
           <circle cx="50" cy="50" r="5" />

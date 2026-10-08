@@ -1,5 +1,4 @@
 import {
-  CircleHelpIcon,
   ExternalLinkIcon,
   GlobeIcon,
   LayoutGridIcon,
@@ -15,6 +14,7 @@ import { type ReactNode, Suspense } from "react";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { ExternalLink, InfoCard, InfoRow } from "@/components/shared/detail-layout";
 import { JsonLd } from "@/components/shared/json-ld";
+import { MediaImage } from "@/components/shared/media-image";
 import { DetailSkeleton } from "@/components/shared/skeletons";
 import { Button } from "@/components/ui/button";
 import { venuePath } from "@/components/venues/venue-card";
@@ -122,21 +122,14 @@ async function VenueDetail({ params }: Pick<PageProps<"/venues/[slug]">, "params
         </p>
       </header>
 
-      {!verified && (
-        <div
-          role="note"
-          className="mt-8 flex max-w-3xl gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-900"
-        >
-          <CircleHelpIcon className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
-          <div className="space-y-1">
-            <p className="font-semibold">This listing has not been verified</p>
-            <p>
-              It was compiled from the public sources listed below and has not been confirmed by the
-              venue operator. Details may be incomplete or out of date. Please confirm with the
-              venue before visiting.
-            </p>
-          </div>
-        </div>
+      {venue.imageUrl && (
+        <MediaImage
+          src={venue.imageUrl}
+          alt={`${venue.name} in ${venue.city.name}`}
+          sizes="(min-width: 1280px) 1216px, 100vw"
+          preload
+          className="mt-8 aspect-[16/9] rounded-3xl sm:aspect-[21/9]"
+        />
       )}
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem]">

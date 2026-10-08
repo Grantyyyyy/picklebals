@@ -11,6 +11,7 @@ import { Suspense } from "react";
 
 import { DetailLayout, InfoCard, InfoRow } from "@/components/shared/detail-layout";
 import { JsonLd } from "@/components/shared/json-ld";
+import { EventTimingBadge } from "@/components/shared/live-status";
 import { DetailSkeleton } from "@/components/shared/skeletons";
 import { Button } from "@/components/ui/button";
 import { getEventBySlug, getUpcomingEvents } from "@/features/events/queries";
@@ -107,6 +108,9 @@ async function EventDetail({ params }: Pick<PageProps<"/events/[slug]">, "params
             <InfoCard title="Event details">
               <InfoRow icon={CalendarDaysIcon} label="Date">
                 <time dateTime={event.startsAt}>{formatEventDate(event.startsAt)}</time>
+                <span className="mt-1.5 flex empty:hidden">
+                  <EventTimingBadge startsAt={event.startsAt} endsAt={event.endsAt} />
+                </span>
               </InfoRow>
               <InfoRow icon={ClockIcon} label="Time (Philippine time)">
                 {formatEventTime(event.startsAt, event.endsAt)}

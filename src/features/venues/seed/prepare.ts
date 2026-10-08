@@ -18,6 +18,8 @@ export type PreparedVenue = {
 
 export type PreparedSeed = {
   dataset: string;
+  /** From `dataset.test_data`: every venue in this file is test data. */
+  isTestData: boolean;
   city: { name: string; slug: string; province: string; region: string | null };
   venues: PreparedVenue[];
   warnings: string[];
@@ -103,6 +105,7 @@ export function prepareVenueSeed(file: VenueSeedFile): PreparedSeed {
 
   return {
     dataset: version != null ? `${datasetName}@${version}` : datasetName,
+    isTestData: file.dataset?.test_data ?? false,
     city: {
       name: file.city.name,
       slug: slugify(file.city.name),

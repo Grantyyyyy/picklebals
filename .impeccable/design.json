@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-08T07:32:00.000Z",
+  "title": "Design System: Pickleball Hub",
+  "extensions": {
+    "colorMeta": {
+      "court": {
+        "role": "primary",
+        "displayName": "Court Green",
+        "canonical": "oklch(0.44 0.095 160)",
+        "tonalRamp": [
+          "oklch(0.18 0.05 160)",
+          "oklch(0.25 0.05 165)",
+          "oklch(0.35 0.08 160)",
+          "oklch(0.44 0.095 160)",
+          "oklch(0.58 0.08 160)",
+          "oklch(0.75 0.05 160)",
+          "oklch(0.88 0.035 160)",
+          "oklch(0.95 0.025 160)"
+        ]
+      },
+      "court-deep": {
+        "role": "primary",
+        "displayName": "Court Deep",
+        "canonical": "oklch(0.25 0.05 165)",
+        "tonalRamp": [
+          "oklch(0.15 0.04 165)",
+          "oklch(0.18 0.018 165)",
+          "oklch(0.25 0.05 165)",
+          "oklch(0.35 0.06 165)",
+          "oklch(0.5 0.05 165)",
+          "oklch(0.7 0.03 165)",
+          "oklch(0.88 0.02 165)",
+          "oklch(0.96 0.01 165)"
+        ]
+      },
+      "court-soft": {
+        "role": "secondary",
+        "displayName": "Court Soft",
+        "canonical": "oklch(0.95 0.025 160)",
+        "tonalRamp": [
+          "oklch(0.25 0.05 160)",
+          "oklch(0.4 0.06 160)",
+          "oklch(0.55 0.05 160)",
+          "oklch(0.7 0.04 160)",
+          "oklch(0.82 0.035 160)",
+          "oklch(0.9 0.03 160)",
+          "oklch(0.95 0.025 160)",
+          "oklch(0.98 0.015 160)"
+        ]
+      },
+      "ball": {
+        "role": "secondary",
+        "displayName": "Ball Lime",
+        "canonical": "oklch(0.9 0.19 122)",
+        "tonalRamp": [
+          "oklch(0.3 0.12 122)",
+          "oklch(0.42 0.14 122)",
+          "oklch(0.55 0.16 122)",
+          "oklch(0.68 0.18 122)",
+          "oklch(0.8 0.19 122)",
+          "oklch(0.9 0.19 122)",
+          "oklch(0.95 0.12 118)",
+          "oklch(0.97 0.07 118)"
+        ]
+      },
+      "ball-soft": {
+        "role": "secondary",
+        "displayName": "Ball Soft",
+        "canonical": "oklch(0.97 0.07 118)",
+        "tonalRamp": [
+          "oklch(0.35 0.12 118)",
+          "oklch(0.5 0.14 118)",
+          "oklch(0.65 0.12 118)",
+          "oklch(0.78 0.1 118)",
+          "oklch(0.88 0.09 118)",
+          "oklch(0.93 0.08 118)",
+          "oklch(0.97 0.07 118)",
+          "oklch(0.99 0.03 118)"
+        ]
+      },
+      "sand": {
+        "role": "neutral",
+        "displayName": "Sand",
+        "canonical": "oklch(0.975 0.008 95)",
+        "tonalRamp": [
+          "oklch(0.2 0.02 95)",
+          "oklch(0.35 0.015 95)",
+          "oklch(0.5 0.012 95)",
+          "oklch(0.7 0.01 95)",
+          "oklch(0.85 0.01 95)",
+          "oklch(0.93 0.008 95)",
+          "oklch(0.975 0.008 95)",
+          "oklch(0.99 0.004 95)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(0.18 0.018 165)",
+        "tonalRamp": [
+          "oklch(0.12 0.02 165)",
+          "oklch(0.18 0.018 165)",
+          "oklch(0.28 0.02 165)",
+          "oklch(0.4 0.02 165)",
+          "oklch(0.55 0.015 165)",
+          "oklch(0.72 0.01 165)",
+          "oklch(0.88 0.008 165)",
+          "oklch(0.96 0.006 165)"
+        ]
+      },
+      "mist": {
+        "role": "neutral",
+        "displayName": "Mist",
+        "canonical": "oklch(0.955 0.008 170)",
+        "tonalRamp": [
+          "oklch(0.2 0.02 170)",
+          "oklch(0.35 0.015 170)",
+          "oklch(0.5 0.012 170)",
+          "oklch(0.68 0.01 170)",
+          "oklch(0.82 0.01 170)",
+          "oklch(0.9 0.009 170)",
+          "oklch(0.955 0.008 170)",
+          "oklch(0.98 0.006 170)"
+        ]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Sand Paper",
+        "canonical": "oklch(0.99 0.004 95)",
+        "tonalRamp": [
+          "oklch(0.18 0.018 165)",
+          "oklch(0.3 0.015 95)",
+          "oklch(0.5 0.01 95)",
+          "oklch(0.7 0.008 95)",
+          "oklch(0.85 0.006 95)",
+          "oklch(0.93 0.006 95)",
+          "oklch(0.975 0.008 95)",
+          "oklch(0.99 0.004 95)"
+        ]
+      },
+      "foreground": {
+        "role": "neutral",
+        "displayName": "Ink Text",
+        "canonical": "oklch(0.21 0.025 165)",
+        "tonalRamp": [
+          "oklch(0.15 0.025 165)",
+          "oklch(0.21 0.025 165)",
+          "oklch(0.32 0.02 165)",
+          "oklch(0.48 0.02 165)",
+          "oklch(0.62 0.015 165)",
+          "oklch(0.78 0.01 165)",
+          "oklch(0.9 0.008 165)",
+          "oklch(0.97 0.005 165)"
+        ]
+      },
+      "muted-foreground": {
+        "role": "neutral",
+        "displayName": "Muted Court Text",
+        "canonical": "oklch(0.48 0.02 165)",
+        "tonalRamp": [
+          "oklch(0.2 0.02 165)",
+          "oklch(0.32 0.02 165)",
+          "oklch(0.4 0.02 165)",
+          "oklch(0.48 0.02 165)",
+          "oklch(0.6 0.015 165)",
+          "oklch(0.75 0.01 165)",
+          "oklch(0.88 0.008 165)",
+          "oklch(0.96 0.006 165)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Court Hairline",
+        "canonical": "oklch(0.91 0.01 120)",
+        "tonalRamp": [
+          "oklch(0.3 0.02 120)",
+          "oklch(0.45 0.015 120)",
+          "oklch(0.6 0.012 120)",
+          "oklch(0.75 0.012 120)",
+          "oklch(0.85 0.01 120)",
+          "oklch(0.91 0.01 120)",
+          "oklch(0.95 0.008 120)",
+          "oklch(0.98 0.005 120)"
+        ]
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "Card White",
+        "canonical": "oklch(1 0 0)",
+        "tonalRamp": [
+          "oklch(0.2 0.01 165)",
+          "oklch(0.4 0.008 165)",
+          "oklch(0.6 0.006 95)",
+          "oklch(0.78 0.005 95)",
+          "oklch(0.9 0.004 95)",
+          "oklch(0.96 0.003 95)",
+          "oklch(0.99 0.004 95)",
+          "oklch(1 0 0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero wordmark-scale condensed uppercase only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles; often uppercase condensed Bricolage."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card and listing names."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Readable Geist paragraphs and UI copy."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase kickers, chips, and nav meta."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-hover",
+        "value": "0 20px 25px -5px oklch(0.44 0.095 160 / 0.1), 0 8px 10px -6px oklch(0.44 0.095 160 / 0.1)",
+        "purpose": "Hover lift on listing tiles only; rest stays flat."
+      }
+    ],
+    "motion": [
+      {
+        "name": "color-shift",
+        "value": "transition-colors",
+        "purpose": "Default hover/focus color changes."
+      },
+      {
+        "name": "arrow-nudge",
+        "value": "transform 150ms ease; translateX(0.125rem) on group-hover",
+        "purpose": "Motion-safe arrow hint on links; no bounce easing."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Dense court-green button for forms and chrome.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">Save</button>",
+      "css": ".ds-btn-primary { background: var(--court); color: oklch(0.99 0.004 95); height: 2rem; padding: 0 0.625rem; border: 0; border-radius: 0.75rem; font: 500 0.875rem/1 Geist, ui-sans-serif, sans-serif; cursor: pointer; } .ds-btn-primary:hover { background: color-mix(in oklch, var(--court) 80%, transparent); } .ds-btn-primary:focus-visible { outline: 3px solid oklch(0.6 0.12 150 / 0.5); }"
+    },
+    {
+      "name": "Pill CTA",
+      "kind": "button",
+      "refersTo": "button-primary-pill",
+      "description": "Public-site capsule on court-deep.",
+      "html": "<button class=\"ds-btn-pill\" type=\"button\">Find a court</button>",
+      "css": ".ds-btn-pill { background: var(--court-deep); color: oklch(0.99 0.004 95); height: 2.5rem; padding: 0 1.25rem; border: 0; border-radius: 9999px; font: 600 0.875rem/1 Geist, ui-sans-serif, sans-serif; cursor: pointer; } .ds-btn-pill:hover { background: color-mix(in oklch, var(--court-deep) 90%, black); } .ds-btn-pill:focus-visible { outline: 3px solid oklch(0.6 0.12 150 / 0.5); }"
+    },
+    {
+      "name": "Lime Header CTA",
+      "kind": "button",
+      "refersTo": "button-cta-lime",
+      "description": "Scarce ball-lime capsule in the ink header.",
+      "html": "<button class=\"ds-btn-lime\" type=\"button\">List your court</button>",
+      "css": ".ds-btn-lime { background: var(--ball); color: var(--court-deep); height: 2.5rem; padding: 0 1.25rem; border: 0; border-radius: 9999px; font: 600 0.875rem/1 Geist, ui-sans-serif, sans-serif; cursor: pointer; } .ds-btn-lime:hover { background: color-mix(in oklch, var(--ball) 85%, white); } .ds-btn-lime:focus-visible { outline: 3px solid oklch(0.9 0.19 122 / 0.6); }"
+    },
+    {
+      "name": "Search Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Transparent-fill field with court focus ring.",
+      "html": "<input class=\"ds-input\" type=\"search\" placeholder=\"Search courts\" />",
+      "css": ".ds-input { height: 2.5rem; width: 100%; border: 1px solid oklch(0.89 0.012 120); background: transparent; border-radius: 0.75rem; padding: 0 0.625rem; font: 400 1rem/1.4 Geist, ui-sans-serif, sans-serif; color: oklch(0.21 0.025 165); } .ds-input:focus-visible { border-color: oklch(0.6 0.12 150); outline: 3px solid oklch(0.6 0.12 150 / 0.5); }"
+    },
+    {
+      "name": "Ink Header",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Sticky ink bar with white links and lime CTA.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-brand\">PB Hub</span><a class=\"ds-nav-link\" href=\"#\">Venues</a><a class=\"ds-nav-cta\" href=\"#\">List your court</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 1rem; height: 4rem; padding: 0 1.5rem; background: oklch(0.18 0.018 165 / 0.95); color: white; } .ds-nav-brand { font: 800 1rem/1 Bricolage Grotesque, sans-serif; } .ds-nav-link { color: white; text-decoration: none; font: 500 0.875rem/1 Geist, sans-serif; } .ds-nav-link:hover { opacity: 0.8; } .ds-nav-cta { margin-left: auto; background: var(--ball); color: var(--court-deep); text-decoration: none; border-radius: 9999px; padding: 0.5rem 1.25rem; font: 600 0.875rem/1 Geist, sans-serif; }"
+    },
+    {
+      "name": "Amenity Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Court-soft pill for amenities.",
+      "html": "<span class=\"ds-chip\">Indoor</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; background: var(--court-soft); color: var(--court-deep); border-radius: 9999px; padding: 0.125rem 0.625rem; font: 500 0.75rem/1.3 Geist, sans-serif; }"
+    },
+    {
+      "name": "Listing Card",
+      "kind": "card",
+      "refersTo": "card-listing",
+      "description": "WANDER-calm showcase tile; hover shadow only.",
+      "html": "<article class=\"ds-card\"><p class=\"ds-card-kicker\">Indoor · 4 courts</p><h3 class=\"ds-card-title\">Capitol Courts</h3><p class=\"ds-card-meta\">Iligan, Lanao del Norte</p></article>",
+      "css": ".ds-card { background: white; border: 1px dashed color-mix(in oklch, var(--court) 35%, transparent); border-radius: 1.25rem; padding: 1.25rem; } .ds-card:hover { border-color: color-mix(in oklch, var(--court) 70%, transparent); box-shadow: 0 20px 25px -5px oklch(0.44 0.095 160 / 0.1); } .ds-card-kicker { margin: 0; font: 700 0.75rem/1.3 Geist, sans-serif; letter-spacing: 0.05em; text-transform: uppercase; color: var(--court); } .ds-card-title { margin: 0.5rem 0 0; font: 800 1.25rem/1.2 Bricolage Grotesque, sans-serif; text-transform: uppercase; font-stretch: 87.5%; color: var(--court-deep); } .ds-card-meta { margin: 0.25rem 0 0; font: 400 0.875rem/1.4 Geist, sans-serif; color: oklch(0.48 0.02 165); }"
+    },
+    {
+      "name": "Hero Stage",
+      "kind": "custom",
+      "refersTo": "hero-stage",
+      "description": "Nike-scale condensed word on ink with lime period.",
+      "html": "<section class=\"ds-hero\"><p class=\"ds-hero-kicker\">Now covering Iligan City</p><h1 class=\"ds-hero-display\">Pickleball</h1><p class=\"ds-hero-promise\">Find your next game<span class=\"ds-hero-dot\">.</span></p></section>",
+      "css": ".ds-hero { background: var(--court-deep); color: white; border-radius: 2rem; padding: 3.5rem 2.5rem; } .ds-hero-kicker { display: inline-flex; border: 1px solid oklch(1 0 0 / 0.15); background: oklch(1 0 0 / 0.05); border-radius: 9999px; padding: 0.25rem 0.75rem; font: 600 0.75rem/1 Geist, sans-serif; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ball); } .ds-hero-display { margin: 1.25rem 0 0; font: 800 clamp(3.5rem, 15vw, 8rem)/0.85 Bricolage Grotesque, sans-serif; letter-spacing: -0.02em; text-transform: uppercase; font-stretch: 75%; } .ds-hero-promise { margin: 1rem 0 0; font: 700 1.5rem/1.2 Geist, sans-serif; } .ds-hero-dot { color: var(--ball); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Match-day type, gallery cards",
+    "overview": "The public site should feel like walking into a tournament weekend and then browsing a calm lookbook. Display type is athletic: condensed, uppercase, oversized Bricolage Grotesque on dark ink or court-deep fields, with a lime pickleball accent used sparingly. Listing surfaces are the opposite of that noise — white or mist cards, generous radius, photography first, hairline or dashed borders, no nested chrome.\n\nThis is the incumbent home identity (Nike-like sport energy + WANDER-like clean cards). New marketing and listing surfaces extend it. App/admin chrome can be quieter but must still use the same tokens and type pairing.",
+    "keyCharacteristics": [
+      "Condensed uppercase display vs. readable Geist body",
+      "Court green + ink + lime ball; warm sand paper, not cool gray SaaS",
+      "Dark sticky header; light content canvas",
+      "Pills for actions; rounded-2xl tiles for listings",
+      "Photography and scale carry emotion; cards stay quiet"
+    ],
+    "rules": [
+      {
+        "name": "The Ball Accent Rule",
+        "body": "Lime appears on ≤10% of any screen. If everything is highlighted, nothing is.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Beige-SaaS Rule",
+        "body": "Do not drift to Inter + zinc + violet. Warm sand and court chroma are the neutrals.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Voice Rule",
+        "body": "Condensed uppercase is for titles that name a place or a moment. Geist sentence case is for everything a person has to read.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-Tile Rule",
+        "body": "Listing cards lift only on hover. Depth is photography, scrims, and ink bands — not drop shadows at rest.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Pill-for-Action Rule",
+        "body": "Promoted CTAs on the public site are capsules. Cards are rounded rectangles. Do not mix a squircle CTA on a pill-heavy page.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do keep Bricolage Grotesque + Geist as the only type pairing.",
+      "Do use court / ink / ball tokens from src/app/globals.css; extend, don't replace.",
+      "Do put athletic scale on heroes and section titles; keep listing cards quiet and photographic.",
+      "Do mark sample/seed data with the existing Sample badge language — never as real social proof."
+    ],
+    "donts": [
+      "Don't restyle the home into generic shadcn marketing (centered hero, Inter, nested cards, purple gradient).",
+      "Don't use pure black, cool zinc palettes, or AI-beige #fafafa with no court chroma.",
+      "Don't set body copy in uppercase condensed display.",
+      "Don't nest cards or wrap every section in a bordered tile.",
+      "Don't flood a page with ball lime or pulsing/glow decorations."
+    ]
+  }
+}

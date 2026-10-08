@@ -86,17 +86,32 @@
     @apply border-border outline-ring/50;
   }
   html {
-    @apply scroll-smooth font-sans;
+    @apply font-sans;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--court) var(--mist);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
   body {
     @apply bg-background text-foreground;
     text-rendering: optimizeLegibility;
+    caret-color: var(--court);
   }
   h1,
   h2,
   h3,
   h4 {
     @apply font-heading tracking-tight text-balance;
+  }
+  a {
+    text-underline-offset: 0.18em;
+  }
+  ::selection {
+    background: var(--ball);
+    color: var(--ink);
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
@@ -108,12 +123,11 @@
   @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
 
-/* Subtle court-line pattern for hero sections and image placeholders */
-@utility bg-court-lines {
-  background-image:
-    linear-gradient(to right, oklch(1 0 0 / 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(1 0 0 / 0.08) 1px, transparent 1px);
-  background-size: 48px 48px;
+/* Textured acrylic court surface: a fine light/dark sand grain, no visible tiling.
+   Pair with <CourtMarkings /> for painted lines. */
+@utility bg-court-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1.6 0 0 0 -.92'/%3E%3C/filter%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.6 0 0 0 -.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)' opacity='.5'/%3E%3Crect width='100%25' height='100%25' filter='url(%23b)' opacity='.45'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
 /* Angled section edges; pair with padding of at least var(--angle) on the clipped side */
@@ -133,4 +147,254 @@
   background-image:
     radial-gradient(60% 80% at 100% 100%, oklch(0.9 0.19 122 / 0.22), transparent 70%),
     linear-gradient(115deg, var(--court-deep) 0%, var(--court-deep) 35%, var(--court) 100%);
+}
+
+/* ---------- Motion ----------
+   One authored moment: the hero ball drops onto the court once.
+   Everything else is scroll-linked and tiny. Every effect starts from the
+   static, fully visible design: no scroll-timeline support or reduced motion
+   simply means no animation. */
+
+@utility animate-ball-drop {
+  @media (prefers-reduced-motion: no-preference) {
+    transform-origin: 50% 100%;
+    animation: ball-drop 1150ms 300ms both;
+  }
+}
+
+@utility animate-status-in {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: status-in 450ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+/* Hides a SplitText word until it has been split, so it never flashes whole.
+   No scripting or reduced motion shows it at once; a stalled script after 2s. */
+.split-pending {
+  @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+    visibility: hidden;
+    animation: split-fallback 0s 2s forwards;
+  }
+}
+
+/* Section titles rise out of their own baseline as they scroll in. */
+@utility reveal-title {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: title-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 28%;
+    }
+  }
+}
+
+/* Court markings are "painted" sideline to sideline as they enter. */
+@utility reveal-court {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: court-paint linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 40%;
+    }
+  }
+}
+
+@keyframes ball-drop {
+  0% {
+    transform: translateY(-260%);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  40% {
+    transform: translateY(0) scale(1.1, 0.88);
+    animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+  }
+  62% {
+    transform: translateY(-22%) scale(0.98, 1.02);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  80% {
+    transform: translateY(0) scale(1.04, 0.95);
+    animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+  }
+  90% {
+    transform: translateY(-5%);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes split-fallback {
+  to {
+    visibility: visible;
+  }
+}
+
+@keyframes status-in {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translateY(2px);
+  }
+}
+
+@keyframes title-rise {
+  from {
+    clip-path: inset(100% -5% -25% -5%);
+    transform: translateY(0.4em);
+  }
+  to {
+    clip-path: inset(-25% -5% -25% -5%);
+    transform: none;
+  }
+}
+
+@keyframes court-paint {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ---------- Mobile menu panel ----------
+   Open: the inset panel grows out of its own round close button (top-right),
+   the scrim fades in, links rise in. Close: it folds back into the button.
+   Radix waits for these animations before unmounting. */
+
+@utility menu-panel {
+  @media (prefers-reduced-motion: no-preference) {
+    &[data-state="open"] {
+      animation: menu-expand 560ms cubic-bezier(0.76, 0, 0.24, 1) both;
+    }
+    &[data-state="closed"] {
+      animation: menu-collapse 380ms cubic-bezier(0.76, 0, 0.24, 1) both;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &[data-state="open"] {
+      animation: menu-fade 150ms ease-out both;
+    }
+    &[data-state="closed"] {
+      animation: menu-fade 120ms ease-in reverse both;
+    }
+  }
+}
+
+@utility menu-scrim {
+  &[data-state="open"] {
+    animation: menu-fade 300ms ease-out both;
+  }
+  &[data-state="closed"] {
+    animation: menu-fade 300ms ease-in 80ms reverse both;
+  }
+}
+
+@utility menu-item {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: menu-item-in 700ms cubic-bezier(0.16, 1, 0.3, 1) calc(240ms + var(--i, 0) * 50ms)
+      both;
+  }
+}
+
+@utility menu-lines {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: court-paint 900ms cubic-bezier(0.16, 1, 0.3, 1) 360ms both;
+  }
+}
+
+/* The 48px close button sits 12px in from the panel's top-right corner. */
+@keyframes menu-expand {
+  from {
+    clip-path: inset(12px 12px calc(100% - 60px) calc(100% - 60px) round 24px);
+  }
+  to {
+    clip-path: inset(0 round 1.75rem);
+  }
+}
+
+@keyframes menu-collapse {
+  from {
+    clip-path: inset(0 round 1.75rem);
+  }
+  to {
+    clip-path: inset(12px 12px calc(100% - 60px) calc(100% - 60px) round 24px);
+  }
+}
+
+@keyframes menu-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(0.5em);
+  }
+}
+
+/* Close icon: the hamburger bars swing into an X as the panel opens. */
+@utility menu-bar-a {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: menu-bar-a 420ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+  }
+}
+
+@utility menu-bar-b {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: menu-bar-b 420ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+  }
+}
+
+@keyframes menu-bar-a {
+  from {
+    translate: 0 -5px;
+    rotate: 0deg;
+  }
+}
+
+@keyframes menu-bar-b {
+  from {
+    translate: -3px 5px;
+    rotate: 0deg;
+    scale: 0.7 1;
+  }
+}
+
+/* ---------- Ticket notches ----------
+   Each half of a ticket cuts a quarter circle at both ends of its seam edge;
+   side by side the two halves form the semicircle notches of a tear line.
+   Size with --notch. */
+
+@utility notch-r {
+  mask-image:
+    radial-gradient(circle var(--notch, 0.7rem) at 100% 0, #0000 98%, #000),
+    radial-gradient(circle var(--notch, 0.7rem) at 100% 100%, #0000 98%, #000);
+  mask-composite: intersect;
+}
+
+@utility notch-l {
+  mask-image:
+    radial-gradient(circle var(--notch, 0.7rem) at 0 0, #0000 98%, #000),
+    radial-gradient(circle var(--notch, 0.7rem) at 0 100%, #0000 98%, #000);
+  mask-composite: intersect;
+}
+
+@utility notch-b {
+  mask-image:
+    radial-gradient(circle var(--notch, 0.7rem) at 0 100%, #0000 98%, #000),
+    radial-gradient(circle var(--notch, 0.7rem) at 100% 100%, #0000 98%, #000);
+  mask-composite: intersect;
+}
+
+@utility notch-t {
+  mask-image:
+    radial-gradient(circle var(--notch, 0.7rem) at 0 0, #0000 98%, #000),
+    radial-gradient(circle var(--notch, 0.7rem) at 100% 0, #0000 98%, #000);
+  mask-composite: intersect;
 }

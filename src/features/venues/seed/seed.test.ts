@@ -168,8 +168,19 @@ describe("buildVenueSeedSql", () => {
     assert.match(sql, /on conflict \(slug\) do nothing/);
   });
 
-  it("imports every venue as unverified, non-test data", () => {
+  it("imports every venue as unverified, non-test data by default", () => {
     assert.match(sql, /'unverified', false, 'published'::public\.content_status/);
+  });
+
+  it("marks every venue as test data when the dataset says so", () => {
+    const file = venueSeedFileSchema.parse({
+      ...example,
+      dataset: { ...example.dataset, test_data: true },
+    });
+    const testSeed = prepareVenueSeed(file);
+    assert.equal(testSeed.isTestData, true);
+    const testSql = buildVenueSeedSql(testSeed, { status: "published", sourceFile: "x.json" });
+    assert.match(testSql, /'unverified', true, 'published'::public\.content_status/);
   });
 
   it("can import venues hidden from the public directory", () => {
