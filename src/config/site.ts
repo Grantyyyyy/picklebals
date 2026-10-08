@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: "Pickleball Hub",
-  shortName: "PB Hub",
+  name: "Pick n Go",
+  shortName: "Pick n Go",
   tagline: "Find your next tournament.",
   description:
     "Discover pickleball tournaments and venues in Iligan City, Lanao del Norte — with brackets, schedules and results in one place.",

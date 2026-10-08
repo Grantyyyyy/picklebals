@@ -14,7 +14,7 @@ Primary users are pickleball players in Iligan City, Lanao del Norte, looking fo
 
 ## Product Purpose
 
-Pickleball Hub is a city-scoped pickleball venue directory and tournament platform. Today it helps people in Iligan discover courts, clubs, events, and beginner guides in one place. Success is less searching, more playing: a player can find a nearby court or upcoming event without leaving the site.
+Pick n Go is a city-scoped pickleball venue directory and tournament platform. Today it helps people in Iligan discover courts, clubs, events, and beginner guides in one place. Success is less searching, more playing: a player can find a nearby court or upcoming event without leaving the site.
 
 Tournament management screens and the competition engine (round robin and single elimination) are planned next. Reservations, payments, subscriptions, and ratings are out of scope.
 
@@ -35,7 +35,7 @@ Players browse on the public web (`en-PH`, Asia/Manila). Listings can come from 
 
 ## Brand Commitments
 
-- Name: **Pickleball Hub** (short: **PB Hub**).
+- Name: **Pick n Go** (no short form).
 - Tagline in site config: “Find your next tournament.” Hero currently leads with “Find your next game.”
 - Voice: direct, local, sport-forward; Philippines / Iligan first.
 - Binding visual constraint from the product owner (Reancirl): the public home redesign blends **Nike sporty energy** (condensed display type, dark ink, lime ball accent, athletic scale) with **WANDER-like clean cards** (calm white/mist tiles, generous radius, photography-led listings). Future UI work preserves this identity unless an explicit redesign is requested.

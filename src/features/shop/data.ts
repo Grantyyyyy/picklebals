@@ -2,7 +2,7 @@
  * SHOP LISTINGS — local content shown as regular listings (`isSample: false`) by product decision,
  * matching the clubs and events in `sample-content/data.ts`.
  *
- * Pickleball Hub does not take payments: each listing points buyers to the seller, who arranges
+ * Pick n Go does not take payments: each listing points buyers to the seller, who arranges
  * payment and pickup themselves. Sellers below are this project's placeholder clubs, not real
  * organizations, and every item, price and size is invented; replace them with real listings
  * before launch. Photos are from Unsplash (Unsplash License: free to use, no attribution required).

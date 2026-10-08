@@ -42,7 +42,7 @@ export function Logo({
           inverted ? "text-white" : "text-court-deep",
         )}
       >
-        Pickleball<span className={inverted ? "text-ball" : "text-court"}>Hub</span>
+        Pick n <span className={inverted ? "text-ball" : "text-court"}>Go</span>
       </span>
     </Link>
   );

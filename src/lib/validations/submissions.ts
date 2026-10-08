@@ -46,10 +46,30 @@ export const contactSchema = z.object({
     .max(2000, "Please keep your message under 2000 characters."),
 });
 
-export const submissionSchema = z.discriminatedUnion("type", [courtListingSchema, contactSchema]);
+export const skillLevels = ["beginner", "intermediate", "advanced"] as const;
+
+export const eventRegistrationSchema = z.object({
+  type: z.literal("event_registration"),
+  ...contactFields,
+  eventSlug: z
+    .string()
+    .trim()
+    .regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, "Unknown event.")
+    .max(160),
+  skillLevel: z.enum(skillLevels, { error: "Please choose your skill level." }),
+  partnerName: optionalText(120),
+  notes: optionalText(1000),
+});
+
+export const submissionSchema = z.discriminatedUnion("type", [
+  courtListingSchema,
+  contactSchema,
+  eventRegistrationSchema,
+]);
 
 export type CourtListingInput = z.infer<typeof courtListingSchema>;
 export type ContactInput = z.infer<typeof contactSchema>;
+export type EventRegistrationInput = z.infer<typeof eventRegistrationSchema>;
 export type SubmissionInput = z.infer<typeof submissionSchema>;
 
 export type FieldErrors = Partial<Record<string, string[]>>;

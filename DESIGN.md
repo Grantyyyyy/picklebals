@@ -1,5 +1,5 @@
 ---
-name: Pickleball Hub
+name: Pick n Go
 description: Nike-sporty public home with WANDER-calm listing cards — court green, ink, and lime ball.
 colors:
   court: "oklch(0.44 0.095 160)"
@@ -82,7 +82,7 @@ components:
     padding: "1.25rem"
 ---
 
-# Design System: Pickleball Hub
+# Design System: Pick n Go
 
 ## Overview
 

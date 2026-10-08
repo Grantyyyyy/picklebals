@@ -1,4 +1,4 @@
-# Pickleball Hub
+# Pick n Go
 
 A pickleball venue directory and tournament platform for **Iligan City** (Lanao del Norte).
 The schema is city-scoped, so more cities can be added later.

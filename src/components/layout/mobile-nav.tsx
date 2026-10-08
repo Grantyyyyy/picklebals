@@ -47,7 +47,7 @@ export function MobileNav({ items }: { items: NavItem[] }) {
 
   // The panel is mobile-only; close it if the viewport grows past the breakpoint.
   useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 48rem)");
+    const desktop = window.matchMedia("(min-width: 64rem)");
     const close = () => desktop.matches && setOpen(false);
     desktop.addEventListener("change", close);
     return () => desktop.removeEventListener("change", close);
@@ -56,16 +56,16 @@ export function MobileNav({ items }: { items: NavItem[] }) {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger
-        className="flex size-11 items-center justify-center rounded-full text-white transition-colors outline-none hover:bg-white/10 focus-visible:ring-3 focus-visible:ring-ball/70 md:hidden"
+        className="flex size-11 items-center justify-center rounded-full text-white transition-colors outline-none hover:bg-white/10 focus-visible:ring-3 focus-visible:ring-ball/70 lg:hidden"
         aria-label="Open menu"
       >
         <MenuGlyph />
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 menu-scrim bg-ink/45 md:hidden" />
+        <Dialog.Overlay className="fixed inset-0 z-50 menu-scrim bg-ink/45 lg:hidden" />
         <Dialog.Content
           aria-describedby={undefined}
-          className="fixed inset-2 z-50 flex menu-panel flex-col overflow-hidden rounded-[1.75rem] bg-ink text-white shadow-2xl shadow-ink/40 outline-none sm:left-auto sm:w-[26rem] md:hidden"
+          className="fixed inset-2 z-50 flex menu-panel flex-col overflow-hidden rounded-[1.75rem] bg-ink text-white shadow-2xl shadow-ink/40 outline-none sm:left-auto sm:w-[26rem] lg:hidden"
         >
           <Dialog.Title className="sr-only">Menu</Dialog.Title>
           <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">

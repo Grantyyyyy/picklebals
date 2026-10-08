@@ -7,7 +7,8 @@ import type {
 } from "./types";
 
 /**
- * SAMPLE TOURNAMENT — rendered only when Supabase is not configured, always badged "Sample".
+ * SAMPLE TOURNAMENT: rendered only when Supabase is not configured. Like the other local content
+ * it shows without a Sample badge; it stays out of search (noindex, no sitemap entry).
  * Teams, players and scores are invented for previewing the live bracket. Like the sample
  * events, it is deliberately not tied to any real venue.
  */

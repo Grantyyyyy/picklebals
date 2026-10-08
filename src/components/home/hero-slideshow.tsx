@@ -35,7 +35,10 @@ export function HeroSlideshow({
 
   return (
     <div className={className} {...autoplay.regionProps}>
-      <div className="absolute inset-0 -z-20" aria-hidden="true">
+      <div
+        className="absolute inset-x-0 -inset-y-[14%] -z-20 parallax-y [--parallax:9%]"
+        aria-hidden="true"
+      >
         {slides.map((slide, slideIndex) => {
           const active = slideIndex === index;
           return (

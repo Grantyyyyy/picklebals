@@ -4,7 +4,8 @@ import { Suspense } from "react";
 import { EventCard } from "@/components/events/event-card";
 import { EmptyState } from "@/components/shared/empty-state";
 import { PageHeader } from "@/components/shared/page-header";
-import { EventListSkeleton } from "@/components/shared/skeletons";
+import { CardGridSkeleton, EventListSkeleton } from "@/components/shared/skeletons";
+import { TournamentList } from "@/components/tournaments/tournament-list";
 import { getUpcomingEvents } from "@/features/events/queries";
 import { buildMetadata } from "@/lib/seo";
 
@@ -45,13 +46,24 @@ export default function EventsPage() {
       <PageHeader
         eyebrow="Events"
         title="Upcoming pickleball events"
-        description="Tournaments, open play, clinics and socials — all in one place."
+        description="Tournaments with live brackets, plus open play, clinics and socials, all in one place."
       />
-      <section aria-label="Upcoming events" className="container-page py-12">
-        <Suspense fallback={<EventListSkeleton />}>
-          <EventList />
+      <div className="container-page py-12">
+        <Suspense fallback={<CardGridSkeleton count={3} />}>
+          <TournamentList />
         </Suspense>
-      </section>
+        <section aria-labelledby="events-heading" className="space-y-6">
+          <h2
+            id="events-heading"
+            className="font-heading text-3xl leading-[0.95] font-extrabold text-court-deep uppercase font-stretch-condensed sm:text-4xl"
+          >
+            Upcoming events
+          </h2>
+          <Suspense fallback={<EventListSkeleton />}>
+            <EventList />
+          </Suspense>
+        </section>
+      </div>
     </>
   );
 }

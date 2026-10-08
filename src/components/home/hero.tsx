@@ -40,7 +40,7 @@ export async function Hero({ image }: { image?: HeroImage }) {
       );
 
   const content = (
-    <div className="px-5 pt-10 pb-8 sm:px-10 sm:pt-14 sm:pb-12 lg:px-14 lg:pt-16 lg:pb-14">
+    <div className="parallax-exit px-5 pt-10 pb-8 sm:px-10 sm:pt-14 sm:pb-12 lg:px-14 lg:pt-16 lg:pb-14">
       <h1 id="hero-title">
         <SplitText
           text="Pickleball"

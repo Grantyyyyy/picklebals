@@ -5,7 +5,6 @@ import { Suspense } from "react";
 
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { JsonLd } from "@/components/shared/json-ld";
-import { SampleBadge } from "@/components/shared/sample-content";
 import { DetailSkeleton } from "@/components/shared/skeletons";
 import { LiveTournament } from "@/components/tournaments/live-tournament";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -34,12 +33,12 @@ export async function generateMetadata({ params }: PageProps<"/tournaments/[slug
     return buildMetadata({
       title: "Tournament not found",
       description: "",
-      path: "/",
+      path: "/events",
       noIndex: true,
     });
   }
   return buildMetadata({
-    title: `${tournament.name} — Live bracket and scores`,
+    title: `${tournament.name}: Live bracket and scores`,
     description:
       tournament.summary ??
       `Live courts, brackets and results for ${tournament.name} in ${tournament.city.name}.`,
@@ -94,16 +93,12 @@ async function TournamentDetail({ params }: Pick<PageProps<"/tournaments/[slug]"
       <Breadcrumbs
         items={[
           { name: "Home", path: "/" },
+          { name: "Events", path: "/events" },
           { name: tournament.name, path: tournamentPath(tournament) },
         ]}
       />
 
       <header className="mt-6 max-w-4xl">
-        {tournament.isSample && (
-          <div className="mb-3">
-            <SampleBadge />
-          </div>
-        )}
         <h1 className="font-heading text-5xl leading-[0.9] font-extrabold text-court-deep uppercase font-stretch-condensed sm:text-7xl">
           {tournament.name}
         </h1>

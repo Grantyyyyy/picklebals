@@ -1,5 +1,5 @@
 -- =============================================================================
--- Pickleball Hub — competition engine and live updates
+-- Pickleball Hub: competition engine and live updates
 --
 -- The only write path for matches, match games and court assignments (see the tournament
 -- platform migration). Every function is security definer, checks the caller's organization

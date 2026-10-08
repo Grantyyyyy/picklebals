@@ -557,7 +557,7 @@ export type Database = {
       content_status: "draft" | "published" | "archived";
       court_environment: "indoor" | "outdoor" | "covered";
       event_type: "tournament" | "open_play" | "clinic" | "league" | "social";
-      submission_type: "court_listing" | "contact";
+      submission_type: "court_listing" | "contact" | "event_registration";
       submission_status: "pending" | "reviewed" | "approved" | "rejected" | "spam";
       verification_status: "unverified" | "verified" | "rejected";
       org_role: "owner" | "organizer" | "scorekeeper";

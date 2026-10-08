@@ -9,6 +9,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
+import { EventRegistrationForm } from "@/components/forms/event-registration-form";
 import { DetailLayout, InfoCard, InfoRow } from "@/components/shared/detail-layout";
 import { JsonLd } from "@/components/shared/json-ld";
 import { EventTimingBadge } from "@/components/shared/live-status";
@@ -148,13 +149,15 @@ async function EventDetail({ params }: Pick<PageProps<"/events/[slug]">, "params
                 </InfoRow>
               )}
             </InfoCard>
-            {event.registrationUrl && (
-              <Button asChild size="lg" className="h-12 w-full rounded-full text-base">
+            <Button asChild size="lg" className="h-12 w-full rounded-full text-base">
+              {event.registrationUrl ? (
                 <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
                   Register
                 </a>
-              </Button>
-            )}
+              ) : (
+                <a href="#register">Register</a>
+              )}
+            </Button>
           </>
         }
       >
@@ -166,6 +169,23 @@ async function EventDetail({ params }: Pick<PageProps<"/events/[slug]">, "params
             {event.description ?? "More details about this event are coming soon."}
           </p>
         </section>
+        {!event.registrationUrl && (
+          <section
+            id="register"
+            aria-labelledby="register-heading"
+            className="scroll-mt-24 space-y-4 rounded-2xl border bg-card p-6 sm:p-8"
+          >
+            <div className="space-y-1">
+              <h2 id="register-heading" className="text-2xl font-bold text-court-deep">
+                Register to play
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                Save your spot and the organizer will confirm by email.
+              </p>
+            </div>
+            <EventRegistrationForm eventSlug={event.slug} eventTitle={event.title} />
+          </section>
+        )}
       </DetailLayout>
     </>
   );

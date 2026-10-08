@@ -466,3 +466,98 @@
     translate: 0 10px;
   }
 }
+
+/* ---------- Parallax ----------
+   Scroll-driven, compositor-only (transform/opacity). Layers that move must be oversized by
+   at least their travel so no edge shows. Static without support or with reduced motion. */
+
+/* Background layer drifts against the scroll: --parallax is the travel each way. */
+@utility parallax-y {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: parallax-y linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+/* Oversized lettering slides sideways while its section passes. */
+@utility parallax-x {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: parallax-x linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+/* Foreground lifts a little faster than the page as it leaves the top of the viewport. */
+@utility parallax-exit {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: parallax-exit linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 100%;
+    }
+  }
+}
+
+/* Headline lines slide in from opposite sides as they enter. */
+@utility drift-from-left {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: drift-from-left linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 45%;
+    }
+  }
+}
+
+@utility drift-from-right {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: drift-from-right linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 45%;
+    }
+  }
+}
+
+@keyframes parallax-y {
+  from {
+    transform: translateY(calc(var(--parallax, 8%) * -1));
+  }
+  to {
+    transform: translateY(var(--parallax, 8%));
+  }
+}
+
+@keyframes parallax-x {
+  from {
+    transform: translateX(calc(var(--parallax-x, 8%) * -1));
+  }
+  to {
+    transform: translateX(var(--parallax-x, 8%));
+  }
+}
+
+@keyframes parallax-exit {
+  to {
+    transform: translateY(-3rem);
+    opacity: 0.55;
+  }
+}
+
+@keyframes drift-from-left {
+  from {
+    transform: translateX(-0.6em);
+  }
+}
+
+@keyframes drift-from-right {
+  from {
+    transform: translateX(0.6em);
+  }
+}

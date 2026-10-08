@@ -133,13 +133,13 @@ values
   ('What is pickleball? A quick guide for first-timers', 'what-is-pickleball',
    'The fastest-growing paddle sport explained in five minutes — court, rules and gear.',
    E'Pickleball combines elements of tennis, badminton and table tennis.\n\n## The court\n\nA pickleball court measures 20 by 44 feet. The seven-foot zone on each side of the net is the kitchen.\n\n## Basic rules\n\n- Serves are underhand and diagonal.\n- The ball must bounce once on each side before volleys are allowed.\n- You cannot volley while standing in the kitchen.',
-   'Basics', 'Pickleball Hub (sample)', 5, 'published'),
+   'Basics', 'Pick n Go (sample)', 5, 'published'),
   ('Pickleball scoring explained (without the headache)', 'pickleball-scoring-explained',
    'Why players call out three numbers, and how side-outs work in doubles.',
    E'Traditional doubles scoring uses three numbers.\n\n## Only the serving team scores\n\nPoints are won only on your own serve.\n\n## Games to 11\n\nMost recreational games are played to 11, win by 2.',
-   'Rules', 'Pickleball Hub (sample)', 4, 'published'),
+   'Rules', 'Pick n Go (sample)', 4, 'published'),
   ('Open play etiquette: how to join a game at a new court', 'open-play-etiquette',
    'Paddle stacks, rotations and the unwritten rules that keep open play fun.',
    E'Open play is the heart of pickleball culture.\n\n## Look for the paddle stack\n\nAdd your paddle to the end of the queue.\n\n## Mix it up\n\nRotate partners and keep games moving.',
-   'Community', 'Pickleball Hub (sample)', 3, 'published')
+   'Community', 'Pick n Go (sample)', 3, 'published')
 on conflict (slug) do nothing;

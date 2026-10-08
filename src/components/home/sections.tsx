@@ -71,8 +71,8 @@ export async function HomeStats() {
           id="why-hub"
           className="reveal-title font-heading text-[clamp(3rem,10vw,7rem)] leading-[0.88] font-extrabold tracking-[-0.02em] text-court-deep uppercase font-stretch-condensed"
         >
-          <span className="block">Less searching,</span>
-          <span className="block text-court">
+          <span className="block drift-from-left">Less searching,</span>
+          <span className="block drift-from-right text-court">
             more playing
             <span
               className="ml-[0.06em] inline-block size-[0.2em] rounded-full bg-ball align-baseline ring-[0.035em] ring-court-deep/15"
@@ -253,9 +253,14 @@ export async function ClubSpotlight() {
       className="relative isolate overflow-hidden bg-court-gradient py-[calc(var(--angle)+4rem)] text-white clip-angle-both"
     >
       <div className="absolute inset-0 -z-10 bg-court-grain opacity-70" aria-hidden="true" />
-      <CourtMarkings crop="full" className="-z-10" />
+      <div
+        className="absolute inset-x-0 -inset-y-[12%] -z-10 parallax-y [--parallax:7%]"
+        aria-hidden="true"
+      >
+        <CourtMarkings crop="full" />
+      </div>
       <p
-        className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 text-center font-heading text-[clamp(6rem,22vw,20rem)] leading-none font-extrabold whitespace-nowrap text-white/[0.06] uppercase font-stretch-condensed select-none"
+        className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 parallax-x text-center font-heading text-[clamp(6rem,22vw,20rem)] leading-none font-extrabold whitespace-nowrap text-white/[0.06] uppercase font-stretch-condensed select-none [--parallax-x:6%]"
         aria-hidden="true"
       >
         Play local
@@ -370,7 +375,12 @@ export async function ExploreByLocation() {
         <div className="grid gap-3 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)]">
           <article className="group relative isolate flex min-h-80 flex-col justify-between gap-10 overflow-hidden rounded-[1.5rem] bg-court-deep p-6 text-white sm:p-8">
             <div className="absolute inset-0 -z-10 bg-court-grain opacity-60" aria-hidden="true" />
-            <CourtMarkings crop="kitchen" className="-z-10" />
+            <div
+              className="absolute inset-x-0 -inset-y-[10%] -z-10 parallax-y [--parallax:6%]"
+              aria-hidden="true"
+            >
+              <CourtMarkings crop="kitchen" />
+            </div>
             <div className="mt-auto">
               <h2
                 id="explore-location"

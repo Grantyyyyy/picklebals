@@ -38,7 +38,7 @@ export function ShopItemSheet({ item, categoryLabel }: { item: ShopItem; categor
   const isDesktop = useIsDesktop();
   const [copied, setCopied] = useState(false);
   const price = formatPrice(item.price);
-  const message = `Hi! Is the ${item.name} (${price}) on Pickleball Hub still available?`;
+  const message = `Hi! Is the ${item.name} (${price}) on Pick n Go still available?`;
 
   async function copyMessage() {
     try {
@@ -178,7 +178,7 @@ export function ShopItemSheet({ item, categoryLabel }: { item: ShopItem; categor
                 href="/contact"
                 className={cn(ctaClassName, "h-12 w-full justify-center text-base")}
               >
-                Send through Pickleball Hub
+                Send through Pick n Go
               </Link>
             )}
           </div>

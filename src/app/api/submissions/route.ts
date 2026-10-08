@@ -34,6 +34,51 @@ function clientIp(request: Request): string {
   return forwarded || request.headers.get("x-real-ip") || "unknown";
 }
 
+/** Registration is only open for published events that have not ended, once per email. */
+async function checkEventRegistration(
+  supabase: NonNullable<ReturnType<typeof createServiceClient>>,
+  eventSlug: string,
+  email: string,
+): Promise<Response | null> {
+  const { data: event, error: eventError } = await supabase
+    .from("events")
+    .select("starts_at, ends_at, registration_url")
+    .eq("status", "published")
+    .eq("slug", eventSlug)
+    .maybeSingle();
+
+  if (eventError) {
+    console.error("Event registration lookup failed", eventError);
+    return json({ ok: false, error: "Something went wrong. Please try again later." }, 500);
+  }
+  if (!event) {
+    return json({ ok: false, error: "This event is not open for registration." }, 404);
+  }
+  if (event.registration_url) {
+    return json({ ok: false, error: "Please register through the organizer's link." }, 409);
+  }
+  if (new Date(event.ends_at ?? event.starts_at).getTime() < Date.now()) {
+    return json({ ok: false, error: "Registration for this event has closed." }, 409);
+  }
+
+  const { count, error: duplicateError } = await supabase
+    .from("submissions")
+    .select("id", { count: "exact", head: true })
+    .eq("type", "event_registration")
+    .eq("payload->>eventSlug", eventSlug)
+    // Case-insensitive exact match: escape LIKE wildcards such as "_" that are valid in emails.
+    .ilike("email", email.replace(/[\\%_]/g, "\\$&"));
+
+  if (duplicateError) {
+    console.error("Event registration duplicate check failed", duplicateError);
+    return json({ ok: false, error: "Something went wrong. Please try again later." }, 500);
+  }
+  if ((count ?? 0) > 0) {
+    return json({ ok: false, error: "You're already registered for this event." }, 409);
+  }
+  return null;
+}
+
 export async function POST(request: Request) {
   if (!isAllowedOrigin(request)) {
     return json({ ok: false, error: "Cross-origin submissions are not allowed." }, 403);
@@ -95,6 +140,15 @@ export async function POST(request: Request) {
   }
   if ((count ?? 0) >= RATE_LIMIT_MAX) {
     return json({ ok: false, error: "Too many submissions. Please try again in an hour." }, 429);
+  }
+
+  if (parsed.data.type === "event_registration") {
+    const rejection = await checkEventRegistration(
+      supabase,
+      parsed.data.eventSlug,
+      parsed.data.email,
+    );
+    if (rejection) return rejection;
   }
 
   const { type, name, email, phone, ...rest } = parsed.data;
