@@ -239,13 +239,14 @@ function Divisions({ divisions }: { divisions: LiveDivision[] }) {
         role={divisions.length > 1 ? "tabpanel" : undefined}
         aria-labelledby={divisions.length > 1 ? `${tabsId}-tab-${selected.id}` : undefined}
       >
-        <DivisionPanel division={selected} />
+        <DivisionPanel division={selected} named={divisions.length > 1} />
       </div>
     </section>
   );
 }
 
-function DivisionPanel({ division }: { division: LiveDivision }) {
+/** `named`: a selected tab already shows the division name, so the heading is kept for screen readers only. */
+function DivisionPanel({ division, named }: { division: LiveDivision; named: boolean }) {
   const winner = champion(division);
   const rules = [
     formatLabels[division.format],
@@ -257,11 +258,16 @@ function DivisionPanel({ division }: { division: LiveDivision }) {
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
         <div>
-          <h3 className="font-heading text-2xl leading-tight font-extrabold text-court-deep uppercase font-stretch-condensed sm:text-3xl">
+          <h3
+            className={cn(
+              "font-heading text-2xl leading-tight font-extrabold text-court-deep uppercase font-stretch-condensed sm:text-3xl",
+              named && "sr-only",
+            )}
+          >
             {division.name}
             {division.skillLabel && <span className="text-court"> · {division.skillLabel}</span>}
           </h3>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <p className={cn("text-sm text-muted-foreground", !named && "mt-1")}>
             {rules} · {division.teams.length} {division.teams.length === 1 ? "team" : "teams"}
           </p>
         </div>

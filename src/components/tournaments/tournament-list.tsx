@@ -22,15 +22,12 @@ export async function TournamentList() {
 
   return (
     <section aria-labelledby="tournaments-heading" className="mb-14 space-y-6">
-      <div className="space-y-1">
-        <h2
-          id="tournaments-heading"
-          className="font-heading text-3xl leading-[0.95] font-extrabold text-court-deep uppercase font-stretch-condensed sm:text-4xl"
-        >
-          Tournaments
-        </h2>
-        <p className="text-muted-foreground">Live courts, brackets and results.</p>
-      </div>
+      <h2
+        id="tournaments-heading"
+        className="font-heading text-3xl leading-[0.95] font-extrabold text-court-deep uppercase font-stretch-condensed sm:text-4xl"
+      >
+        Tournaments
+      </h2>
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {tournaments.map((tournament) => (
           <li key={tournament.id}>
